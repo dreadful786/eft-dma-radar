@@ -52,23 +52,7 @@ namespace eft_dma_shared.Common.Unity.LowLevel.Hooks
 
             return NativeHook.Call(GameObject_CUSTOM_Find, name) ?? 0;
         }
-        public static readonly object Lock = new();        
-        public static ulong FindGameObjectS(string name)
-        {
-            lock (Lock)
-            {
-                var nameMonoStr = RemoteBytes.MonoString.Get(name);
-                using RemoteBytes nameMonoStrMem = new((int)nameMonoStr.GetSizeU());
-                nameMonoStrMem.WriteString(nameMonoStr);
 
-                ulong result = FindGameObject((ulong)nameMonoStrMem);
-
-                if (result == 0x0)
-                    LoneLogging.WriteLine($"Game object \"{name}\" could not be found!");
-                
-                return result;
-            }
-        }
         public static ulong GameObjectSetActive(ulong gameObject, bool state)
         {
             if (!gameObject.IsValidVirtualAddress())

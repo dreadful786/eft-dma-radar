@@ -366,8 +366,8 @@ namespace eft_dma_radar.UI.ESP
             if (wepInfo is not null)
                 textWidth = Math.Max(textWidth, SKPaints.TextMagazineInfoESP.MeasureText(wepInfo));
             var textHeight = SKPaints.TextMagazineESP.FontSpacing + SKPaints.TextMagazineInfoESP.FontSpacing;
-            var x = CameraManagerBase.Viewport.Width - textWidth - 15f * Config.ESP.FontScale;
-            var y = CameraManagerBase.Viewport.Height - CameraManagerBase.Viewport.Height * 0.10f - textHeight + 4f * Config.ESP.FontScale;
+            var x = CameraManagerBase.Viewport.Width - textWidth - 1068f * Config.ESP.FontScale; // ESP Ammo Counter Horizontal
+            var y = CameraManagerBase.Viewport.Height - CameraManagerBase.Viewport.Height * 0.33f - textHeight + 4f * Config.ESP.FontScale; // ESP Ammo Counter Vertical
             if (wepInfo is not null)
                 canvas.DrawText(wepInfo, x, y, SKPaints.TextMagazineInfoESP); // Draw Weapon Info
             canvas.DrawText(counter, x,

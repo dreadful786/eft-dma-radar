@@ -560,27 +560,12 @@ namespace eft_dma_radar.UI.Radar
 
         private void textBox_VischeckVisColor_TextChanged(object sender, EventArgs e)
         {
-            if (ColorTranslator.FromHtml(textBox_VischeckVisColor.Text) is Color selectedColor)
-            {
-                textBox_VischeckVisColor.BackColor = selectedColor;
-                textBox_VischeckVisColor.ForeColor = GetContrastingColor(selectedColor);
-            }
+            Chams.Config.VisibleColor = textBox_VischeckVisColor.Text;
         }
 
         private void textBox_VischeckInvisColor_TextChanged(object sender, EventArgs e)
         {
-            if (ColorTranslator.FromHtml(textBox_VischeckInvisColor.Text) is Color selectedColor)
-            {
-                textBox_VischeckInvisColor.BackColor = selectedColor;
-                textBox_VischeckInvisColor.ForeColor = GetContrastingColor(selectedColor);
-            }
-        }
-
-        // Function to get black or white based on contrast
-        private Color GetContrastingColor(Color color)
-        {
-            double luminance = (0.299 * color.R + 0.587 * color.G + 0.114 * color.B) / 255;
-            return luminance > 0.5 ? Color.Black : Color.White; // Use white text on dark colors, black text on light colors
+            Chams.Config.InvisibleColor = textBox_VischeckInvisColor.Text;
         }
 
         private void button_VischeckVisColorPick_Click(object sender, EventArgs e)
@@ -3696,37 +3681,6 @@ namespace eft_dma_radar.UI.Radar
                 return StringComparer.OrdinalIgnoreCase.GetHashCode(Id);
             }
         }
-
-        private void DataGridView_Loot_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            // Ensure we're formatting the color column
-            if (dataGridView_Loot.Columns[e.ColumnIndex].Name == "Column_ItemColor")
-            {
-                string colorCode = dataGridView_Loot.Rows[e.RowIndex].Cells["Column_ItemColor"].Value?.ToString();
-
-                if (!string.IsNullOrEmpty(colorCode))
-                {
-                    try
-                    {
-                        // Convert the string to a Color object
-                        Color bgColor = ColorTranslator.FromHtml(colorCode);
-
-                        // Apply background color to the color column
-                        e.CellStyle.BackColor = bgColor;
-
-                        // Adjust text color to contrast with the background
-                        e.CellStyle.ForeColor = (bgColor.GetBrightness() < 0.5) ? Color.White : Color.Black;
-                    }
-                    catch
-                    {
-                        // Handle invalid color codes gracefully
-                        e.CellStyle.BackColor = Color.White;
-                        e.CellStyle.ForeColor = Color.Black;
-                    }
-                }
-            }
-        }
-
 
         #endregion
     }

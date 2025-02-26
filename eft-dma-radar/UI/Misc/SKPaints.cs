@@ -1060,7 +1060,7 @@ namespace eft_dma_radar.UI.Misc
         public static SKPaint TextMagazineESP { get; } = new()
         {
             SubpixelText = true,
-            Color = SKColors.White,
+            Color = SKColors.LimeGreen,
             IsStroke = false,
             TextSize = 42f,
             TextAlign = SKTextAlign.Left,
@@ -1073,7 +1073,7 @@ namespace eft_dma_radar.UI.Misc
         public static SKPaint TextMagazineInfoESP { get; } = new()
         {
             SubpixelText = true,
-            Color = SKColors.White,
+            Color = SKColors.LimeGreen,
             IsStroke = false,
             TextSize = 16f,
             TextAlign = SKTextAlign.Left,

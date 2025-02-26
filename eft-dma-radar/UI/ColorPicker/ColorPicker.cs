@@ -51,11 +51,11 @@ namespace eft_dma_radar.UI.ColorPicker
             textBox_ColorValue.Text = _colors[_selected];
         }
 
-        private void textBox_ColorValue_TextChanged(object sender, EventArgs e)
-        {
-            var input = textBox_ColorValue.Text.Trim();
-            _colors[_selected] = input;
-        }
+        //private void textBox_ColorValue_TextChanged(object sender, EventArgs e)
+        // {
+        //    var input = textBox_ColorValue.Text.Trim();
+        //     _colors[_selected] = input;
+        // }
 
         private void button_Edit_Click(object sender, EventArgs e)
         {

@@ -95,6 +95,31 @@
             PerformLayout();
         }
 
+        private void textBox_ColorValue_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                // Convert the input color code to a Color object
+                Color selectedColor = ColorTranslator.FromHtml(textBox_ColorValue.Text);
+
+                // Apply the background color to match the entered color
+                textBox_ColorValue.BackColor = selectedColor;
+
+                // Determine text color based on luminance for contrast
+                double luminance = (0.299 * selectedColor.R + 0.587 * selectedColor.G + 0.114 * selectedColor.B) / 255;
+
+                // If luminance is low, use white text; otherwise, use black
+                textBox_ColorValue.ForeColor = luminance < 0.5 ? Color.White : Color.Black;
+            }
+            catch
+            {
+                // If the input is invalid, reset to default colors
+                textBox_ColorValue.BackColor = Color.White;
+                textBox_ColorValue.ForeColor = Color.Black;
+            }
+        }
+
+
         #endregion
 
         private ColorDialog colorDialog1;
