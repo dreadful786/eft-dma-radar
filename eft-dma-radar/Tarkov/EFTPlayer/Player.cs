@@ -1389,7 +1389,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
                                 level = $"L{levelResult}:";
                         }
                         lines.Add($"{level}{name}{health}");
-                        lines.Add($"H: {(int)Math.Round(height)} D: {(int)Math.Round(dist)}");
+                        lines.Add($"D: {(int)Math.Round(dist)}");
                     }
                     else // just height, distance
                     {
@@ -1403,6 +1403,8 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
                             (MainForm.Config.QuestHelper.Enabled && (Gear?.HasQuestItems ?? false))
                         ))
                         lines[0] = $"!!{lines[0]}"; // Notify important loot
+
+                    DrawPlayerHeight(canvas, point, localPlayer.Position.Y, Position.Y);
                     DrawPlayerText(canvas, point, lines);
                 }
             }
@@ -1462,6 +1464,64 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
             return new SKPoint(start.X + MathF.Cos(radians) * aimlineLength,
                 start.Y + MathF.Sin(radians) * aimlineLength);
         }
+
+
+        private int GetMapLayer(float height)
+        {
+            var mapLayers = LoneMapManager.Map?.Config.MapLayers;
+
+            if (mapLayers is null)
+                return 0;
+
+            for (int i = mapLayers.Count - 1; i > 0; i--)
+            {
+                var layer = mapLayers[i];
+
+                if (layer.MinHeight is null)
+                    return i;
+
+                if (height >= layer.MinHeight)
+                    return i;
+            }
+
+            return 0;
+        }
+
+        /// <summary>
+        /// Draws one or more arrows to represent how many floors height-wise are between a player.
+        /// Uses the defined MapLayers in Maps/*.json to determine the *floor* (layer)
+        /// </summary>
+        private void DrawPlayerHeight(SKCanvas canvas, SKPoint point, float localPlayerHeight, float playerHeight)
+        {
+            var localPlayerLayer = GetMapLayer(localPlayerHeight);
+            var playerLayer = GetMapLayer(playerHeight);
+
+            var numArrows = Math.Abs(playerLayer - localPlayerLayer);
+
+            if (numArrows == 0)
+                return;
+
+            var up = playerLayer - localPlayerLayer > 0;
+
+            int arrowX = -20;
+            int arrowY = -5;
+            int arrowYOffset = 5;
+            float arrowSize = 6.5f;
+
+            SKPaints.ShapeOutline.StrokeWidth = 2f;
+
+            point.Offset(arrowX * MainForm.UIScale, arrowY * MainForm.UIScale);
+
+            for (int i = 0; i < numArrows; i++)
+            {
+                using var path = up ? point.GetUpArrow(arrowSize) : point.GetDownArrow(arrowSize);
+
+                canvas.DrawPath(path, SKPaints.ShapeOutline);
+                canvas.DrawPath(path, SKPaints.PaintFood);
+                point.Offset(0, arrowYOffset * MainForm.UIScale);
+            }
+        }
+
 
         /// <summary>
         /// Draws Player Text on this location.
