@@ -1504,7 +1504,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
             var up = playerLayer - localPlayerLayer > 0;
 
             int arrowX = -20;
-            int arrowY = -5;
+            int arrowY = -3;
             int arrowYOffset = 5;
             float arrowSize = 6.5f;
 

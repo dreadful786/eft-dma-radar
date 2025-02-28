@@ -3450,6 +3450,8 @@ namespace eft_dma_radar.UI.Radar
             flowLayoutPanel2.PerformLayout();
             ((ISupportInitialize)dataGridView_Loot).EndInit();
             ResumeLayout(false);
+            dataGridView_Loot.CellFormatting += DataGridView_Loot_CellFormatting;
+
         }
 
         #endregion

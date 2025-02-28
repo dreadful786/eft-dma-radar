@@ -41,7 +41,7 @@ namespace eft_dma_radar.UI.SKWidgetControl
 
         public LootInfoWidget(SKGLControl parent, SKRect location, bool minimized, float scale)
             : base(parent, "Loot Info", new SKPoint(location.Left, location.Top),
-                new SKSize(location.Width + 10, FixedHeight), scale, false)
+                new SKSize(location.Width, FixedHeight), scale, false)
         {
             Minimized = minimized;
             SetScaleFactor(scale);
@@ -125,7 +125,7 @@ namespace eft_dma_radar.UI.SKWidgetControl
                 mouseWheelDelta = 0;
             }
 
-            var drawPt = new SKPoint(ClientRectangle.Left + 0, ClientRectangle.Top + 27);
+            var drawPt = new SKPoint(ClientRectangle.Left + 5, ClientRectangle.Top + 27);
             LootItem hoveredItem = null;
 
             foreach (var (item, count) in lootItems.Skip(scrollOffset).Take(maxVisibleItems))
@@ -137,7 +137,7 @@ namespace eft_dma_radar.UI.SKWidgetControl
 
                 sb.AppendFormat("{0,-18} {1,-8} {2,-8} {3,-8:F1}", name, quantity, price, dist).AppendLine();
 
-                var itemRect = new SKRect(drawPt.X, drawPt.Y, drawPt.X + 280, drawPt.Y + textHeight);
+                var itemRect = new SKRect(drawPt.X, drawPt.Y, drawPt.X + 250, drawPt.Y + textHeight);
 
                 if (itemRect.Contains(mousePosition))
                 {
