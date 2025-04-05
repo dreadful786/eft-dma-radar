@@ -3996,7 +3996,7 @@ namespace eft_dma_radar.UI.Radar
         private Label label34;
         private CheckBox checkBox_streamerMode;
         private CheckBox checkBox_hideRaidcode;
-        private CheckBox checkBox1;
+        // private CheckBox checkBox1;
         private LinkLabel linkLabel_CheckForUpdates;
         private Button button_SettingWidget;
         private CheckBox checkBox_ESP_Switches;

@@ -13,7 +13,6 @@ using eft_dma_shared.Common.Players;
 using eft_dma_shared.Common.Maps;
 using arena_dma_radar.Arena.Features.MemoryWrites;
 using eft_dma_shared.Common.ESP;
-using eft_dma_shared.Common.Misc;
 using eft_dma_shared.Common.Misc.Pools;
 using eft_dma_shared.Common.DMA;
 

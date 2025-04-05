@@ -11,7 +11,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
         /// <summary>
         /// EFT.Profile Address
         /// </summary>
-        public ulong Profile { get; }
+        public new ulong Profile { get; }
         /// <summary>
         /// ICharacterController
         /// </summary>

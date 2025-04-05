@@ -3,7 +3,6 @@ using eft_dma_radar.Tarkov.Features;
 using eft_dma_radar.Tarkov.GameWorld;
 using eft_dma_shared.Common.Features;
 using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.Misc;
 using eft_dma_shared.Common.Unity;
 using eft_dma_shared.Common.Unity.LowLevel.Hooks;
 
