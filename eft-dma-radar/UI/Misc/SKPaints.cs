@@ -1064,7 +1064,7 @@ namespace eft_dma_radar.UI.Misc
             Color = SKColors.Orange,
             SubpixelText = true,
             IsStroke = false,
-            TextSize = 16f,
+            TextSize = 12f,
             FakeBoldText = true,
             TextAlign = SKTextAlign.Center,
             TextEncoding = SKTextEncoding.Utf8,

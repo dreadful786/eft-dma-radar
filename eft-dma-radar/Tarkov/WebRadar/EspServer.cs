@@ -42,7 +42,7 @@ namespace eft_dma_radar.Tarkov.WebRadar
             LoneLogging.WriteLine($"✅ ESP Server started on {ip}:{port}");
 
             // ✅ Start the ESP Worker (Fix)
-            Task.Run(() => EspServerWorker.Start());
+            await Task.Run(() => EspServerWorker.Start());
 
             await host.RunAsync();
         }

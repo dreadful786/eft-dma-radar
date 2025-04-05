@@ -4,7 +4,6 @@ using eft_dma_radar.UI.Radar;
 using eft_dma_radar.UI.SKWidgetControl;
 using eft_dma_shared.Common.ESP;
 using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.Misc;
 using eft_dma_shared.Common.Players;
 using eft_dma_shared.Common.Unity;
 

@@ -18,14 +18,13 @@ namespace eft_dma_radar.Tarkov.GameWorld.Exits
     /// <summary>
     /// Represents an interactive switch on the map
     /// </summary>
-    public sealed class Switch : IMouseoverEntity, IMapEntity
+    public sealed class Switch : IMouseoverEntity, IMapEntity, IESPEntity
     {
         private Vector3 _position;
         public ref Vector3 Position => ref _position;
 
         public string Name { get; set; }
         public string SwitchInfo { get; set; }
-
         public Switch(Vector3 position, string name)
         {
             _position = position;
@@ -166,56 +165,22 @@ namespace eft_dma_radar.Tarkov.GameWorld.Exits
         /// <summary>
         /// Draw ESP for the switch, similar to exfil points
         /// </summary>
-        /*
-        public void DrawESP(SKCanvas canvas, LocalPlayer localPlayer)
-        {
-
-            // Get distance to switch
-            var distance = Vector3.Distance(localPlayer.Position, Position);
-
-            // Use standard ESP distance settings
-            float maxDistance = 150f;
-            float minScale = 0.5f;
-
-            // Check distance
-            if (distance > maxDistance)
-                return;
-
-            // Get screen position
-            var screenPos = WorldToScreen(Position);
-            if (!screenPos.IsValid)
-                return;
-
-            // Calculate scale based on distance
-            float scale = Math.Max(minScale, 1.0f - (distance / maxDistance));
-            float boxSize = 10f * scale;
-
-            SKColor espColor = GetESPColor();
-
-            // Create paints for drawing
-            using var boxPaint = new SKPaint { Color = espColor, IsAntialias = true, Style = SKPaintStyle.Stroke, StrokeWidth = 2 };
-            using var textPaint = new SKPaint
+            public void DrawESP(SKCanvas canvas, LocalPlayer localPlayer)
             {
-                Color = espColor,
-                IsAntialias = true,
-                TextSize = 12 * scale,
-                TextAlign = SKTextAlign.Center
-            };
+                if (!CameraManagerBase.WorldToScreen(ref Position, out var screenPos))
+                {
+                    return;
+                }
 
-            // Draw a small box for the switch
-            canvas.DrawRect(screenPos.X - boxSize / 2, screenPos.Y - boxSize / 2, boxSize, boxSize, boxPaint);
-
-            // Draw text for the switch
-            string text = $"Switch: {Name} [{distance:F1}m]";
-            canvas.DrawText(text, screenPos.X, screenPos.Y + boxSize + 10 * scale, textPaint);
-
-            // Draw additional info if available
-            if (!string.IsNullOrEmpty(SwitchInfo))
-            {
-                canvas.DrawText(SwitchInfo, screenPos.X, screenPos.Y + boxSize + 25 * scale, textPaint);
+                canvas.DrawText(Name, screenPos, SKPaints.TextSwitchesESP);
+                if (ESP.Config.ShowDistances)
+                {
+                    var distance = Vector3.Distance(localPlayer.Position, Position);
+                    var distanceText = $"{distance:F0}m";
+                    var distancePoint = new SKPoint(screenPos.X, screenPos.Y + 16f * ESP.Config.FontScale);
+                    canvas.DrawText(distanceText, distancePoint, SKPaints.TextSwitchesESP);
+                }
             }
-        }
-        */
         /// <summary>
         /// Convert world position to screen position
         /// </summary>

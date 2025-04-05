@@ -10,7 +10,6 @@ using eft_dma_radar.UI.Radar;
 using eft_dma_shared.Common.ESP;
 using eft_dma_shared.Common.Features;
 using eft_dma_shared.Common.Misc;
-using eft_dma_shared.Common.Misc;
 using eft_dma_shared.Common.Misc.Data;
 using eft_dma_shared.Common.Players;
 using eft_dma_shared.Common.Unity;
@@ -502,19 +501,8 @@ namespace eft_dma_radar.UI.ESP
             {
                 foreach (var switchEntry in switches)
                 {
-                    var switchPos = switchEntry.Value;
-                    if (!CameraManagerBase.WorldToScreen(ref switchPos, out var screenPos))
-                    {
-                        continue;
-                    }
-                    canvas.DrawText(switchEntry.Key, screenPos, SKPaints.TextSwitchesESP);
-                    if (ESP.Config.ShowDistances)
-                    {
-                        var distance = Vector3.Distance(localPlayer.Position, switchPos);
-                        var distanceText = $"{distance:F0}m";
-                        var distancePoint = new SKPoint(screenPos.X, screenPos.Y + 16f * ESP.Config.FontScale);
-                        canvas.DrawText(distanceText, distancePoint, SKPaints.TextSwitchesESP);
-                    }
+                    var switchObj = new Tarkov.GameWorld.Exits.Switch(switchEntry.Value, switchEntry.Key);
+                    switchObj.DrawESP(canvas, localPlayer);
                 }
             }
         }

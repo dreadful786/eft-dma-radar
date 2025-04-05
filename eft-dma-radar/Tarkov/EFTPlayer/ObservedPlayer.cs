@@ -17,7 +17,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
         /// <summary>
         /// Player's Profile & Stats (If Human Player).
         /// </summary>
-        public PlayerProfile Profile { get; }
+        public new PlayerProfile Profile { get; }
         /// <summary>
         /// ObservedPlayerController for non-clientplayer players.
         /// </summary>
