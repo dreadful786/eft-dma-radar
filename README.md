@@ -4,18 +4,34 @@ Forked from Mambo - I'll update with changes I like from time to time but mainly
 
 ## Current Changes
 
-Rotated maps to match orientation of online maps.
+-Fixed issue where first time users have to move DLL's after building
 
-Added elevation arrows.
+-Added App Launcher. The Launcher creates an icon on your desktop for you after building. Launch the launcher and select which app you want to run EFT Radar or Arena Radar.
 
-My version of the Mambo loot widget (Sort by Name or Price using N and P key's on radar PC)
+-Rotated maps to better match orientation of most online maps.
 
-Added visual colors to Color Picker, Loot Filter, and Cham vischeck colors
+-Added elevation arrows.
 
-ESP Ammo Counter is LimeGreen - Can be changed in SKPain.cs
+-My version of the Mambo loot widget (Sort by Name or Price using N and P key's on radar PC)
 
-Flea Prices on loot update every 4HR's - Price updates are for PvE - You can change this in TarkovDevCores.cs by removing (gameMode:pve) on line 22. - This update is from LONE
+-Added visual colors to Color Picker, Loot Filter, and Cham vischeck colors
+
+-ESP Ammo Counter is LimeGreen - Can be changed in SKPain.cs
+
+-Flea Prices on loot update every 4HR's - Price updates are for PvE - You can change this in TarkovDevCores.cs by removing (gameMode:pve) on line 22. - This update is from LONE
+
+-Mambo's Chams
+
+-Mambo's/DrewBeCheese WebRadar and WebESP (Need to add more features from BrewBeCheese)
+
+-Nutori's long jump, unclamp free look, instant pose change, instant plant
+
+-Added switches to all the maps. Can be toggled on/off for ESP (kek-m8 helped with this)
 
 ## Future Changes
 
-Any updates Mambo makes
+No idea
+
+## Creds
+
+Thanks to everyone in the community that maintains a repo. Anyone that I've swiped a feature from and haven't mentioned please reach out so I can give credit.
