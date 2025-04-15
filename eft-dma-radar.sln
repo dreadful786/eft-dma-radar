@@ -43,6 +43,7 @@ Global
 		{B0B2A4AF-65FA-58B6-A238-A9DD7C282565}.Release|x64.ActiveCfg = Release|Any CPU
 		{B0B2A4AF-65FA-58B6-A238-A9DD7C282565}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
+
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
