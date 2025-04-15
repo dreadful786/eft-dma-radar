@@ -32,6 +32,7 @@ namespace radar_launcher
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LauncherForm));
             lblTitle = new Label();
             btnEftRadar = new Button();
             btnArenaRadar = new Button();
@@ -83,11 +84,12 @@ namespace radar_launcher
             Controls.Add(btnEftRadar);
             Controls.Add(lblTitle);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 2, 3, 2);
             MaximizeBox = false;
             Name = "LauncherForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Radar Launcher";
+            Text = "EFT DMA Radar Launcher";
             ResumeLayout(false);
         }
 
