@@ -237,7 +237,7 @@ namespace arena_dma_radar.Arena
         /// </summary>
         private void LoadProcess()
         {
-            if (!_hVMM.PidGetFromName(_processName, out uint pid))
+            if (_hVMM == null || !_hVMM.PidGetFromName(_processName, out uint pid))
                 throw new Exception($"Unable to find '{_processName}'");
             _pid = pid;
         }
