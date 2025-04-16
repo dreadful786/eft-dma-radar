@@ -11,7 +11,6 @@ using eft_dma_shared.Common.DMA;
 using eft_dma_shared.Common.ESP;
 using eft_dma_shared.Common.Players;
 
-
 namespace arena_dma_radar.Arena.Features.MemoryWrites
 {
     public sealed class Aimbot : MemWriteFeature<Aimbot>

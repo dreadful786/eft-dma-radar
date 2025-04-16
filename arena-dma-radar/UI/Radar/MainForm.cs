@@ -20,7 +20,6 @@ using arena_dma_radar.Arena.Features.MemoryWrites;
 using arena_dma_radar.Arena.Features.MemoryWrites.Patches;
 using eft_dma_shared.Common.ESP;
 
-
 namespace arena_dma_radar.UI.Radar
 {
     public sealed partial class MainForm : Form
@@ -553,9 +552,6 @@ namespace arena_dma_radar.UI.Radar
             if (_fpsSw.ElapsedMilliseconds >= 1000)
             {
                 var fps = Interlocked.Exchange(ref _fps, 0); // Get FPS -> Reset FPS counter
-                var title = Program.Name;
-                if (inRaid) title += $" ({fps} fps)";
-                Text = title;
                 _fpsSw.Restart();
             }
             else

@@ -62,6 +62,7 @@ namespace arena_dma_radar
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
+        [Obfuscation(Feature = "Virtualization", Exclude = false)]
         [STAThread]
         static void Main(string[] args)
         {
@@ -83,7 +84,25 @@ namespace arena_dma_radar
         {
             try
             {
-                TryImportLoneCfg();
+                try
+                {
+                    string loneCfgPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Lones-Client");
+                    if (Directory.Exists(loneCfgPath))
+                    {
+                        if (ConfigPath.Exists)
+                            ConfigPath.Delete(true);
+                        Directory.Move(loneCfgPath, ConfigPath.FullName);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("ERROR Importing Lone Config(s). Close down the radar, and try copy your config files manually from %AppData%\\LonesClient TO %AppData%\\eft-dma-radar\n\n" +
+                        "Be sure to delete the Lones-Client folder when done.\n\n" +
+                        $"ERROR: {ex}",
+                        Program.Name,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                }
                 ConfigPath.Create();
                 var config = Config.Load();
                 eft_dma_shared.SharedProgram.Initialize(ConfigPath, config);
@@ -97,49 +116,27 @@ namespace arena_dma_radar
         }
 
         /// <summary>
-        /// If user is a former managed Lone EFT User, try import their config.
-        /// </summary>
-        private static void TryImportLoneCfg()
-        {
-            try
-            {
-                DirectoryInfo loneCfgPath = new(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Lones-Client"));
-                if (!ConfigPath.Exists && loneCfgPath.Exists)
-                {
-                    ConfigPath.Create();
-                    foreach (var file in loneCfgPath.EnumerateFiles())
-                        file.CopyTo(Path.Combine(ConfigPath.FullName, file.Name));
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("ERROR Importing Lone Config(s)." +
-                    $"Exception Info: {ex}",
-                    Program.Name,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-            }
-        }
-
-        /// <summary>
         /// Configure Program Startup.
         /// </summary>
         /// <param name="args">Args passed from entrypoint.</param>
+        [Obfuscation(Feature = "Virtualization", Exclude = false)]
+        [Obfuscation(Feature = "Virtualization", Exclude = false)]
         private static void ConfigureProgram()
         {
             ApplicationConfiguration.Initialize();
             using var loading = LoadingForm.Create();
             loading.UpdateStatus("Loading Tarkov.Dev Data...", 15);
-            EftDataManager.ModuleInitAsync(loading, true).GetAwaiter().GetResult();
+            EftDataManager.ModuleInitAsync(loading).GetAwaiter().GetResult();
             loading.UpdateStatus("Loading Map Assets...", 35);
             LoneMapManager.ModuleInit();
-            loading.UpdateStatus("Starting DMA Connection...", 50);
+            loading.UpdateStatus("Starting Memory Interface...", 50);
             MemoryInterface.ModuleInit();
-            loading.UpdateStatus("Loading Remaining Modules...", 75);
+            loading.UpdateStatus("Loading Features...", 75);
             FeatureManager.ModuleInit();
             ResourceJanitor.ModuleInit(new Action(CleanupWindowResources));
             loading.UpdateStatus("Loading Completed!", 100);
         }
+
 
         private static void CleanupWindowResources()
         {

@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net9.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<RootNamespace>radar_launcher</RootNamespace>
+		<ApplicationIcon>..\Resources\lone-icon.ico</ApplicationIcon>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.WindowsDesktop.App" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<Content Include="..\Resources\lone-icon.ico">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <PackageReference Include="DarkModeForms.imerzan" Version="1.0.1" />
+	</ItemGroup>
+
+	<!-- Target to create desktop shortcut after build -->
+	<Target Name="CreateDesktopShortcut" AfterTargets="Build">
+		<PropertyGroup>
+			<!-- Get path to desktop -->
+			<DesktopPath>$([System.Environment]::GetFolderPath(SpecialFolder.Desktop))</DesktopPath>
+			<!-- Path to the executable (output of this project) -->
+			<ExePath>$(OutputPath)$(AssemblyName).exe</ExePath>
+			<!-- Shortcut name -->
+			<ShortcutPath>$(DesktopPath)\Radar Launcher.lnk</ShortcutPath>
+		</PropertyGroup>
+
+		<!-- Log information about the shortcut being created -->
+		<Message Text="Creating desktop shortcut..." Importance="high" />
+		<Message Text="Executable path: $(ExePath)" Importance="normal" />
+		<Message Text="Shortcut path: $(ShortcutPath)" Importance="normal" />
+
+		<!-- Create the shortcut using PowerShell -->
+		<Exec Command="powershell.exe -Command &quot;$WshShell = New-Object -ComObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('$(ShortcutPath)'); $Shortcut.TargetPath = '$(MSBuildProjectDirectory)\$(ExePath)'; $Shortcut.WorkingDirectory = '$(MSBuildProjectDirectory)\$(OutputPath)'; $Shortcut.IconLocation = '$(MSBuildProjectDirectory)\$(OutputPath)lone-icon.ico'; $Shortcut.Description = 'Radar Launcher'; $Shortcut.Save();&quot;" />
+
+		<!-- Show success message -->
+		<Message Text="Created shortcut on desktop: $(ShortcutPath)" Importance="high" />
+	</Target>
+	
+</Project>
