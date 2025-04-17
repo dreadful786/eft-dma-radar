@@ -9,6 +9,7 @@ namespace radar_launcher
     public partial class LauncherForm : Form
     {
         private readonly string _eftRadarPath;
+        private readonly string _eftRadarNonRotatedPath;
         private readonly string _arenaRadarPath;
         private readonly DarkModeCS _darkmode;
 
@@ -27,13 +28,16 @@ namespace radar_launcher
             #endif
 
             _eftRadarPath = Path.Combine(solutionDir, $@"eft-dma-radar\bin\x64\{buildConfig}\net9.0-windows\eft-dma-radar.exe");
+            _eftRadarNonRotatedPath = Path.Combine(solutionDir, $@"eft-dma-radar-non-rotated-maps\bin\x64\{buildConfig}\net9.0-windows\eft-dma-radar-non-rotated-maps.exe");
             _arenaRadarPath = Path.Combine(solutionDir, $@"arena-dma-radar\bin\x64\{buildConfig}\net9.0-windows\arena-dma-radar.exe");
 
-            Debug.WriteLine($"EFT Radar Path: {_eftRadarPath}");
-            Debug.WriteLine($"Arena Radar Path: {_arenaRadarPath}");
+            // Debug.WriteLine($"EFT Radar Path: {_eftRadarPath}");
+            // Debug.WriteLine($"EFT Radar NonRotated Path: {_eftRadarNonRotatedPath}");
+            // Debug.WriteLine($"Arena Radar Path: {_arenaRadarPath}");
 
             // Verify if executable files exist and update UI accordingly
             btnEftRadar.Enabled = File.Exists(_eftRadarPath);
+            btnEftRadarNonRotated.Enabled = File.Exists(_eftRadarNonRotatedPath);
             btnArenaRadar.Enabled = File.Exists(_arenaRadarPath);
 
             if (!btnEftRadar.Enabled)
@@ -41,15 +45,22 @@ namespace radar_launcher
                 toolTip1.SetToolTip(btnEftRadar, "Executable not found at: " + _eftRadarPath);
             }
 
-            if (!btnArenaRadar.Enabled)
+            if (!btnEftRadarNonRotated.Enabled)
             {
-                toolTip1.SetToolTip(btnArenaRadar, "Executable not found at: " + _arenaRadarPath);
+                toolTip1.SetToolTip(btnEftRadarNonRotated, "Executable not found at: " + _eftRadarNonRotatedPath);
             }
 
             if (!btnArenaRadar.Enabled)
             {
                 toolTip1.SetToolTip(btnArenaRadar, "Executable not found at: " + _arenaRadarPath);
             }
+
+            /*
+            if (!btnArenaRadar.Enabled)
+            {
+                toolTip1.SetToolTip(btnArenaRadar, "Executable not found at: " + _arenaRadarPath);
+            }
+            */
         }
         /// <summary>
         /// Set Dark Mode on startup.
@@ -64,12 +75,14 @@ namespace radar_launcher
         {
             LaunchExecutable(_eftRadarPath);
         }
-
+        private void btnEftRadarNonRotated_Click(object sender, EventArgs e)
+        {
+            LaunchExecutable(_eftRadarNonRotatedPath);
+        }
         private void btnArenaRadar_Click(object sender, EventArgs e)
         {
             LaunchExecutable(_arenaRadarPath);
         }
-
         private void LaunchExecutable(string path)
         {
             try
