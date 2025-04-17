@@ -37,6 +37,7 @@ namespace radar_launcher
             btnEftRadar = new Button();
             btnArenaRadar = new Button();
             toolTip1 = new ToolTip(components);
+            btnEftRadarNonRotated = new Button();
             SuspendLayout();
             // 
             // lblTitle
@@ -75,11 +76,24 @@ namespace radar_launcher
             btnArenaRadar.UseVisualStyleBackColor = true;
             btnArenaRadar.Click += btnArenaRadar_Click;
             // 
+            // btnEftRadarNonRotated
+            // 
+            btnEftRadarNonRotated.Font = new Font("Segoe UI", 12F);
+            btnEftRadarNonRotated.Location = new Point(41, 140);
+            btnEftRadarNonRotated.Margin = new Padding(3, 2, 3, 2);
+            btnEftRadarNonRotated.Name = "btnEftRadarNonRotated";
+            btnEftRadarNonRotated.Size = new Size(131, 78);
+            btnEftRadarNonRotated.TabIndex = 3;
+            btnEftRadarNonRotated.Text = "EFT Radar\r\nNon Rotated Maps";
+            btnEftRadarNonRotated.UseVisualStyleBackColor = true;
+            btnEftRadarNonRotated.Click += btnEftRadarNonRotated_Click;
+            // 
             // LauncherForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(350, 188);
+            ClientSize = new Size(350, 248);
+            Controls.Add(btnEftRadarNonRotated);
             Controls.Add(btnArenaRadar);
             Controls.Add(btnEftRadar);
             Controls.Add(lblTitle);
@@ -99,5 +113,6 @@ namespace radar_launcher
         private Button btnEftRadar;
         private Button btnArenaRadar;
         private ToolTip toolTip1;
+        private Button btnEftRadarNonRotated;
     }
 }
