@@ -118,6 +118,9 @@ namespace arena_dma_radar.UI.Misc
         [JsonPropertyName("monitorHeight")]
         public int MonitorHeight { get; set; } = 1080;
 
+        [JsonPropertyName("showBombRadar")]
+        public bool ShowBomb { get; set; } = false;
+
         /// <summary>
         /// Hotkeys Dictionary for Radar.
         /// </summary>
@@ -554,6 +557,9 @@ namespace arena_dma_radar.UI.Misc
         [JsonPropertyName("showAimFov")]
         public bool ShowAimFOV { get; set; } = true;
 
+        [JsonPropertyName("showBomb")]
+        public bool ShowBomb { get; set; } = false;
+
         /// <summary>
         /// Display Status (aimbot enabled, bone, etc.) in top center of ESP Screen.
         /// </summary>
@@ -592,6 +598,9 @@ namespace arena_dma_radar.UI.Misc
         /// </summary>
         [JsonPropertyName("showDist")]
         public bool ShowDist { get; set; }
+
+        [JsonPropertyName("showBomb")]
+        public bool ShowBomb { get; set; }
     }
 
     public sealed class WidgetsConfig

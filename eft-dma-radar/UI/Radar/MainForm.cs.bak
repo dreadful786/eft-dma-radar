@@ -315,7 +315,7 @@ namespace eft_dma_radar.UI.Radar
                     float centerY = (mapCanvasBounds.Top + mapCanvasBounds.Bottom) / 2;
 
                     // Apply a rotation transformation to the canvas
-                    canvas.RotateDegrees(180, centerX, centerY);
+                    canvas.RotateDegrees(_rotationDegrees, centerX, centerY);
 
                     // Draw the map
                     map.Draw(canvas, localPlayer.Position.Y, mapParams.Bounds, mapCanvasBounds);
@@ -343,7 +343,7 @@ namespace eft_dma_radar.UI.Radar
                                 var itemPosition = item.Position.ToMapPos(map.Config).ToZoomedPos(mapParams);
 
                                 // Apply a rotation transformation to the canvas
-                                canvas.RotateDegrees(180, itemPosition.X, itemPosition.Y);
+                                canvas.RotateDegrees(_rotationDegrees, itemPosition.X, itemPosition.Y);
 
                                 // Draw the item
                                 item.Draw(canvas, mapParams, localPlayer);
@@ -373,7 +373,7 @@ namespace eft_dma_radar.UI.Radar
                                         var containerPosition = container.Position.ToMapPos(map.Config).ToZoomedPos(mapParams);
 
                                         // Apply a rotation transformation to the canvas
-                                        canvas.RotateDegrees(180, containerPosition.X, containerPosition.Y);
+                                        canvas.RotateDegrees(_rotationDegrees, containerPosition.X, containerPosition.Y);
 
                                         // Draw the container
                                         container.Draw(canvas, mapParams, localPlayer);
@@ -399,7 +399,7 @@ namespace eft_dma_radar.UI.Radar
                                 var itemPosition = item.Position.ToMapPos(map.Config).ToZoomedPos(mapParams);
 
                                 // Apply a rotation transformation to the canvas
-                                canvas.RotateDegrees(180, itemPosition.X, itemPosition.Y);
+                                canvas.RotateDegrees(_rotationDegrees, itemPosition.X, itemPosition.Y);
 
                                 // Draw the quest location
                                 item.Draw(canvas, mapParams, localPlayer);
@@ -418,7 +418,7 @@ namespace eft_dma_radar.UI.Radar
                                 var locPosition = loc.Position.ToMapPos(map.Config).ToZoomedPos(mapParams);
 
                                 // Apply a rotation transformation to the canvas
-                                canvas.RotateDegrees(180, locPosition.X, locPosition.Y);
+                                canvas.RotateDegrees(_rotationDegrees, locPosition.X, locPosition.Y);
 
                                 // Draw the quest location
                                 loc.Draw(canvas, mapParams, localPlayer);
@@ -464,7 +464,7 @@ namespace eft_dma_radar.UI.Radar
                                 var exitPosition = exit.Position.ToMapPos(map.Config).ToZoomedPos(mapParams);
 
                                 // Apply a rotation transformation to the canvas
-                                canvas.RotateDegrees(180, exitPosition.X, exitPosition.Y);
+                                canvas.RotateDegrees(_rotationDegrees, exitPosition.X, exitPosition.Y);
 
                                 // Draw the exit
                                 exit.Draw(canvas, mapParams, localPlayer);
@@ -519,7 +519,7 @@ namespace eft_dma_radar.UI.Radar
                     float centerYwidgets = (mapCanvasBounds.Top + mapCanvasBounds.Bottom) / 2;
 
                     // Apply a rotation transformation to the canvas
-                    canvas.RotateDegrees(180, centerXwidgets, centerYwidgets);
+                    canvas.RotateDegrees(_rotationDegrees, centerXwidgets, centerYwidgets);
 
                     // Draw Player Info Widget
                     if (allPlayers is not null && checkBox_ShowInfoTab.Checked) // Players Overlay
@@ -533,7 +533,7 @@ namespace eft_dma_radar.UI.Radar
                     float centerYmouseover = (mapCanvasBounds.Top + mapCanvasBounds.Bottom) / 2;
 
                     // Apply a rotation transformation to the canvas
-                    canvas.RotateDegrees(180, centerXmouseover, centerYmouseover);
+                    canvas.RotateDegrees(_rotationDegrees, centerXmouseover, centerYmouseover);
 
                     // Draw the mouseover item
                     closestToMouse?.DrawMouseover(canvas, mapParams, localPlayer);

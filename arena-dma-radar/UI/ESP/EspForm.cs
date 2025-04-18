@@ -8,6 +8,7 @@ using eft_dma_shared.Common.Unity;
 using arena_dma_radar.Arena.Features.MemoryWrites;
 using eft_dma_shared.Common.ESP;
 using eft_dma_shared.Common.Players;
+using arena_dma_radar.Arena.Loot;
 
 namespace arena_dma_radar.UI.ESP
 {
@@ -52,6 +53,8 @@ namespace arena_dma_radar.UI.ESP
         /// Contains all 'Hot' grenades in Local Game World, and their position(s).
         /// </summary>
         private static IReadOnlyCollection<Grenade> Grenades => Memory.Grenades;
+
+        private static IEnumerable<LootItem> Loot => Memory.Loot?.FilteredLoot;
 
         public EspForm()
         {
@@ -180,6 +183,7 @@ namespace arena_dma_radar.UI.ESP
                         DrawNotShown(canvas);
                     else
                     {
+                        DrawLoot(canvas, localPlayer);
                         if (Config.ESP.ShowGrenades)
                             DrawGrenades(canvas, localPlayer);
                         foreach (var player in allPlayers)
@@ -267,9 +271,22 @@ namespace arena_dma_radar.UI.ESP
             canvas.DrawText(counter, x, y + ((SKPaints.TextMagazineESP.FontSpacing - SKPaints.TextMagazineInfoESP.FontSpacing) + 6f * Config.ESP.FontScale), SKPaints.TextMagazineESP); // Draw Counter
         }
 
+        private static void DrawLoot(SKCanvas canvas, LocalPlayer localPlayer)
+        {
+            var loot = Loot;
+            loot = Loot?.Reverse();
+            if (loot is not null)
+            {
+                foreach (var item in loot)
+                {
+                    item.DrawESP(canvas, localPlayer);
+                }
+            }
+
+        }
         /// <summary>
-        /// Draw 'ESP Hidden' notification.
-        /// </summary>
+         /// Draw 'ESP Hidden' notification.
+         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void DrawNotShown(SKCanvas canvas)
         {
@@ -376,5 +393,10 @@ namespace arena_dma_radar.UI.ESP
         }
 
         #endregion
+
+        private void skglControl_ESP_PaintSurface(object sender, SKPaintGLSurfaceEventArgs e)
+        {
+
+        }
     }
 }

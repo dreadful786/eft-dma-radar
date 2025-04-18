@@ -110,26 +110,28 @@ namespace eft_dma_radar.Tarkov.Loot
         }
         public override void DrawMouseover(SKCanvas canvas, LoneMapParams mapParams, LocalPlayer localPlayer)
         {
-            // Get the container's position on the map
-            var containerPosition = Position.ToMapPos(mapParams.Map).ToZoomedPos(mapParams);
-
-            // Check if there is any loot to display
-            IEnumerable<LootItem> filteredLoot = this.FilteredLoot;
-            if (filteredLoot.Count() <= 0)
-                return;
-
             // Save the current canvas state
             canvas.Save();
 
+            // Get the quest location's position on the map
+            var ContainerPosition = Position.ToMapPos(mapParams.Map).ToZoomedPos(mapParams);
+
             // Apply a rotation transformation to the canvas
-            canvas.RotateDegrees(180, containerPosition.X, containerPosition.Y);
+            float rotation = MainForm.Window._rotationDegrees;
+            canvas.RotateDegrees(rotation, ContainerPosition.X, ContainerPosition.Y);
+
+            // Adjust text orientation for 90° and 270° rotations
+            if (rotation == 90 || rotation == 270)
+            {
+                canvas.RotateDegrees(180, ContainerPosition.X, ContainerPosition.Y);
+            }
 
             // Draw the mouseover text
             var lines = new List<string>() { this.Name };
-            foreach (LootItem lootItem in filteredLoot)
+            foreach (LootItem lootItem in FilteredLoot)
                 lines.Add(lootItem.GetUILabel(MainForm.Config.QuestHelper.Enabled));
+            Position.ToMapPos(mapParams.Map).ToZoomedPos(mapParams).DrawMouseoverText(canvas, lines);
 
-            containerPosition.DrawMouseoverText(canvas, lines);
 
             // Restore the canvas state
             canvas.Restore();

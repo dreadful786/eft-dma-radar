@@ -44,7 +44,7 @@ using eft_dma_shared.Common.UI;
 
 namespace arena_dma_radar
 {
-    internal static class Program 
+    internal static class Program
     {
         internal const string Name = "Arena DMA Radar";
 

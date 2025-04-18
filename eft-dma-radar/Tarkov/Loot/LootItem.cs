@@ -338,14 +338,21 @@ namespace eft_dma_radar.Tarkov.Loot
                 // Save the current canvas state
                 canvas.Save();
 
-                // Get the position of the container on the map
-                var containerPosition = Position.ToMapPos(mapParams.Map).ToZoomedPos(mapParams);
+                // Get the quest location's position on the map
+                var LootPosition = Position.ToMapPos(mapParams.Map).ToZoomedPos(mapParams);
 
                 // Apply a rotation transformation to the canvas
-                canvas.RotateDegrees(180, containerPosition.X, containerPosition.Y);
+                float rotation = MainForm.Window._rotationDegrees;
+                canvas.RotateDegrees(rotation, LootPosition.X, LootPosition.Y);
+
+                // Adjust text orientation for 90° and 270° rotations
+                if (rotation == 90 || rotation == 270)
+                {
+                    canvas.RotateDegrees(180, LootPosition.X, LootPosition.Y);
+                }
 
                 // Draw the mouseover text
-                containerPosition.DrawMouseoverText(canvas, lines);
+                LootPosition.DrawMouseoverText(canvas, lines);
 
                 // Restore the canvas state
                 canvas.Restore();
