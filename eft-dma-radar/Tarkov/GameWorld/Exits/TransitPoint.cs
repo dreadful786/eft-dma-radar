@@ -95,17 +95,24 @@ namespace eft_dma_radar.Tarkov.GameWorld.Exits
             canvas.Save();
 
             // Get the quest location's position on the map
-            var questPosition = Position.ToMapPos(mapParams.Map).ToZoomedPos(mapParams);
+            var TransitPosition = Position.ToMapPos(mapParams.Map).ToZoomedPos(mapParams);
 
             // Apply a rotation transformation to the canvas
-            canvas.RotateDegrees(180, questPosition.X, questPosition.Y);
+            float rotation = MainForm.Window._rotationDegrees;
+            canvas.RotateDegrees(rotation, TransitPosition.X, TransitPosition.Y);
+
+            // Adjust text orientation for 90° and 270° rotations
+            if (rotation == 90 || rotation == 270)
+            {
+                canvas.RotateDegrees(180, TransitPosition.X, TransitPosition.Y);
+            }
 
             // Draw the mouseover text
             List<string> lines = new(1)
             {
                 Name
             };
-            questPosition.DrawMouseoverText(canvas, lines);
+            TransitPosition.DrawMouseoverText(canvas, lines);
 
             // Restore the canvas state
             canvas.Restore();

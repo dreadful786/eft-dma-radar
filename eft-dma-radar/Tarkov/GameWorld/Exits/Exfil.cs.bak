@@ -162,7 +162,7 @@ namespace eft_dma_radar.Tarkov.GameWorld.Exits
             var exfilPosition = Position.ToMapPos(mapParams.Map).ToZoomedPos(mapParams);
 
             // Apply a rotation transformation to the canvas
-            canvas.RotateDegrees(180, exfilPosition.X, exfilPosition.Y);
+            canvas.RotateDegrees(_rotationDegrees, exfilPosition.X, exfilPosition.Y);
 
             // Draw the mouseover text
                 List<string> lines = new();

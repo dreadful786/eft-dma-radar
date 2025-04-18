@@ -67,7 +67,7 @@ namespace eft_dma_radar.Tarkov.GameWorld.Exits
         /// </summary>
         public void Draw(SKCanvas canvas, LoneMapParams mapParams, ILocalPlayer localPlayer)
         {
-            var heightDiff = localPlayer.Position.Y - Position.Y;
+            var heightDiff = Position.Y - localPlayer.Position.Y;
             var paint = GetPaint();
             var point = Position.ToMapPos(mapParams.Map).ToZoomedPos(mapParams);
             MouseoverPosition = new Vector2(point.X, point.Y);
@@ -99,13 +99,22 @@ namespace eft_dma_radar.Tarkov.GameWorld.Exits
         /// </summary>
         public void DrawMouseover(SKCanvas canvas, LoneMapParams mapParams, LocalPlayer localPlayer)
         {
-            var point = Position.ToMapPos(mapParams.Map).ToZoomedPos(mapParams);
-
             // Save the current canvas state
             canvas.Save();
 
-            // Rotate the canvas 180 degrees around the switch point to counteract the main rotation
-            canvas.RotateDegrees(180, point.X, point.Y);
+            // Get the quest location's position on the map
+            var SwitchPosition = Position.ToMapPos(mapParams.Map).ToZoomedPos(mapParams);
+
+            // Apply a rotation transformation to the canvas
+            float rotation = MainForm.Window._rotationDegrees;
+            canvas.RotateDegrees(rotation, SwitchPosition.X, SwitchPosition.Y);
+
+            // Adjust text orientation for 90° and 270° rotations
+            if (rotation == 90 || rotation == 270)
+            {
+                canvas.RotateDegrees(180, SwitchPosition.X, SwitchPosition.Y);
+            }
+
 
             // Create lines for the mouseover text
             List<string> lines = new List<string>
@@ -135,16 +144,16 @@ namespace eft_dma_radar.Tarkov.GameWorld.Exits
 
             // Draw background with proper dimensions
             SKRect rect = new SKRect(
-                point.X - maxWidth / 2 - padding,
-                point.Y - totalHeight + padding,
-                point.X + maxWidth / 2 + padding,
-                point.Y + padding
+                SwitchPosition.X - maxWidth / 2 - padding,
+                SwitchPosition.Y - totalHeight + padding,
+                SwitchPosition.X + maxWidth / 2 + padding,
+                SwitchPosition.Y + padding
             );
 
             canvas.DrawRect(rect, SKPaints.PaintTransparentBacker);
 
             // Calculate starting Y position for the first line of text
-            float startY = point.Y - totalHeight + padding + lineHeight;
+            float startY = SwitchPosition.Y - totalHeight + padding + lineHeight;
 
             // Draw text lines with proper spacing
             for (int i = 0; i < lines.Count; i++)
@@ -152,7 +161,7 @@ namespace eft_dma_radar.Tarkov.GameWorld.Exits
                 float yPos = startY + (i * lineHeight);
                 canvas.DrawText(
                     lines[i],
-                    point.X - SKPaints.TextMouseover.MeasureText(lines[i]) / 2,
+                    SwitchPosition.X - SKPaints.TextMouseover.MeasureText(lines[i]) / 2,
                     yPos,
                     SKPaints.TextMouseover
                 );

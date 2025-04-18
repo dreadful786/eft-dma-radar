@@ -57,7 +57,6 @@ namespace arena_dma_radar.Arena.Features.MemoryWrites
                                 return;
                             }
                             break;
-                        
                         case ChamsManager.ChamsMode.VisCheckGlow:
                             if (ChamsManager.Materials!.TryGetValue((ChamsManager.ChamsMode.VisCheckGlow, "AI"), out var vischeck) &&
                                 vischeck.InstanceID < 0)

@@ -12,6 +12,7 @@ using static arena_dma_radar.UI.Hotkeys.HotkeyManager;
 using static arena_dma_radar.UI.Hotkeys.HotkeyManager.HotkeyActionController;
 using eft_dma_shared.Common.Features;
 using eft_dma_shared.Common.Misc;
+using arena_dma_radar.Arena.Loot;
 using eft_dma_shared.Common.Unity;
 using eft_dma_shared.Common.Unity.LowLevel;
 using eft_dma_shared.Common.Maps;
@@ -19,6 +20,13 @@ using arena_dma_radar.Arena.Features;
 using arena_dma_radar.Arena.Features.MemoryWrites;
 using arena_dma_radar.Arena.Features.MemoryWrites.Patches;
 using eft_dma_shared.Common.ESP;
+using eft_dma_shared.Common.Unity.Collections;
+using static SDK.Enums;
+using VmmFrost;
+using arena_dma_radar.Arena;
+using eft_dma_shared.Common.Misc.Data;
+using System.Collections.Frozen;
+using arena_dma_radar.UI.LootFilters;
 
 namespace arena_dma_radar.UI.Radar
 {
@@ -37,6 +45,12 @@ namespace arena_dma_radar.UI.Radar
         private int _fps;
         private Vector2 _mapPanPosition;
         private EspWidget _espWidget;
+
+        public MonoLib.MonoClass _arenaOverlay;
+
+
+        public Vector3[] objectivePositions = new Vector3[3];
+        public Vector2[] objectiveMapPos = new Vector2[3];
 
         /// <summary>
         /// Main UI/Application Config.
@@ -59,6 +73,8 @@ namespace arena_dma_radar.UI.Radar
         /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public static int? MouseoverGroup { get; private set; }
+
+        private static IEnumerable<LootItem> Loot => Memory.Loot?.FilteredLoot;
 
         /// <summary>
         /// Current Map ID
@@ -192,6 +208,7 @@ namespace arena_dma_radar.UI.Radar
                 if (inMatch && localPlayer is not null) // LocalPlayer is in a raid -> Begin Drawing...
                 {
                     var map = LoneMapManager.Map; // cache ref
+
                     ArgumentNullException.ThrowIfNull(map, nameof(map));
                     var closestToMouse = _mouseOverItem; // cache ref
                     var mouseOverGrp = MouseoverGroup; // cache value for entire render
@@ -236,6 +253,14 @@ namespace arena_dma_radar.UI.Radar
                         } // end ForEach (allPlayers)
 
                     // End allPlayers not null
+                    var loot = Loot?.Reverse(); // Draw important loot last (on top)
+                    if (loot is not null)
+                    {
+                        foreach (var item in loot)
+                        {
+                            item.Draw(canvas, mapParams, localPlayer);
+                        }
+                    }
                     if (checkBox_GrpConnect.Checked) // Connect Groups together
                     {
                         var groupedPlayers = allPlayers?
@@ -327,6 +352,7 @@ namespace arena_dma_radar.UI.Radar
             const string waitingFor1 = "Waiting for Match Start.";
             const string waitingFor2 = "Waiting for Match Start..";
             const string waitingFor3 = "Waiting for Match Start...";
+            _arenaOverlay = new MonoLib.MonoClass();//MonoLib.MonoClass.Find("Assembly-CSharp", ClassNames.ArenaOverlayData.ClassName, out _);
             string status = _statusOrder == 1 ?
                 waitingFor1 : _statusOrder == 2 ?
                 waitingFor2 : waitingFor3;
@@ -476,6 +502,8 @@ namespace arena_dma_radar.UI.Radar
             toolTip1.SetToolTip(checkBox_AdvancedMemWrites, "Enables Advanced Memory Writing Features. These features use a riskier injection technique. Use at your own risk. Includes (but not limited to):\n" +
                 "- Advanced Chams Options.\n" +
                 "- Enhanced reliability of some features (Passive).");
+            toolTip1.SetToolTip(checkBox_Bomb, "Display what player is carrying the Bomb in BlastGang");
+            toolTip1.SetToolTip(checkBox_RadarBomb, "Display what player is carrying the Bomb in BlastGang on the radar");
         }
 
         /// <summary>
@@ -500,6 +528,8 @@ namespace arena_dma_radar.UI.Radar
         {
             trackBar_AimlineLength.Value = Config.AimLineLength;
             checkBox_Aimview.Checked = Config.ShowESPWidget;
+            checkBox_Bomb.Checked = Config.ESP.ShowBomb;
+            checkBox_RadarBomb.Checked = Config.ShowBomb;
             trackBar_UIScale.Value = (int)Math.Round(Config.UIScale * 100);
             textBox_ResWidth.Text = Config.MonitorWidth.ToString();
             textBox_ResHeight.Text = Config.MonitorHeight.ToString();
@@ -552,6 +582,9 @@ namespace arena_dma_radar.UI.Radar
             if (_fpsSw.ElapsedMilliseconds >= 1000)
             {
                 var fps = Interlocked.Exchange(ref _fps, 0); // Get FPS -> Reset FPS counter
+                var title = Program.Name;
+                if (inRaid) title += $" ({fps} fps)";
+                Text = title;
                 _fpsSw.Restart();
             }
             else
@@ -1781,12 +1814,46 @@ namespace arena_dma_radar.UI.Radar
 
         private void linkLabel_CheckForUpdates_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            const string updatesUrl = "https://lone-eft.com/opensource";
+            const string updatesUrl = "https://lone-eft.com/ongoingsupport";
             Process.Start(new ProcessStartInfo()
             {
                 FileName = updatesUrl,
                 UseShellExecute = true
             });
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void skglControl_Radar_PaintSurface(object sender, SKPaintGLSurfaceEventArgs e)
+        {
+
+        }
+
+        private void checkBox_Bomb_CheckedChanged(object sender, EventArgs e)
+        {
+            Config.ESP.PlayerRendering.ShowBomb = checkBox_Bomb.Checked;
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                var arenaOverlay = MonoLib.MonoClass.Find("Assembly-CSharp", "Game.Mode.System.ArenaOverlaySystem", out _);
+                var arenaOverlayPtr = arenaOverlay.GetNumMethods();
+                MessageBox.Show(arenaOverlayPtr.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void checkBox_RadarBomb_CheckedChanged(object sender, EventArgs e)
+        {
+            Config.ShowBomb = checkBox_RadarBomb.Checked;
         }
     }
 }

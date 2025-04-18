@@ -221,14 +221,21 @@ namespace eft_dma_radar.Tarkov.GameWorld.Exits
             // Save the current canvas state
             canvas.Save();
 
-            // Get the exfil's position on the map
-            var exfilPosition = Position.ToMapPos(mapParams.Map).ToZoomedPos(mapParams);
+            // Get the quest location's position on the map
+            var ExfilPosition = Position.ToMapPos(mapParams.Map).ToZoomedPos(mapParams);
 
             // Apply a rotation transformation to the canvas
-            canvas.RotateDegrees(180, exfilPosition.X, exfilPosition.Y);
+            float rotation = MainForm.Window._rotationDegrees;
+            canvas.RotateDegrees(rotation, ExfilPosition.X, ExfilPosition.Y);
+
+            // Adjust text orientation for 90° and 270° rotations
+            if (rotation == 90 || rotation == 270)
+            {
+                canvas.RotateDegrees(180, ExfilPosition.X, ExfilPosition.Y);
+            }
 
             // Draw the mouseover text
-                List<string> lines = new();
+            List<string> lines = new();
                 var exfilName = Name;
                 exfilName ??= "unknown";
                 lines.Add($"{exfilName} ({Status.GetDescription()})");
