@@ -55,7 +55,7 @@ namespace radar_launcher
             // btnEftRadar
             // 
             btnEftRadar.Font = new Font("Segoe UI", 12F);
-            btnEftRadar.Location = new Point(41, 76);
+            btnEftRadar.Location = new Point(41, 49);
             btnEftRadar.Margin = new Padding(3, 2, 3, 2);
             btnEftRadar.Name = "btnEftRadar";
             btnEftRadar.Size = new Size(131, 60);
@@ -67,7 +67,7 @@ namespace radar_launcher
             // btnArenaRadar
             // 
             btnArenaRadar.Font = new Font("Segoe UI", 12F);
-            btnArenaRadar.Location = new Point(178, 76);
+            btnArenaRadar.Location = new Point(178, 49);
             btnArenaRadar.Margin = new Padding(3, 2, 3, 2);
             btnArenaRadar.Name = "btnArenaRadar";
             btnArenaRadar.Size = new Size(131, 60);
@@ -79,7 +79,7 @@ namespace radar_launcher
             // btnEftRadarNonRotated
             // 
             btnEftRadarNonRotated.Font = new Font("Segoe UI", 12F);
-            btnEftRadarNonRotated.Location = new Point(41, 140);
+            btnEftRadarNonRotated.Location = new Point(104, 146);
             btnEftRadarNonRotated.Margin = new Padding(3, 2, 3, 2);
             btnEftRadarNonRotated.Name = "btnEftRadarNonRotated";
             btnEftRadarNonRotated.Size = new Size(131, 78);
@@ -92,7 +92,7 @@ namespace radar_launcher
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(350, 248);
+            ClientSize = new Size(350, 118);
             Controls.Add(btnEftRadarNonRotated);
             Controls.Add(btnArenaRadar);
             Controls.Add(btnEftRadar);

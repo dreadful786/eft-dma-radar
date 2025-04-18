@@ -278,6 +278,12 @@ namespace eft_dma_radar.UI.Misc
         [JsonPropertyName("R9tQvX5")]
         public PersistentCache Cache { get; private set; } = new();
 
+        /// <summary>
+        /// Last map rotation value in degrees (0-360).
+        /// </summary>
+        [JsonPropertyName("mapRotation")]
+        public int MapRotation { get; set; } = 0;
+
         #region Config Interface
 
         /// <summary>

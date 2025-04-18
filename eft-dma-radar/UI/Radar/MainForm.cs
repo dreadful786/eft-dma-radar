@@ -1312,6 +1312,8 @@ namespace eft_dma_radar.UI.Radar
             /// Begin Render
             skglControl_Radar.PaintSurface += Radar_PaintSurface;
             _renderTimer.Elapsed += RenderTimer_Elapsed;
+            _rotationDegrees = Config.MapRotation;
+            button_RotateMap.Text = $"Rotate Map ({_rotationDegrees}°)";
         }
 
         /// <summary>
@@ -1537,6 +1539,9 @@ namespace eft_dma_radar.UI.Radar
         {
             // Increment rotation by 90 degrees
             _rotationDegrees = (_rotationDegrees + 90) % 360;
+
+            // Save to config
+            Config.MapRotation = _rotationDegrees;
 
             // Update the button text to show current rotation
             button_RotateMap.Text = $"Rotate Map ({_rotationDegrees}°)";
@@ -2846,6 +2851,7 @@ namespace eft_dma_radar.UI.Radar
                     .ToList();
 
                 Config.Zoom = _zoom;
+                Config.MapRotation = _rotationDegrees;
                 Config.MaxDistance = trackBar_MaxDist.Value;
                 Memory.CloseFPGA(); // Close FPGA
             }
