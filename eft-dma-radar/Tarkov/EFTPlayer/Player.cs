@@ -1440,11 +1440,17 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
                     canvas.Save();
 
                     // Apply a rotation transformation to the canvas
-                    canvas.RotateDegrees(180, point.X, point.Y);
+                    float rotation = MainForm.Window._rotationDegrees;
+                    canvas.RotateDegrees(rotation, point.X, point.Y);
+
+                    // Adjust text orientation for 90° and 270° rotations
+                    if (rotation == 90 || rotation == 270)
+                    {
+                        canvas.RotateDegrees(180, point.X, point.Y);
+                    }
 
                     DrawPlayerHeight(canvas, point, localPlayer.Position.Y, Position.Y);
                     DrawPlayerText(canvas, point, lines);
-
 
                     // Restore the canvas state
                     canvas.Restore();
@@ -1629,11 +1635,18 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
             // Save the current canvas state
             canvas.Save();
 
-            // Get the player's position on the map
-            var playerPosition = Position.ToMapPos(mapParams.Map).ToZoomedPos(mapParams);
+            // Get the quest location's position on the map
+            var PlayerPosition = Position.ToMapPos(mapParams.Map).ToZoomedPos(mapParams);
 
             // Apply a rotation transformation to the canvas
-            canvas.RotateDegrees(180, playerPosition.X, playerPosition.Y);
+            float rotation = MainForm.Window._rotationDegrees;
+            canvas.RotateDegrees(rotation, PlayerPosition.X, PlayerPosition.Y);
+
+            // Adjust text orientation for 90° and 270° rotations
+            if (rotation == 90 || rotation == 270)
+            {
+                canvas.RotateDegrees(180, PlayerPosition.X, PlayerPosition.Y);
+            }
 
             if (this == localPlayer)
                 return;

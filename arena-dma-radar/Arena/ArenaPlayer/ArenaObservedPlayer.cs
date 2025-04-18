@@ -4,11 +4,13 @@ using eft_dma_shared.Common.DMA.ScatterAPI;
 using eft_dma_shared.Common.Misc;
 using eft_dma_shared.Common.Players;
 using eft_dma_shared.Common.Unity;
+using static SDK.ClassNames;
 
 namespace arena_dma_radar.Arena.ArenaPlayer
 {
     public sealed class ArenaObservedPlayer : Player
     {
+        private ulong _arenaOverlayDataContainer;
         /// <summary>
         /// ObservedPlayerController for non-clientplayer players.
         /// </summary>
@@ -95,6 +97,8 @@ namespace arena_dma_radar.Arena.ArenaPlayer
             InventoryControllerAddr = ObservedPlayerController + Offsets.ObservedPlayerController.InventoryController;
             HandsControllerAddr = ObservedPlayerController + Offsets.ObservedPlayerController.HandsController;
             CorpseAddr = ObservedHealthController + Offsets.ObservedHealthController.PlayerCorpse;
+
+            
 
             AccountID = GetAccountID();
             IsFocused = CheckIfFocused();

@@ -274,10 +274,17 @@ namespace eft_dma_radar.Tarkov.GameWorld
             canvas.Save();
 
             // Get the quest location's position on the map
-            var questPosition = Position.ToMapPos(mapParams.Map).ToZoomedPos(mapParams);
+            var QuestPosition = Position.ToMapPos(mapParams.Map).ToZoomedPos(mapParams);
 
             // Apply a rotation transformation to the canvas
-            canvas.RotateDegrees(180, questPosition.X, questPosition.Y);
+            float rotation = MainForm.Window._rotationDegrees;
+            canvas.RotateDegrees(rotation, QuestPosition.X, QuestPosition.Y);
+
+            // Adjust text orientation for 90° and 270° rotations
+            if (rotation == 90 || rotation == 270)
+            {
+                canvas.RotateDegrees(180, QuestPosition.X, QuestPosition.Y);
+            }
 
             string[] lines = new string[] { Name };
             Position.ToMapPos(mapParams.Map).ToZoomedPos(mapParams).DrawMouseoverText(canvas, lines);

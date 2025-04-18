@@ -42,6 +42,7 @@
             skglControl_ESP.Size = new Size(624, 441);
             skglControl_ESP.TabIndex = 0;
             skglControl_ESP.VSync = false;
+            skglControl_ESP.PaintSurface += skglControl_ESP_PaintSurface;
             // 
             // EspForm
             // 
@@ -54,7 +55,7 @@
             MinimizeBox = false;
             Name = "EspForm";
             Text = "ESP";
-            TopMost = false;
+            TopMost = true;
             ResumeLayout(false);
         }
 

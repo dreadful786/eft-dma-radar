@@ -1,4 +1,5 @@
 ﻿using arena_dma_radar.Arena.ArenaPlayer;
+using arena_dma_radar.Arena.Loot;
 using arena_dma_radar.UI.Radar;
 using arena_dma_radar.UI.Misc;
 using eft_dma_shared.Common.Features;
@@ -33,6 +34,9 @@ namespace arena_dma_radar.Arena.GameWorld
         private readonly Thread _t2;
         private readonly Thread _t3;
         private readonly Thread _t4;
+        private readonly LootManager _lootManager;
+
+        public LootManager Loot => _lootManager;
 
         /// <summary>
         /// Current Game Instance Mode.
@@ -87,6 +91,8 @@ namespace arena_dma_radar.Arena.GameWorld
         /// </summary>
         public bool InRaid => !_disposed;
 
+        public Enums.ERaidMode matchMode => MatchMode;
+
         public CameraManager CameraManager { get; }
         public IReadOnlyCollection<Player> Players => _rgtPlayers;
         public LocalPlayer LocalPlayer => _rgtPlayers?.LocalPlayer;
@@ -124,6 +130,7 @@ namespace arena_dma_radar.Arena.GameWorld
             if (_rgtPlayers.GetPlayerCount() < 1)
                 throw new ArgumentOutOfRangeException(nameof(_rgtPlayers));
             CameraManager = new();
+            _lootManager = new(localGameWorld, ct);
             _grenadeManager = new(localGameWorld);
         }
 
@@ -184,8 +191,10 @@ namespace arena_dma_radar.Arena.GameWorld
                 var mapPtr = Memory.ReadValue<ulong>(localGameWorld + Offsets.GameWorld.Location, false);
                 var map = Memory.ReadUnityString(mapPtr, 64, false);
                 LoneLogging.WriteLine("Detected Map " + map);
-                if (!GameData.MapNames.ContainsKey(map))
-                    throw new Exception("Invalid Map ID!");
+                if (!GameData.MapNames.ContainsKey(map)) { 
+                    MessageBox.Show($"Invalid Map ID! {map}"); 
+                    return null;
+                }
                 /// Get Raid Instance / Players List
                 var inMatch = Memory.ReadValue<bool>(localGameWorld + Offsets.ClientLocalGameWorld.IsInRaid, false);
                 if (!inMatch)
@@ -213,6 +222,7 @@ namespace arena_dma_radar.Arena.GameWorld
             {
                 ThrowIfMatchEnded();
                 _rgtPlayers.Refresh();
+                _lootManager.Refresh();
             }
             catch (RaidEnded)
             {

@@ -123,6 +123,7 @@
             checkBox_ESPRender_Labels = new CheckBox();
             checkBox_ESPRender_Weapons = new CheckBox();
             checkBox_ESPRender_Dist = new CheckBox();
+            checkBox_Bomb = new CheckBox();
             flowLayoutPanel4 = new FlowLayoutPanel();
             label_EspFontScale = new Label();
             trackBar_EspFontScale = new TrackBar();
@@ -140,7 +141,7 @@
             label_Pos = new Label();
             skglControl_Radar = new SKGLControl();
             tabControl1 = new TabControl();
-            linkLabel_CheckForUpdates = new LinkLabel();
+            checkBox_RadarBomb = new CheckBox();
             tabPage2.SuspendLayout();
             flowLayoutPanel_Settings.SuspendLayout();
             flowLayoutPanel_RadarSettings.SuspendLayout();
@@ -206,7 +207,6 @@
             flowLayoutPanel_RadarSettings.BorderStyle = BorderStyle.FixedSingle;
             flowLayoutPanel_RadarSettings.Controls.Add(label2);
             flowLayoutPanel_RadarSettings.Controls.Add(label8);
-            flowLayoutPanel_RadarSettings.Controls.Add(linkLabel_CheckForUpdates);
             flowLayoutPanel_RadarSettings.Controls.Add(label1);
             flowLayoutPanel_RadarSettings.Controls.Add(button_Restart);
             flowLayoutPanel_RadarSettings.Controls.Add(button_HotkeyManager);
@@ -220,11 +220,12 @@
             flowLayoutPanel_RadarSettings.Controls.Add(checkBox_Aimview);
             flowLayoutPanel_RadarSettings.Controls.Add(checkBox_GrpConnect);
             flowLayoutPanel_RadarSettings.Controls.Add(checkBox_HideNames);
+            flowLayoutPanel_RadarSettings.Controls.Add(checkBox_RadarBomb);
             flowLayoutPanel_RadarSettings.Dock = DockStyle.Top;
             flowLayoutPanel_Settings.SetFlowBreak(flowLayoutPanel_RadarSettings, true);
             flowLayoutPanel_RadarSettings.Location = new Point(3, 3);
             flowLayoutPanel_RadarSettings.Name = "flowLayoutPanel_RadarSettings";
-            flowLayoutPanel_RadarSettings.Size = new Size(1186, 173);
+            flowLayoutPanel_RadarSettings.Size = new Size(1186, 146);
             flowLayoutPanel_RadarSettings.TabIndex = 0;
             // 
             // label2
@@ -249,7 +250,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(4, 48);
+            label1.Location = new Point(10, 21);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(169, 45);
@@ -260,7 +261,7 @@
             // button_Restart
             // 
             button_Restart.Font = new Font("Segoe UI", 9.75F);
-            button_Restart.Location = new Point(180, 51);
+            button_Restart.Location = new Point(186, 24);
             button_Restart.Name = "button_Restart";
             button_Restart.Size = new Size(107, 41);
             button_Restart.TabIndex = 18;
@@ -270,7 +271,7 @@
             // 
             // button_HotkeyManager
             // 
-            button_HotkeyManager.Location = new Point(293, 51);
+            button_HotkeyManager.Location = new Point(299, 24);
             button_HotkeyManager.Name = "button_HotkeyManager";
             button_HotkeyManager.Size = new Size(107, 41);
             button_HotkeyManager.TabIndex = 34;
@@ -280,7 +281,7 @@
             // 
             // button_Radar_ColorPicker
             // 
-            button_Radar_ColorPicker.Location = new Point(406, 51);
+            button_Radar_ColorPicker.Location = new Point(412, 24);
             button_Radar_ColorPicker.Name = "button_Radar_ColorPicker";
             button_Radar_ColorPicker.Size = new Size(107, 41);
             button_Radar_ColorPicker.TabIndex = 21;
@@ -291,7 +292,7 @@
             // button_BackupConfig
             // 
             flowLayoutPanel_RadarSettings.SetFlowBreak(button_BackupConfig, true);
-            button_BackupConfig.Location = new Point(519, 51);
+            button_BackupConfig.Location = new Point(525, 24);
             button_BackupConfig.Name = "button_BackupConfig";
             button_BackupConfig.Size = new Size(107, 41);
             button_BackupConfig.TabIndex = 20;
@@ -303,7 +304,7 @@
             // 
             label_AimlineLength.Anchor = AnchorStyles.Right;
             label_AimlineLength.AutoSize = true;
-            label_AimlineLength.Location = new Point(4, 113);
+            label_AimlineLength.Location = new Point(4, 86);
             label_AimlineLength.Margin = new Padding(4, 0, 4, 0);
             label_AimlineLength.Name = "label_AimlineLength";
             label_AimlineLength.Size = new Size(88, 15);
@@ -316,7 +317,7 @@
             trackBar_AimlineLength.Anchor = AnchorStyles.Right;
             trackBar_AimlineLength.BackColor = SystemColors.Window;
             trackBar_AimlineLength.LargeChange = 50;
-            trackBar_AimlineLength.Location = new Point(100, 98);
+            trackBar_AimlineLength.Location = new Point(100, 71);
             trackBar_AimlineLength.Margin = new Padding(4, 3, 4, 3);
             trackBar_AimlineLength.Maximum = 1500;
             trackBar_AimlineLength.Minimum = 10;
@@ -331,7 +332,7 @@
             // 
             label_UIScale.Anchor = AnchorStyles.Right;
             label_UIScale.AutoSize = true;
-            label_UIScale.Location = new Point(199, 113);
+            label_UIScale.Location = new Point(199, 86);
             label_UIScale.Name = "label_UIScale";
             label_UIScale.Size = new Size(72, 15);
             label_UIScale.TabIndex = 28;
@@ -344,7 +345,7 @@
             trackBar_UIScale.BackColor = SystemColors.Window;
             flowLayoutPanel_RadarSettings.SetFlowBreak(trackBar_UIScale, true);
             trackBar_UIScale.LargeChange = 10;
-            trackBar_UIScale.Location = new Point(277, 98);
+            trackBar_UIScale.Location = new Point(277, 71);
             trackBar_UIScale.Maximum = 200;
             trackBar_UIScale.Minimum = 50;
             trackBar_UIScale.Name = "trackBar_UIScale";
@@ -356,7 +357,7 @@
             // checkBox_MapSetup
             // 
             checkBox_MapSetup.AutoSize = true;
-            checkBox_MapSetup.Location = new Point(3, 149);
+            checkBox_MapSetup.Location = new Point(3, 122);
             checkBox_MapSetup.Name = "checkBox_MapSetup";
             checkBox_MapSetup.Size = new Size(153, 19);
             checkBox_MapSetup.TabIndex = 9;
@@ -367,7 +368,7 @@
             // checkBox_Aimview
             // 
             checkBox_Aimview.AutoSize = true;
-            checkBox_Aimview.Location = new Point(162, 149);
+            checkBox_Aimview.Location = new Point(162, 122);
             checkBox_Aimview.Name = "checkBox_Aimview";
             checkBox_Aimview.Size = new Size(86, 19);
             checkBox_Aimview.TabIndex = 19;
@@ -378,7 +379,7 @@
             // checkBox_GrpConnect
             // 
             checkBox_GrpConnect.AutoSize = true;
-            checkBox_GrpConnect.Location = new Point(254, 149);
+            checkBox_GrpConnect.Location = new Point(254, 122);
             checkBox_GrpConnect.Name = "checkBox_GrpConnect";
             checkBox_GrpConnect.Size = new Size(112, 19);
             checkBox_GrpConnect.TabIndex = 33;
@@ -388,7 +389,7 @@
             // checkBox_HideNames
             // 
             checkBox_HideNames.AutoSize = true;
-            checkBox_HideNames.Location = new Point(372, 149);
+            checkBox_HideNames.Location = new Point(372, 122);
             checkBox_HideNames.Name = "checkBox_HideNames";
             checkBox_HideNames.Size = new Size(91, 19);
             checkBox_HideNames.TabIndex = 26;
@@ -402,7 +403,7 @@
             flowLayoutPanel_MemWriteCheckbox.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             flowLayoutPanel_MemWriteCheckbox.Controls.Add(checkBox_EnableMemWrite);
             flowLayoutPanel_Settings.SetFlowBreak(flowLayoutPanel_MemWriteCheckbox, true);
-            flowLayoutPanel_MemWriteCheckbox.Location = new Point(3, 182);
+            flowLayoutPanel_MemWriteCheckbox.Location = new Point(3, 155);
             flowLayoutPanel_MemWriteCheckbox.Name = "flowLayoutPanel_MemWriteCheckbox";
             flowLayoutPanel_MemWriteCheckbox.Size = new Size(190, 25);
             flowLayoutPanel_MemWriteCheckbox.TabIndex = 45;
@@ -435,7 +436,7 @@
             flowLayoutPanel_MemWrites.Controls.Add(flowLayoutPanel_Chams);
             flowLayoutPanel_MemWrites.Dock = DockStyle.Top;
             flowLayoutPanel_Settings.SetFlowBreak(flowLayoutPanel_MemWrites, true);
-            flowLayoutPanel_MemWrites.Location = new Point(3, 213);
+            flowLayoutPanel_MemWrites.Location = new Point(3, 186);
             flowLayoutPanel_MemWrites.Name = "flowLayoutPanel_MemWrites";
             flowLayoutPanel_MemWrites.Size = new Size(1186, 191);
             flowLayoutPanel_MemWrites.TabIndex = 1;
@@ -641,7 +642,7 @@
             label10.AutoSize = true;
             label10.Location = new Point(3, 75);
             label10.Name = "label10";
-            label10.Size = new Size(40, 15);
+            label10.Size = new Size(39, 15);
             label10.TabIndex = 51;
             label10.Text = "Target";
             // 
@@ -650,7 +651,7 @@
             comboBox_AimbotTarget.Anchor = AnchorStyles.Right;
             comboBox_AimbotTarget.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox_AimbotTarget.FormattingEnabled = true;
-            comboBox_AimbotTarget.Location = new Point(49, 71);
+            comboBox_AimbotTarget.Location = new Point(48, 71);
             comboBox_AimbotTarget.Name = "comboBox_AimbotTarget";
             comboBox_AimbotTarget.Size = new Size(121, 23);
             comboBox_AimbotTarget.TabIndex = 50;
@@ -659,7 +660,7 @@
             // 
             checkBox_AimRandomBone.Anchor = AnchorStyles.Right;
             checkBox_AimRandomBone.AutoSize = true;
-            checkBox_AimRandomBone.Location = new Point(176, 73);
+            checkBox_AimRandomBone.Location = new Point(175, 73);
             checkBox_AimRandomBone.Name = "checkBox_AimRandomBone";
             checkBox_AimRandomBone.Size = new Size(101, 19);
             checkBox_AimRandomBone.TabIndex = 68;
@@ -671,7 +672,7 @@
             // 
             button_RandomBoneCfg.Anchor = AnchorStyles.Right;
             button_RandomBoneCfg.Enabled = false;
-            button_RandomBoneCfg.Location = new Point(283, 69);
+            button_RandomBoneCfg.Location = new Point(282, 69);
             button_RandomBoneCfg.Name = "button_RandomBoneCfg";
             button_RandomBoneCfg.Size = new Size(57, 28);
             button_RandomBoneCfg.TabIndex = 69;
@@ -921,7 +922,7 @@
             flowLayoutPanel_MonitorSettings.Controls.Add(button_DetectRes);
             flowLayoutPanel_MonitorSettings.Dock = DockStyle.Top;
             flowLayoutPanel_Settings.SetFlowBreak(flowLayoutPanel_MonitorSettings, true);
-            flowLayoutPanel_MonitorSettings.Location = new Point(3, 410);
+            flowLayoutPanel_MonitorSettings.Location = new Point(3, 383);
             flowLayoutPanel_MonitorSettings.Name = "flowLayoutPanel_MonitorSettings";
             flowLayoutPanel_MonitorSettings.Size = new Size(1186, 70);
             flowLayoutPanel_MonitorSettings.TabIndex = 2;
@@ -1016,7 +1017,7 @@
             flowLayoutPanel_ESPSettings.Controls.Add(flowLayoutPanel4);
             flowLayoutPanel_ESPSettings.Dock = DockStyle.Top;
             flowLayoutPanel_Settings.SetFlowBreak(flowLayoutPanel_ESPSettings, true);
-            flowLayoutPanel_ESPSettings.Location = new Point(3, 486);
+            flowLayoutPanel_ESPSettings.Location = new Point(3, 459);
             flowLayoutPanel_ESPSettings.Name = "flowLayoutPanel_ESPSettings";
             flowLayoutPanel_ESPSettings.Size = new Size(1186, 178);
             flowLayoutPanel_ESPSettings.TabIndex = 3;
@@ -1210,9 +1211,10 @@
             flowLayoutPanel_ESP_PlayerRender.Controls.Add(checkBox_ESPRender_Labels);
             flowLayoutPanel_ESP_PlayerRender.Controls.Add(checkBox_ESPRender_Weapons);
             flowLayoutPanel_ESP_PlayerRender.Controls.Add(checkBox_ESPRender_Dist);
+            flowLayoutPanel_ESP_PlayerRender.Controls.Add(checkBox_Bomb);
             flowLayoutPanel_ESP_PlayerRender.Location = new Point(3, 96);
             flowLayoutPanel_ESP_PlayerRender.Name = "flowLayoutPanel_ESP_PlayerRender";
-            flowLayoutPanel_ESP_PlayerRender.Size = new Size(200, 77);
+            flowLayoutPanel_ESP_PlayerRender.Size = new Size(264, 77);
             flowLayoutPanel_ESP_PlayerRender.TabIndex = 5;
             // 
             // label18
@@ -1284,6 +1286,17 @@
             checkBox_ESPRender_Dist.UseVisualStyleBackColor = true;
             checkBox_ESPRender_Dist.CheckedChanged += checkBox_ESPRender_Dist_CheckedChanged;
             // 
+            // checkBox_Bomb
+            // 
+            checkBox_Bomb.AutoSize = true;
+            checkBox_Bomb.Location = new Point(201, 53);
+            checkBox_Bomb.Name = "checkBox_Bomb";
+            checkBox_Bomb.Size = new Size(58, 19);
+            checkBox_Bomb.TabIndex = 72;
+            checkBox_Bomb.Text = "Bomb";
+            checkBox_Bomb.UseVisualStyleBackColor = true;
+            checkBox_Bomb.CheckedChanged += checkBox_Bomb_CheckedChanged;
+            // 
             // flowLayoutPanel4
             // 
             flowLayoutPanel4.Anchor = AnchorStyles.Right;
@@ -1293,7 +1306,7 @@
             flowLayoutPanel4.Controls.Add(trackBar_EspFontScale);
             flowLayoutPanel4.Controls.Add(label_EspLineScale);
             flowLayoutPanel4.Controls.Add(trackBar_EspLineScale);
-            flowLayoutPanel4.Location = new Point(209, 109);
+            flowLayoutPanel4.Location = new Point(273, 109);
             flowLayoutPanel4.Name = "flowLayoutPanel4";
             flowLayoutPanel4.Size = new Size(346, 51);
             flowLayoutPanel4.TabIndex = 4;
@@ -1456,6 +1469,7 @@
             skglControl_Radar.Size = new Size(1250, 647);
             skglControl_Radar.TabIndex = 18;
             skglControl_Radar.VSync = false;
+            skglControl_Radar.PaintSurface += skglControl_Radar_PaintSurface;
             // 
             // tabControl1
             // 
@@ -1468,18 +1482,16 @@
             tabControl1.Size = new Size(1264, 681);
             tabControl1.TabIndex = 8;
             // 
-            // linkLabel_CheckForUpdates
+            // checkBox_RadarBomb
             // 
-            linkLabel_CheckForUpdates.AutoSize = true;
-            flowLayoutPanel_RadarSettings.SetFlowBreak(linkLabel_CheckForUpdates, true);
-            linkLabel_CheckForUpdates.Location = new Point(9, 27);
-            linkLabel_CheckForUpdates.Margin = new Padding(3, 6, 3, 6);
-            linkLabel_CheckForUpdates.Name = "linkLabel_CheckForUpdates";
-            linkLabel_CheckForUpdates.Size = new Size(255, 15);
-            linkLabel_CheckForUpdates.TabIndex = 47;
-            linkLabel_CheckForUpdates.TabStop = true;
-            linkLabel_CheckForUpdates.Text = "Check for updates at lone-eft.com/opensource";
-            linkLabel_CheckForUpdates.LinkClicked += linkLabel_CheckForUpdates_LinkClicked;
+            checkBox_RadarBomb.AutoSize = true;
+            checkBox_RadarBomb.Location = new Point(469, 122);
+            checkBox_RadarBomb.Name = "checkBox_RadarBomb";
+            checkBox_RadarBomb.Size = new Size(128, 19);
+            checkBox_RadarBomb.TabIndex = 47;
+            checkBox_RadarBomb.Text = "Show Bomb Carrier";
+            checkBox_RadarBomb.UseVisualStyleBackColor = true;
+            checkBox_RadarBomb.CheckedChanged += checkBox_RadarBomb_CheckedChanged;
             // 
             // MainForm
             // 
@@ -1490,7 +1502,8 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4, 3, 4, 3);
             Name = "MainForm";
-            Text = "Arena DMA Radar";
+            Text = "Whats A DMA?";
+            Load += MainForm_Load;
             tabPage2.ResumeLayout(false);
             flowLayoutPanel_Settings.ResumeLayout(false);
             flowLayoutPanel_Settings.PerformLayout();
@@ -1642,7 +1655,8 @@
         private Button button_VischeckInvisColorPick;
         private RadioButton radioButton_Chams_Visible;
         private FlowLayoutPanel flowLayoutPanel_MemWriteCheckbox;
-        private LinkLabel linkLabel_CheckForUpdates;
+        private CheckBox checkBox_Bomb;
+        private CheckBox checkBox_RadarBomb;
     }
 }
 

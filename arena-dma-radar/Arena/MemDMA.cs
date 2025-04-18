@@ -2,6 +2,7 @@
 using arena_dma_radar.Arena.ArenaPlayer;
 using arena_dma_radar.UI.Radar;
 using arena_dma_radar.UI.Misc;
+using arena_dma_radar.Arena.Loot;
 using VmmFrost;
 using arena_dma_radar.Arena.GameWorld;
 using System.Runtime;
@@ -55,6 +56,8 @@ namespace arena_dma_radar.Arena
         /// True if currently in a raid/match, otherwise False.
         /// </summary>
         public override bool InRaid => Game?.InRaid ?? false;
+
+        public LootManager Loot => Game?.Loot;
 
         private bool _ready;
         /// <summary>
@@ -237,7 +240,7 @@ namespace arena_dma_radar.Arena
         /// </summary>
         private void LoadProcess()
         {
-            if (_hVMM == null || !_hVMM.PidGetFromName(_processName, out uint pid))
+            if (!_hVMM.PidGetFromName(_processName, out uint pid))
                 throw new Exception($"Unable to find '{_processName}'");
             _pid = pid;
         }

@@ -101,7 +101,7 @@ namespace eft_dma_radar.Tarkov.Loot
             var containerPosition = Position.ToMapPos(mapParams.Map).ToZoomedPos(mapParams);
 
             // Apply a rotation transformation to the canvas
-            canvas.RotateDegrees(180, containerPosition.X, containerPosition.Y);
+            canvas.RotateDegrees(_rotationDegrees, containerPosition.X, containerPosition.Y);
 
             // Draw the mouseover text
             var lines = new List<string>()

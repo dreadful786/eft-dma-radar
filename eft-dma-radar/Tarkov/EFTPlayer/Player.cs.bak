@@ -1423,7 +1423,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
                     canvas.Save();
 
                     // Apply a rotation transformation to the canvas
-                    canvas.RotateDegrees(180, point.X, point.Y);
+                    canvas.RotateDegrees(_rotationDegrees, point.X, point.Y);
 
                     DrawPlayerHeight(canvas, point, localPlayer.Position.Y, Position.Y);
                     DrawPlayerText(canvas, point, lines);
@@ -1616,7 +1616,7 @@ namespace eft_dma_radar.Tarkov.EFTPlayer
             var playerPosition = Position.ToMapPos(mapParams.Map).ToZoomedPos(mapParams);
 
             // Apply a rotation transformation to the canvas
-            canvas.RotateDegrees(180, playerPosition.X, playerPosition.Y);
+            canvas.RotateDegrees(_rotationDegrees, playerPosition.X, playerPosition.Y);
 
             if (this == localPlayer)
                 return;
