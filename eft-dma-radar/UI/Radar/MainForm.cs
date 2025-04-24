@@ -2061,7 +2061,8 @@ namespace eft_dma_radar.UI.Radar
         public void radioButton_AimbotDefaultMode_CheckedChanged(object sender, EventArgs e)
         {
             bool isChecked = radioButton_AimTarget_FOV.Checked;
-            if (radioButton_AimTarget_FOV.Enabled = isChecked)
+            // Don't disable the radio button, just set the targeting mode
+            if (isChecked)
                 Aimbot.Config.TargetingMode = Aimbot.AimbotTargetingMode.FOV;
 
             // Update the SettingsWidgetForm checkbox
@@ -2071,7 +2072,8 @@ namespace eft_dma_radar.UI.Radar
         public void radioButton_AimbotCQBMode_CheckedChanged(object sender, EventArgs e)
         {
             bool isChecked = radioButton_AimTarget_CQB.Checked;
-            if (radioButton_AimTarget_CQB.Enabled = isChecked)
+            // Don't disable the radio button, just set the targeting mode
+            if (isChecked)
                 Aimbot.Config.TargetingMode = Aimbot.AimbotTargetingMode.CQB;
 
             // Update the SettingsWidgetForm checkbox
