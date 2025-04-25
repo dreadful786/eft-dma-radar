@@ -35,3 +35,9 @@ No idea
 ## Creds
 
 Thanks to everyone in the community that maintains a repo. Anyone that I've swiped a feature from and haven't mentioned please reach out so I can give credit.
+
+
+Donate
+
+BTC: 36KEWkmf3n5FgP5Lbi6nWsFRvUu46kyDtp
+ETH: 0xfc9D6AF011f0446D6Ae34777C752f3fa37e8FcDd
