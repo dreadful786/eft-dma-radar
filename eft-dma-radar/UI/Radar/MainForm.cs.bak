@@ -1367,6 +1367,15 @@ namespace eft_dma_radar.UI.Radar
                                 sb.Append(slot.Value.Long); // Use long item name
                                 sb.Append(@" \line ");
                             }
+                            int index = 0;
+                            foreach (var loot in gear.Loot.Where(x => x.IsArmorPlate))
+                            {
+                                if (!GameData.PlateLevel.TryGetValue(loot.Name, out var lvl))
+                                    continue;
+                                sb.Append(@$"\b Plate {(index == 0 ? "Front" : (index == 1 ? "Back" : (index >= 2 ? $"Side {index - 1}" : "")))}: \b0 {loot.ShortName} (LVL {lvl})");
+                                sb.Append(@" \line ");
+                                index++;
+                            }
                         }
                         else
                         {

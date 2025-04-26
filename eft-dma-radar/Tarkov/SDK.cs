@@ -522,7 +522,16 @@ namespace SDK
             public const uint zoneId = 0x78; // String
             public const uint plantTime = 0x80; // Single
         }
+        public readonly partial struct QuestConditionLaunchFlare
+        {
+            public const uint zoneId = 0x70; // String
+        }
 
+        public readonly partial struct QuestConditionZone
+        {
+            public const uint target = 0x70; // System.String[]
+            public const uint zoneId = 0x78; // String
+        }
         public readonly partial struct QuestConditionCounterTemplate
         {
             public const uint Conditions = 0x10; // -.\uF162

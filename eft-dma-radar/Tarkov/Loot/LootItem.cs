@@ -377,7 +377,7 @@ namespace eft_dma_radar.Tarkov.Loot
                 if (this is not LootCorpse && loot.Count() == 1)
                 {
                     var firstItem = loot.First();
-                    label = firstItem.ShortName;
+                    label = firstItem.ShortName.ToLower().Contains("Poster") ? firstItem.Name : firstItem.ShortName;
                 }
                 else
                 {
