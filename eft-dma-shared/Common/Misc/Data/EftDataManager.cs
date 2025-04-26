@@ -82,6 +82,8 @@ namespace eft_dma_shared.Common.Misc.Data
                 if (json is not null)
                 {
                     await File.WriteAllTextAsync(_dataFile, json);
+                    // Merge with default data to ensure no items are missing
+                    await TarkovDevCore.MergeDefaultDataWithDataJsonAsync();
                 }
             }
             var jsonOptions = new JsonSerializerOptions()
