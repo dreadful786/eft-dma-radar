@@ -277,6 +277,88 @@ namespace eft_dma_shared.Common.Misc.Data.TarkovMarket
                             currentData.Tasks.Add(defaultTask);
                             hasChanges = true;
                         }
+                        else
+                        {
+                            // Task exists, process objectives
+                            var currentTask = existingTasksDict[defaultTask.Id];
+
+                            if (defaultTask.Objectives != null && currentTask.Objectives != null)
+                            {
+                                // Create a dictionary of objectives by ID for easier lookup
+                                var currentObjectivesDict = new Dictionary<string, EftDataManager.TaskElement.ObjectiveElement>(StringComparer.OrdinalIgnoreCase);
+                                foreach (var obj in currentTask.Objectives)
+                                {
+                                    if (obj?.Id != null)
+                                    {
+                                        currentObjectivesDict[obj.Id] = obj;
+                                    }
+                                }
+
+                                // Process each objective in the default task
+                                foreach (var defaultObjective in defaultTask.Objectives)
+                                {
+                                    if (defaultObjective?.Id == null) continue;
+
+                                    // Check if the objective exists in current data
+                                    if (currentObjectivesDict.TryGetValue(defaultObjective.Id, out var currentObjective))
+                                    {
+                                        // Check if zones need to be preserved
+                                        if (defaultObjective.Zones != null && defaultObjective.Zones.Count > 0)
+                                        {
+                                            // If current objective has no zones, copy from default
+                                            if (currentObjective.Zones == null || currentObjective.Zones.Count == 0)
+                                            {
+                                                currentObjective.Zones = defaultObjective.Zones;
+                                                hasChanges = true;
+                                            }
+                                            else
+                                            {
+                                                // Both have zones - create a dictionary of current zones by ID
+                                                var currentZonesDict = new Dictionary<string, EftDataManager.TaskElement.ObjectiveElement.ZoneElement>(StringComparer.OrdinalIgnoreCase);
+                                                foreach (var zone in currentObjective.Zones)
+                                                {
+                                                    if (zone?.Id != null)
+                                                    {
+                                                        currentZonesDict[zone.Id] = zone;
+                                                    }
+                                                }
+
+                                                // Check each default zone
+                                                foreach (var defaultZone in defaultObjective.Zones)
+                                                {
+                                                    if (defaultZone?.Id == null) continue;
+
+                                                    // Add missing zones
+                                                    if (!currentZonesDict.ContainsKey(defaultZone.Id))
+                                                    {
+                                                        currentObjective.Zones.Add(defaultZone);
+                                                        hasChanges = true;
+                                                    }
+                                                    else
+                                                    {
+                                                        var currentZone = currentZonesDict[defaultZone.Id];
+
+                                                        // Ensure zone outline is preserved
+                                                        if (defaultZone.Outline != null && defaultZone.Outline.Count > 0 &&
+                                                            (currentZone.Outline == null || currentZone.Outline.Count == 0))
+                                                        {
+                                                            currentZone.Outline = defaultZone.Outline;
+                                                            hasChanges = true;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        // Objective doesn't exist in current task, add it
+                                        currentTask.Objectives.Add(defaultObjective);
+                                        hasChanges = true;
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
 
