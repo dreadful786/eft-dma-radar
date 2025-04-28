@@ -406,7 +406,7 @@ namespace eft_dma_radar.UI.Radar
 
                     if (Config.QuestHelper.Enabled)
                     {
-                        var questItems = Loot?.Where(x => x is QuestItem);
+                        var questItems = Memory.Loot?.FilteredLoot?.Where(x => x is QuestItem);
                         if (questItems is not null)
                             foreach (var item in questItems)
                             {

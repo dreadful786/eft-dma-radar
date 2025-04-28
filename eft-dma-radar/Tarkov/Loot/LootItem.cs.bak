@@ -156,7 +156,7 @@ namespace eft_dma_radar.Tarkov.Loot
                 return Price >= Program.Config.MinLootValue;
             }
         }
-/*
+
         public bool isFIR
         {
             get
@@ -170,7 +170,7 @@ namespace eft_dma_radar.Tarkov.Loot
                 return _fir;
             }
         }
-*/
+
         /// <summary>
         /// Checks if an item exceeds valuable loot price threshold.
         /// </summary>
@@ -274,20 +274,19 @@ namespace eft_dma_radar.Tarkov.Loot
 
         private Vector3 _position;
         public ref Vector3 Position => ref _position;
-/*
+
         private bool _fir;
         public ref bool IsFIR => ref _fir;
         public List<LootItem> childItems = new List<LootItem>();
-*/
         public Vector2 MouseoverPosition { get; set; }
 
         public virtual void Draw(SKCanvas canvas, LoneMapParams mapParams, ILocalPlayer localPlayer)
         {
-         /*   if (this is LootItem && this is not QuestItem)
+            if (this is LootItem && this is not QuestItem)
             {
                 if (IsQuestCondition && !IsFIR)
                     return;
-            }*/
+            }
             var label = GetUILabel(MainForm.Config.QuestHelper.Enabled);
             var paints = GetPaints();
             var heightDiff = Position.Y - localPlayer.Position.Y;
@@ -418,7 +417,7 @@ namespace eft_dma_radar.Tarkov.Loot
                 else if (Price > 0)
                     label += $"[{TarkovMarketItem.FormatPrice(Price)}] ";
                 label += (!ShortName.Equals("Poster") ? ShortName : this.Name);
-                if (showQuest && IsQuestCondition /*&& IsFIR*/)
+                if (showQuest && IsQuestCondition && IsFIR)
                     label += " (Quest)";
             }
 
