@@ -406,7 +406,7 @@ namespace eft_dma_radar.UI.Radar
 
                     if (Config.QuestHelper.Enabled)
                     {
-                        var questItems = Loot?.Where(x => x is QuestItem);
+                        var questItems = Memory.Loot?.FilteredLoot?.Where(x => x is QuestItem);
                         if (questItems is not null)
                             foreach (var item in questItems)
                             {
@@ -2692,6 +2692,7 @@ namespace eft_dma_radar.UI.Radar
             checkBox_ShowLootTab.Checked = Config.ShowLootTab;
             checkBox_HideCorpses.Checked = Config.HideCorpses;
             checkBox_ShowMines.Checked = Config.ShowMines;
+            checkBox_KillTask.Checked = Config.ShowZone;
             checkBox_TeammateAimlines.Checked = Config.TeammateAimlines;
             checkBox_AIAimlines.Checked = Config.AIAimlines;
             checkBox_WebRadarUPNP.Checked = Config.WebRadar.UPnP;
@@ -4443,5 +4444,9 @@ namespace eft_dma_radar.UI.Radar
         }
 
 
+        private void checkBox_KillTask_CheckedChanged(object sender, EventArgs e)
+        {
+            Config.ShowZone = checkBox_KillTask.Checked;
+        }
     }
 }
