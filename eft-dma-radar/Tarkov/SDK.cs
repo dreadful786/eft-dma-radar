@@ -178,7 +178,9 @@ namespace SDK
             public const uint _tripwireState = 0x16C; // System.Int32
             public const uint FromPosition = 0x170; // UnityEngine.Vector3
             public const uint ToPosition = 0x17C; // UnityEngine.Vector3
-        }
+        
+        public const uint PlacerPlayerId = 0x140;
+}
 
         public readonly partial struct MineDirectional
         {
@@ -893,7 +895,13 @@ namespace SDK
         {
             public const uint _on = 0xF4; // Boolean
         }
-    }
+    
+
+        public readonly partial struct QuestConditionInZone
+        {
+            public const uint zoneIds = 0x70;
+        }
+}
 
     public readonly partial struct Enums
     {
