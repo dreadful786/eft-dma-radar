@@ -45,6 +45,7 @@ namespace eft_dma_radar.Tarkov.GameWorld
                 id = zone.Id,
                 pos = new Vector3(zone.Position.X, zone.Position.Y, zone.Position.Z)
             }, StringComparer.OrdinalIgnoreCase)
+            .DistinctBy(group => group.Key, StringComparer.OrdinalIgnoreCase)
             .ToDictionary(
                 group => group.Key, // Map Id
                 group => group
@@ -189,7 +190,7 @@ namespace eft_dma_radar.Tarkov.GameWorld
                     foreach (var targetPtr in targets)
                     {
                         var target = Memory.ReadUnityString(targetPtr);
-                        items.Add(target);  
+                        items.Add(target);
                     }
                 }
                 else if (condName == "ConditionPlaceBeacon" || condName == "ConditionLeaveItemAtLocation")
@@ -295,26 +296,6 @@ namespace eft_dma_radar.Tarkov.GameWorld
                 Name = target;
             Position = position;
             Outline = outline;
-        }
-
-        public static bool IsPointInPolygon(Vector2 point, List<Vector2> polygon)
-        {
-            bool inside = false;
-            int count = polygon.Count;
-
-            for (int i = 0, j = count - 1; i < count; j = i++)
-            {
-                var pi = polygon[i];
-                var pj = polygon[j];
-
-                if (((pi.Y > point.Y) != (pj.Y > point.Y)) &&
-                    (point.X < (pj.X - pi.X) * (point.Y - pi.Y) / (pj.Y - pi.Y) + pi.X))
-                {
-                    inside = !inside;
-                }
-            }
-
-            return inside;
         }
 
         public void DrawESP(SKCanvas canvas, LocalPlayer localPlayer)

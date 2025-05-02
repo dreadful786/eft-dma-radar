@@ -532,21 +532,21 @@ namespace SDK
             public const uint target = 0x70; // String
         }
 
-        public readonly partial struct QuestConditionPlaceBeacon
-        {
-            public const uint zoneId = 0x78; // String
-            public const uint plantTime = 0x80; // Single
-        }
-        
-        public readonly partial struct QuestConditionLaunchFlare
-        {
-            public const uint zoneId = 0x70; // String
-        }     
-           
         public readonly partial struct QuestConditionZone
         {
             public const uint target = 0x70; // System.String[]
             public const uint zoneId = 0x78; // String
+        }
+
+        public readonly partial struct QuestConditionLaunchFlare
+        {
+            public const uint zoneId = 0x70; // String
+        }
+
+        public readonly partial struct QuestConditionPlaceBeacon
+        {
+            public const uint zoneId = 0x78; // String
+            public const uint plantTime = 0x80; // Single
         }
 
         public readonly partial struct QuestConditionCounterTemplate
@@ -689,7 +689,8 @@ namespace SDK
             public const uint FireMode = 0xA0; // EFT.InventoryLogic.FireModeComponent
             public const uint Chambers = 0xB0; // EFT.InventoryLogic.Slot[]
             public const uint _magSlotCache = 0xC8; // EFT.InventoryLogic.Slot
-            public const uint Slots = 0x80; // EFT.InventoryLogic.Slot[]
+
+            public const uint Slots = 0x80;
         }
 
         public readonly partial struct FireModeComponent
@@ -872,6 +873,7 @@ namespace SDK
         {
             public const uint Zooms = 0x190; // System.Single[]
         }
+
 
         public readonly partial struct BundleAnimationBonesController
         {
