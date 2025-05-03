@@ -105,6 +105,7 @@ namespace eft_dma_radar.UI.Radar
             label34 = new Label();
             checkBox_QuestHelper_Enabled = new CheckBox();
             checkedListBox_QuestHelper = new CheckedListBox();
+            checkBox_KillTask = new CheckBox();
             flowLayoutPanel_WebRadarSettings = new FlowLayoutPanel();
             label9 = new Label();
             label25 = new Label();
@@ -309,7 +310,6 @@ namespace eft_dma_radar.UI.Radar
             Column_LootColorPicker = new DataGridViewButtonColumn();
             colorPicker1 = new ColorDialog();
             toolTip1 = new ToolTip(components);
-            checkBox_KillTask = new CheckBox();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             flowLayoutPanel_Loot.SuspendLayout();
@@ -1236,6 +1236,18 @@ namespace eft_dma_radar.UI.Radar
             checkedListBox_QuestHelper.Name = "checkedListBox_QuestHelper";
             checkedListBox_QuestHelper.Size = new Size(343, 148);
             checkedListBox_QuestHelper.TabIndex = 48;
+            // 
+            // checkBox_KillTask
+            // 
+            checkBox_KillTask.AutoSize = true;
+            checkBox_KillTask.Location = new Point(426, 28);
+            checkBox_KillTask.Name = "checkBox_KillTask";
+            checkBox_KillTask.Size = new Size(103, 19);
+            checkBox_KillTask.TabIndex = 63;
+            checkBox_KillTask.Text = "KillTask Border";
+            toolTip1.SetToolTip(checkBox_KillTask, "When enabled, a rectangle border representing the zone limits for the kill task will be drawn on the radar");
+            checkBox_KillTask.UseVisualStyleBackColor = true;
+            checkBox_KillTask.CheckedChanged += checkBox_KillTask_CheckedChanged;
             // 
             // flowLayoutPanel_WebRadarSettings
             // 
@@ -3656,18 +3668,6 @@ namespace eft_dma_radar.UI.Radar
             toolTip1.InitialDelay = 500;
             toolTip1.ReshowDelay = 100;
             // 
-            // checkBox_KillTask
-            // 
-            checkBox_KillTask.AutoSize = true;
-            checkBox_KillTask.Location = new Point(3, 167);
-            checkBox_KillTask.Name = "checkBox_KillTask";
-            checkBox_KillTask.Size = new Size(102, 19);
-            checkBox_KillTask.TabIndex = 63;
-            checkBox_KillTask.Text = "KillTask Border";
-            toolTip1.SetToolTip(checkBox_KillTask, "When enabled, a rectangle border representing the zone limits for the kill task will be drawn on the radar");
-            checkBox_KillTask.UseVisualStyleBackColor = true;
-            checkBox_KillTask.CheckedChanged += checkBox_KillTask_CheckedChanged;
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -3677,7 +3677,7 @@ namespace eft_dma_radar.UI.Radar
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4, 3, 4, 3);
             Name = "MainForm";
-            Text = "EFT DMA Radar";
+            Text = "EFT DMA Radar - Dreadful - v1.01";
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();

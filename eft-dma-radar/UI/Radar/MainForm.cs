@@ -187,7 +187,7 @@ namespace eft_dma_radar.UI.Radar
                     players = players.Where(x =>
                         x.LootObject is null || !loot.Contains(x.LootObject)); // Don't show both corpse objects
 
-                var result = loot.Concat(containers).Concat(players).Concat(exits).Concat(questZones).Concat(_switches);
+                var result = loot.Concat(containers).Concat(players).Concat(exits).Concat(questZones).Concat(_switches).Concat(_doors);
                 return result.Any() ? result : null;
             }
         }
@@ -298,6 +298,7 @@ namespace eft_dma_radar.UI.Radar
                 {
                     LoneMapManager.LoadMap(mapID);
                     UpdateSwitches();
+                    UpdateDoors();
                 }
                 canvas.Clear(); // Clear canvas
                 if (inRaid && localPlayer is not null) // LocalPlayer is in a raid -> Begin Drawing...
@@ -518,6 +519,26 @@ namespace eft_dma_radar.UI.Radar
                         // Restore the canvas state
                         canvas.Restore();
                     }
+                    // Draw Doors from the cached list
+                    foreach (var doorInstance in _doors)
+                    {
+                        // Get the Door's position on the map
+                        var doorPosition = doorInstance.Position.ToMapPos(map.Config).ToZoomedPos(mapParams);
+
+                        // Save the current canvas state
+                        canvas.Save();
+
+                        // Apply a rotation transformation to the canvas
+                        ApplyRotationForText(canvas, doorPosition.X, doorPosition.Y, _rotationDegrees);
+
+                        // Draw the Door
+                        doorInstance.Draw(canvas, mapParams, localPlayer);
+
+                        // Restore the canvas state
+                        canvas.Restore();
+                    }
+
+
                     if (allPlayers is not null)
                         foreach (var player in allPlayers) // Draw PMCs
                         {
@@ -1642,6 +1663,20 @@ namespace eft_dma_radar.UI.Radar
                         if (distance < 12)
                         {
                             _mouseOverItem = switchObj;
+                            MouseoverGroup = null;
+                            return;
+                        }
+                    }
+                }
+
+                if (_doors?.Any() == true)
+                {
+                    foreach (var doorObj in _doors)
+                    {
+                        float distance = Vector2.Distance(doorObj.MouseoverPosition, mouse);
+                        if (distance < 12)
+                        {
+                            _mouseOverItem = doorObj;
                             MouseoverGroup = null;
                             return;
                         }
@@ -3832,6 +3867,7 @@ namespace eft_dma_radar.UI.Radar
             Interval = 250
         };
         private List<Tarkov.GameWorld.Exits.Switch> _switches = new List<Tarkov.GameWorld.Exits.Switch>();
+        private List<Tarkov.GameWorld.Interactables.Door> _doors = new List<Tarkov.GameWorld.Interactables.Door>();
         /// <summary>
         /// Current selected Tarkov Market Item in the Loot Filters UI.
         /// </summary>
@@ -4439,6 +4475,17 @@ namespace eft_dma_radar.UI.Radar
                 foreach (var kvp in switchesDict)
                 {
                     _switches.Add(new Tarkov.GameWorld.Exits.Switch(kvp.Value, kvp.Key));
+                }
+            }
+        }
+        private void UpdateDoors()
+        {
+            _doors.Clear();
+            if (GameData.Doors.TryGetValue(MapID, out var doorsDict))
+            {
+                foreach (var kvp in doorsDict)
+                {
+                    _doors.Add(new Tarkov.GameWorld.Interactables.Door(kvp.Value, kvp.Key));
                 }
             }
         }

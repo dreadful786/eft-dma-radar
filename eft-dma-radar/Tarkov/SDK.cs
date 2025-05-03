@@ -121,8 +121,20 @@ namespace SDK
             public const uint MainPlayer = 0x1A8; // EFT.Player
             public const uint SynchronizableObjectLogicProcessor = 0x1D8; // -.\uEB54
             public const uint Grenades = 0x200; // -.\uE3CF<Int32, Throwable>
-
             public const uint LootItems = 0x128;
+            public const uint World = 0x258; // EFT.World
+        }
+
+        public readonly partial struct World
+        {
+            public const uint Interactables = 0x30; // EFT.Interactive.WorldInteractiveObject[]
+        }
+
+        public readonly partial struct Interactable
+        {
+            public const uint Id = 0x60; // String
+            public const uint KeyId = 0x58; // String
+            public const uint _doorState = 0x11C; // System.Byte
         }
 
         public readonly partial struct TransitController
@@ -178,7 +190,9 @@ namespace SDK
             public const uint _tripwireState = 0x16C; // System.Int32
             public const uint FromPosition = 0x170; // UnityEngine.Vector3
             public const uint ToPosition = 0x17C; // UnityEngine.Vector3
-        }
+        
+        public const uint PlacerPlayerId = 0x140;
+}
 
         public readonly partial struct MineDirectional
         {
@@ -893,7 +907,13 @@ namespace SDK
         {
             public const uint _on = 0xF4; // Boolean
         }
-    }
+    
+
+        public readonly partial struct QuestConditionInZone
+        {
+            public const uint zoneIds = 0x70;
+        }
+}
 
     public readonly partial struct Enums
     {
