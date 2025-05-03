@@ -121,8 +121,20 @@ namespace SDK
             public const uint MainPlayer = 0x1A8; // EFT.Player
             public const uint SynchronizableObjectLogicProcessor = 0x1D8; // -.\uEB54
             public const uint Grenades = 0x200; // -.\uE3CF<Int32, Throwable>
-
             public const uint LootItems = 0x128;
+            public const uint World = 0x258; // EFT.World
+        }
+
+        public readonly partial struct World
+        {
+            public const uint Interactables = 0x30; // EFT.Interactive.WorldInteractiveObject[]
+        }
+
+        public readonly partial struct Interactable
+        {
+            public const uint Id = 0x60; // String
+            public const uint KeyId = 0x58; // String
+            public const uint _doorState = 0x11C; // System.Byte
         }
 
         public readonly partial struct TransitController

@@ -312,6 +312,18 @@ namespace eft_dma_radar.UI.Misc
             FilterQuality = SKFilterQuality.High
         };
 
+        public static readonly SKPaint DoorText = new SKPaint
+        {
+            SubpixelText = true,
+            Color = SKColors.White,
+            IsStroke = false,
+            TextSize = 12,
+            TextEncoding = SKTextEncoding.Utf8,
+            IsAntialias = true,
+            Typeface = SKTypeface.FromFamilyName("Consolas"), // Do NOT change this font
+            FilterQuality = SKFilterQuality.High
+        };
+
         #endregion
 
         #region Loot Paints
@@ -1072,6 +1084,20 @@ namespace eft_dma_radar.UI.Misc
             Typeface = CustomFonts.SKFontFamilyMedium,
             FilterQuality = SKFilterQuality.High
         };
+        public static SKPaint TextDoorsESP { get; } = new()
+        {
+            Color = SKColors.White,
+            SubpixelText = true,
+            IsStroke = false,
+            TextSize = 12f,
+            FakeBoldText = true,
+            TextAlign = SKTextAlign.Center,
+            TextEncoding = SKTextEncoding.Utf8,
+            IsAntialias = true,
+            Typeface = CustomFonts.SKFontFamilyMedium,
+            FilterQuality = SKFilterQuality.High
+        };
+
         #region ESP Readonly Paints
 
         public static SKPaint PaintCrosshairESP { get; } = new()
