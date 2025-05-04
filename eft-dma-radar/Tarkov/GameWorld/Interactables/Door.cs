@@ -22,13 +22,16 @@ namespace eft_dma_radar.Tarkov.GameWorld.Interactables
     public sealed class Door : IMouseoverEntity, IMapEntity, IESPEntity
     {
         private Vector3 _position;
+        private string _shortName;
         public ref Vector3 Position => ref _position;
-
+        public ref string ShortName => ref _shortName;
         public string Name { get; set; }
-        public Door(Vector3 position, string name)
+
+        public Door(Vector3 position, string name, string shortName)
         {
             _position = position;
             Name = name;
+            _shortName = shortName;
         }
 
         /// <summary>
@@ -49,12 +52,14 @@ namespace eft_dma_radar.Tarkov.GameWorld.Interactables
                 using var path = point.GetUpArrow(5f * MainForm.UIScale);
                 canvas.DrawPath(path, SKPaints.ShapeOutline);
                 canvas.DrawPath(path, paint);
+                canvas.DrawText("i", point.X, point.Y, SKPaints.DoorText);
             }
             else if (heightDiff < -1.75f) // door is below player
             {
                 using var path = point.GetDownArrow(5f * MainForm.UIScale);
                 canvas.DrawPath(path, SKPaints.ShapeOutline);
                 canvas.DrawPath(path, paint);
+                canvas.DrawText("i", point.X, point.Y, SKPaints.DoorText);
             }
             else // door is level with player 
 
@@ -88,6 +93,7 @@ namespace eft_dma_radar.Tarkov.GameWorld.Interactables
             // Create lines for the mouseover text
             List<string> lines = new();
             lines.Add($"Door:{Name}");
+            lines.Add($"ShortName:{ShortName}");
             Position.ToMapPos(mapParams.Map).ToZoomedPos(mapParams).DrawMouseoverText(canvas, lines);
 
             // Restore the canvas state
@@ -104,7 +110,7 @@ namespace eft_dma_radar.Tarkov.GameWorld.Interactables
                 return;
             }
 
-            canvas.DrawText(Name, screenPos, SKPaints.TextDoorsESP);
+            canvas.DrawText(ShortName, screenPos, SKPaints.TextDoorsESP);
             if (ESP.Config.ShowDistances)
             {
                 var distance = Vector3.Distance(localPlayer.Position, Position);

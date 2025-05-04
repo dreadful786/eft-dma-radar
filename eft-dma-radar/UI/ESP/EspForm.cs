@@ -3,6 +3,7 @@ using eft_dma_radar.Tarkov.EFTPlayer;
 using eft_dma_radar.Tarkov.Features;
 using eft_dma_radar.Tarkov.Features.MemoryWrites;
 using eft_dma_radar.Tarkov.GameWorld.Exits;
+using eft_dma_radar.Tarkov.GameWorld.Interactables;
 using eft_dma_radar.Tarkov.GameWorld.Explosives;
 using eft_dma_radar.Tarkov.Loot;
 using eft_dma_radar.UI.Misc;
@@ -250,6 +251,7 @@ namespace eft_dma_radar.UI.ESP
                         if (Config.ESP.ShowStatusText)
                             DrawStatusText(canvas);
                         DrawTime(canvas);
+                        DrawDoors(canvas, localPlayer);
                     }
                 }
             }
@@ -495,6 +497,9 @@ namespace eft_dma_radar.UI.ESP
                 foreach (var exit in exits)
                     exit.DrawESP(canvas, localPlayer);
         }
+        /// <summary>
+        /// Draw all switches within range.
+        /// </summary>
         private static void DrawSwitches(SKCanvas canvas, LocalPlayer localPlayer)
         {
             if (GameData.Switches.TryGetValue(MapID, out var switches))
@@ -506,6 +511,23 @@ namespace eft_dma_radar.UI.ESP
                 }
             }
         }
+        /// <summary>
+        /// Draw all doors within range.
+        /// </summary>
+        private static void DrawDoors(SKCanvas canvas, LocalPlayer localPlayer)
+        {
+            if (GameData.Doors.TryGetValue(MapID, out var doors))
+            {
+                foreach (var doorsEntry in doors)
+                {
+                    // Extract the position and short name from the tuple
+                    var (position, shortName) = doorsEntry.Value;
+                    var doorObj = new Tarkov.GameWorld.Interactables.Door(position, doorsEntry.Key, shortName);
+                    doorObj.DrawESP(canvas, localPlayer);
+                }
+            }
+        }
+
 
         /// <summary>
         /// Draw all grenades within range.
