@@ -4485,7 +4485,10 @@ namespace eft_dma_radar.UI.Radar
             {
                 foreach (var kvp in doorsDict)
                 {
-                    _doors.Add(new Tarkov.GameWorld.Interactables.Door(kvp.Value, kvp.Key));
+                    string fullKeyName = kvp.Key;
+                    (Vector3 position, string shortName) = kvp.Value;
+
+                    _doors.Add(new Tarkov.GameWorld.Interactables.Door(position, fullKeyName, shortName));
                 }
             }
         }
