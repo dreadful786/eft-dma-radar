@@ -492,6 +492,13 @@ namespace eft_dma_radar.UI.Misc
         /// </summary>
         [JsonPropertyName("showSwitches")]
         public bool ShowSwitches { get; set; } = true;
+
+        /// <summary>
+        /// Indicates whether to show Doors/Locks on the ESP.
+        /// </summary>
+        [JsonPropertyName("showDoorsLocks")]
+        public bool ShowDoorsLocks { get; set; } = true;
+
         /// <summary>
         /// Display loot in ESP.
         /// </summary>

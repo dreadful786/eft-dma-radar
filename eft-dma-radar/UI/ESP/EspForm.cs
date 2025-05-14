@@ -232,6 +232,8 @@ namespace eft_dma_radar.UI.ESP
                             DrawExfils(canvas, localPlayer);
                         if (Config.ESP.ShowSwitches && GameData.Switches.TryGetValue(MapID, out var switches))
                             DrawSwitches(canvas, localPlayer);
+                        if (Config.ESP.ShowDoorsLocks && GameData.Doors.TryGetValue(MapID, out var doors))
+                            DrawDoors(canvas, localPlayer);
                         if (Config.ESP.ShowExplosives)
                             DrawExplosives(canvas, localPlayer);
                         foreach (var player in allPlayers)
@@ -251,7 +253,6 @@ namespace eft_dma_radar.UI.ESP
                         if (Config.ESP.ShowStatusText)
                             DrawStatusText(canvas);
                         DrawTime(canvas);
-                        DrawDoors(canvas, localPlayer);
                     }
                 }
             }
