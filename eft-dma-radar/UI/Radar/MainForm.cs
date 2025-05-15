@@ -388,7 +388,7 @@ namespace eft_dma_radar.UI.Radar
 
                                         // Get the container's position on the map
                                         var containerPosition = container.Position.ToMapPos(map.Config).ToZoomedPos(mapParams);
-                                        
+
                                         // Save the current canvas state
                                         canvas.Save();
 
@@ -486,8 +486,8 @@ namespace eft_dma_radar.UI.Radar
                             {
 
                                 // Get the exit's position on the map
-                                var exitPosition = exit.Position.ToMapPos(map.Config).ToZoomedPos(mapParams);                                
-                                
+                                var exitPosition = exit.Position.ToMapPos(map.Config).ToZoomedPos(mapParams);
+
                                 // Save the current canvas state
                                 canvas.Save();
 
@@ -640,10 +640,10 @@ namespace eft_dma_radar.UI.Radar
                     }
                     // Restore the canvas state
                     canvas.Restore();
-                    
+
                     // Restore the canvas state
                     canvas.Restore();
-                 
+
                     // Draw Loot Info Widget
                     if (checkBox_ShowLootTab.Checked) // Loot Overlay
                     {
@@ -840,10 +840,10 @@ namespace eft_dma_radar.UI.Radar
         {
             // Update config
             Program.Config.MemWrites.StreamerMode = checkBox_streamerMode.Checked;
-        
+
             // Enable or disable the feature
             MemPatchFeature<StreamerMode>.Instance.Enabled = checkBox_streamerMode.Checked;
-        
+
             // Apply the changes immediately
             MemPatchFeature<StreamerMode>.Instance.TryApply();
         }
@@ -1070,7 +1070,7 @@ namespace eft_dma_radar.UI.Radar
             flowLayoutPanel_Loot_Containers.Enabled = enabled;
 
             // Update the SettingsWidgetForm checkbox
-            _settingsWidgetForm?.UpdateShowContainersCheckbox (enabled);
+            _settingsWidgetForm?.UpdateShowContainersCheckbox(enabled);
         }
         private void TrackBar_LTWAmount_ValueChanged(object sender, EventArgs e)
         {
@@ -1524,8 +1524,8 @@ namespace eft_dma_radar.UI.Radar
                 _settingsWidgetForm.UpdateTrackBarAimFOV(trackBar_AimFOV.Value);
                 _settingsWidgetForm.UpdateLabelAimFOV(trackBar_AimFOV.Value);
                 _settingsWidgetForm.UpdateComboBoxAimbotTarget(comboBox_AimbotTarget.SelectedIndex);
-                _settingsWidgetForm.UpdateContainersCheckedState();               
-                _settingsWidgetForm.Show(); 
+                _settingsWidgetForm.UpdateContainersCheckedState();
+                _settingsWidgetForm.Show();
             }
         }
 
@@ -2253,6 +2253,8 @@ namespace eft_dma_radar.UI.Radar
             trackBar_LTWAmount.ValueChanged += TrackBar_LTWAmount_ValueChanged;
             _lootFiltersItemSearchTimer.Elapsed += impLootSearchTimer_Elapsed;
             _lootMenuTimer.Elapsed += lootMenuTimer_Elapsed;
+            checkBox_BigHead.CheckedChanged += new System.EventHandler(this.checkBox_BigHead_CheckedChanged);
+            trackBar_BigHead.ValueChanged += new System.EventHandler(this.trackBar_BigHead_ValueChanged);
         }
 
         /// <summary>
@@ -2515,7 +2517,7 @@ namespace eft_dma_radar.UI.Radar
             checkBox_AdvancedMemWrites.CheckedChanged += checkBox_AdvancedMemWrites_CheckedChanged;
             /// Set Features
             checkBox_hideRaidcode.Checked = MemPatchFeature<HideRaidCode>.Instance.Enabled;
-     checkBox_streamerMode.Checked = MemPatchFeature<StreamerMode>.Instance.Enabled;
+            checkBox_streamerMode.Checked = MemPatchFeature<StreamerMode>.Instance.Enabled;
             checkBox_AntiPage.Checked = Config.MemWrites.AntiPage;
             checkBox_EnableMemWrite.Checked = MemWrites.Enabled;
             checkBox_NoRecoilSway.Checked = MemWriteFeature<NoRecoil>.Instance.Enabled;
@@ -2751,7 +2753,12 @@ namespace eft_dma_radar.UI.Radar
             label_TimePositionX.Text = $"Time Position X: {trackBar_TimePositionX.Value}";
             trackBar_TimePositionY.Value = (int)Config.TimePositionY;
             label_TimePositionY.Text = $"Time Position Y: {trackBar_TimePositionY.Value}";
-
+            trackBar_MagazinePositionX.Value = (int)Config.MagazinePositionX;
+            label_MagazinePositionX.Text = $"Magazine Position X: {trackBar_MagazinePositionX.Value}";
+            trackBar_MagazinePositionY.Value = (int)Config.MagazinePositionY;
+            label_MagazinePositionY.Text = $"Magazine Position Y: {trackBar_MagazinePositionY.Value}";
+            checkBox_BigHead.Checked = Config.MemWrites.BigHead.Enabled;
+            trackBar_BigHead.Enabled = Config.MemWrites.BigHead.Enabled;
             CameraManagerBase.UpdateViewportRes();
             LoadESPConfig();
             InitializeContainers();
@@ -4313,7 +4320,7 @@ namespace eft_dma_radar.UI.Radar
 
         private void button_WebRadarStart_Click(object sender, EventArgs e) =>
             StartWebRadar();
-        private void button_EspServerStart_Click(object sender, EventArgs e) => 
+        private void button_EspServerStart_Click(object sender, EventArgs e) =>
             StartWebEsp();
 
         private void checkBox_WebRadarUPNP_CheckedChanged(object sender, EventArgs e)
@@ -4578,6 +4585,26 @@ namespace eft_dma_radar.UI.Radar
         {
             this.label_MagazinePositionY.Text = $"Magazine Position Y: {this.trackBar_MagazinePositionY.Value}";
             Config.MagazinePositionY = this.trackBar_MagazinePositionY.Value;
+            Config.Save();
+        }
+
+        private void checkBox_BigHead_CheckedChanged(object sender, EventArgs e)
+        {
+          /*  Config.MemWrites.BigHead.Enabled = checkBox_BigHead.Checked;
+            trackBar_BigHead.Enabled = checkBox_BigHead.Checked;
+            label_BigHeadMultiplier.Enabled = checkBox_BigHead.Checked; */
+
+            bool enabled = checkBox_BigHead.Checked;
+            MemWriteFeature<BigHead>.Instance.Enabled = enabled;
+
+            Config.Save();
+        }
+
+        private void trackBar_BigHead_ValueChanged(object sender, EventArgs e)
+        {
+            float scale = 1.0f + ((trackBar_BigHead.Value - 1) / 19.0f) * 2.0f; // 1.0 to 3.0
+            MemWrites.Config.BigHead.Scale = scale;
+            label_BigHeadMultiplier.Text = scale.ToString("0.0") + "x";
             Config.Save();
         }
     }
