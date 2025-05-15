@@ -288,6 +288,18 @@ namespace eft_dma_radar.UI.Misc
         [JsonPropertyName("mapRotation")]
         public int MapRotation { get; set; } = 0;
 
+        /// <summary>
+        /// X offset for DrawTime position
+        /// </summary>
+        [JsonPropertyName("timePositionX")]
+        public float TimePositionX { get; set; } = 180f;
+
+        /// <summary>
+        /// Y offset for DrawTime position
+        /// </summary>
+        [JsonPropertyName("timePositionY")]
+        public float TimePositionY { get; set; } = 20f;
+
         #region Config Interface
 
         /// <summary>

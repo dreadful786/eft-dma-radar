@@ -236,6 +236,7 @@ namespace eft_dma_radar.UI.Radar
             checkBox_ESP_AimLock = new CheckBox();
             checkBox_ESP_RaidStats = new CheckBox();
             checkBox_ESP_StatusText = new CheckBox();
+            checkBox_ESP_Time = new CheckBox();
             checkBox_ESP_FPS = new CheckBox();
             label27 = new Label();
             flowLayoutPanel_ESP_PlayerRender = new FlowLayoutPanel();
@@ -271,6 +272,10 @@ namespace eft_dma_radar.UI.Radar
             trackBar_EspFontScale = new TrackBar();
             label_EspLineScale = new Label();
             trackBar_EspLineScale = new TrackBar();
+            label_TimePositionX = new Label();
+            trackBar_TimePositionX = new TrackBar();
+            label_TimePositionY = new Label();
+            trackBar_TimePositionY = new TrackBar();
             tabPage3 = new TabPage();
             richTextBox_PlayersInfo = new RichTextBox();
             tabPage4 = new TabPage();
@@ -311,7 +316,8 @@ namespace eft_dma_radar.UI.Radar
             Column_LootColorPicker = new DataGridViewButtonColumn();
             colorPicker1 = new ColorDialog();
             toolTip1 = new ToolTip(components);
-            checkBox_ESP_Time = new CheckBox();
+            flowLayoutPanel_ESP_Time = new FlowLayoutPanel();
+            label32 = new Label();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             flowLayoutPanel_Loot.SuspendLayout();
@@ -353,6 +359,8 @@ namespace eft_dma_radar.UI.Radar
             ((ISupportInitialize)trackBar_EspGrenadeDist).BeginInit();
             ((ISupportInitialize)trackBar_EspFontScale).BeginInit();
             ((ISupportInitialize)trackBar_EspLineScale).BeginInit();
+            ((ISupportInitialize)trackBar_TimePositionX).BeginInit();
+            ((ISupportInitialize)trackBar_TimePositionY).BeginInit();
             tabPage3.SuspendLayout();
             tabPage4.SuspendLayout();
             ((ISupportInitialize)dataGridView_PlayerHistory).BeginInit();
@@ -362,6 +370,7 @@ namespace eft_dma_radar.UI.Radar
             tableLayoutPanel_ImportantLoot.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
             ((ISupportInitialize)dataGridView_Loot).BeginInit();
+            flowLayoutPanel_ESP_Time.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
@@ -2578,12 +2587,13 @@ namespace eft_dma_radar.UI.Radar
             flowLayoutPanel_ESPSettings.Controls.Add(label27);
             flowLayoutPanel_ESPSettings.Controls.Add(flowLayoutPanel_ESP_PlayerRender);
             flowLayoutPanel_ESPSettings.Controls.Add(flowLayoutPanel_ESP_AIRender);
+            flowLayoutPanel_ESPSettings.Controls.Add(flowLayoutPanel_ESP_Time);
             flowLayoutPanel_ESPSettings.Controls.Add(flowLayoutPanel4);
             flowLayoutPanel_ESPSettings.Dock = DockStyle.Top;
             flowLayoutPanel_Settings.SetFlowBreak(flowLayoutPanel_ESPSettings, true);
             flowLayoutPanel_ESPSettings.Location = new Point(3, 1215);
             flowLayoutPanel_ESPSettings.Name = "flowLayoutPanel_ESPSettings";
-            flowLayoutPanel_ESPSettings.Size = new Size(1235, 318);
+            flowLayoutPanel_ESPSettings.Size = new Size(1235, 397);
             flowLayoutPanel_ESPSettings.TabIndex = 3;
             // 
             // label12
@@ -2837,6 +2847,17 @@ namespace eft_dma_radar.UI.Radar
             checkBox_ESP_StatusText.Text = "Show Status Text";
             checkBox_ESP_StatusText.UseVisualStyleBackColor = true;
             checkBox_ESP_StatusText.CheckedChanged += checkBox_ESP_StatusText_CheckedChanged;
+            // 
+            // checkBox_ESP_Time
+            // 
+            checkBox_ESP_Time.AutoSize = true;
+            checkBox_ESP_Time.Location = new Point(238, 103);
+            checkBox_ESP_Time.Name = "checkBox_ESP_Time";
+            checkBox_ESP_Time.Size = new Size(85, 19);
+            checkBox_ESP_Time.TabIndex = 76;
+            checkBox_ESP_Time.Text = "Show Time";
+            checkBox_ESP_Time.UseVisualStyleBackColor = true;
+            checkBox_ESP_Time.CheckedChanged += checkBox_ESP_Time_CheckedChanged;
             // 
             // checkBox_ESP_FPS
             // 
@@ -3096,7 +3117,7 @@ namespace eft_dma_radar.UI.Radar
             flowLayoutPanel4.Controls.Add(trackBar_EspFontScale);
             flowLayoutPanel4.Controls.Add(label_EspLineScale);
             flowLayoutPanel4.Controls.Add(trackBar_EspLineScale);
-            flowLayoutPanel4.Location = new Point(3, 211);
+            flowLayoutPanel4.Location = new Point(3, 290);
             flowLayoutPanel4.Name = "flowLayoutPanel4";
             flowLayoutPanel4.Size = new Size(714, 102);
             flowLayoutPanel4.TabIndex = 4;
@@ -3262,6 +3283,47 @@ namespace eft_dma_radar.UI.Radar
             trackBar_EspLineScale.TabIndex = 56;
             trackBar_EspLineScale.TickStyle = TickStyle.None;
             trackBar_EspLineScale.Value = 100;
+            // 
+            // label_TimePositionX
+            // 
+            label_TimePositionX.AutoSize = true;
+            label_TimePositionX.Location = new Point(3, 20);
+            label_TimePositionX.Name = "label_TimePositionX";
+            label_TimePositionX.Size = new Size(114, 15);
+            label_TimePositionX.TabIndex = 77;
+            label_TimePositionX.Text = "Time Position X: 180";
+            // 
+            // trackBar_TimePositionX
+            // 
+            trackBar_TimePositionX.Location = new Point(123, 23);
+            trackBar_TimePositionX.Maximum = (int)(Config.MonitorWidth / 1.4);
+            trackBar_TimePositionX.Name = "trackBar_TimePositionX";
+            trackBar_TimePositionX.Size = new Size(180, 45);
+            trackBar_TimePositionX.TabIndex = 78;
+            trackBar_TimePositionX.TickFrequency = 50;
+            trackBar_TimePositionX.Value = 180;
+            trackBar_TimePositionX.ValueChanged += TrackBar_TimePositionX_ValueChanged;
+            // 
+            // label_TimePositionY
+            // 
+            label_TimePositionY.AutoSize = true;
+            label_TimePositionY.Location = new Point(309, 20);
+            label_TimePositionY.Name = "label_TimePositionY";
+            label_TimePositionY.Size = new Size(108, 15);
+            label_TimePositionY.TabIndex = 79;
+            label_TimePositionY.Text = "Time Position Y: 20";
+
+            // 
+            // trackBar_TimePositionY
+            // 
+            trackBar_TimePositionY.Location = new Point(423, 23);
+            trackBar_TimePositionY.Maximum = (int)(Config.MonitorHeight / 1.27);
+            trackBar_TimePositionY.Name = "trackBar_TimePositionY";
+            trackBar_TimePositionY.Size = new Size(180, 45);
+            trackBar_TimePositionY.TabIndex = 80;
+            trackBar_TimePositionY.TickFrequency = 20;
+            trackBar_TimePositionY.Value = 20;
+            trackBar_TimePositionY.ValueChanged += TrackBar_TimePositionY_ValueChanged;
             // 
             // tabPage3
             // 
@@ -3683,16 +3745,32 @@ namespace eft_dma_radar.UI.Radar
             toolTip1.InitialDelay = 500;
             toolTip1.ReshowDelay = 100;
             // 
-            // checkBox_ESP_Time
+            // flowLayoutPanel_ESP_Time
             // 
-            checkBox_ESP_Time.AutoSize = true;
-            checkBox_ESP_Time.Location = new Point(238, 103);
-            checkBox_ESP_Time.Name = "checkBox_ESP_Time";
-            checkBox_ESP_Time.Size = new Size(85, 19);
-            checkBox_ESP_Time.TabIndex = 76;
-            checkBox_ESP_Time.Text = "Show Time";
-            checkBox_ESP_Time.UseVisualStyleBackColor = true;
-            checkBox_ESP_Time.CheckedChanged += checkBox_ESP_Time_CheckedChanged;
+            flowLayoutPanel_ESP_Time.AutoSize = true;
+            flowLayoutPanel_ESP_Time.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            flowLayoutPanel_ESP_Time.BorderStyle = BorderStyle.FixedSingle;
+            flowLayoutPanel_ESP_Time.Controls.Add(label32);
+            flowLayoutPanel_ESP_Time.Controls.Add(label_TimePositionX);
+            flowLayoutPanel_ESP_Time.Controls.Add(trackBar_TimePositionX);
+            flowLayoutPanel_ESP_Time.Controls.Add(label_TimePositionY);
+            flowLayoutPanel_ESP_Time.Controls.Add(trackBar_TimePositionY);
+            flowLayoutPanel_ESPSettings.SetFlowBreak(flowLayoutPanel_ESP_Time, true);
+            flowLayoutPanel_ESP_Time.Location = new Point(3, 211);
+            flowLayoutPanel_ESP_Time.Name = "flowLayoutPanel_ESP_Time";
+            flowLayoutPanel_ESP_Time.Size = new Size(608, 73);
+            flowLayoutPanel_ESP_Time.TabIndex = 75;
+            // 
+            // label32
+            // 
+            label32.AutoSize = true;
+            flowLayoutPanel_ESP_Time.SetFlowBreak(label32, true);
+            label32.Font = new Font("Segoe UI Semibold", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label32.Location = new Point(3, 0);
+            label32.Name = "label32";
+            label32.Size = new Size(106, 20);
+            label32.TabIndex = 74;
+            label32.Text = "Time Positions";
             // 
             // MainForm
             // 
@@ -3767,6 +3845,8 @@ namespace eft_dma_radar.UI.Radar
             ((ISupportInitialize)trackBar_EspGrenadeDist).EndInit();
             ((ISupportInitialize)trackBar_EspFontScale).EndInit();
             ((ISupportInitialize)trackBar_EspLineScale).EndInit();
+            ((ISupportInitialize)trackBar_TimePositionX).EndInit();
+            ((ISupportInitialize)trackBar_TimePositionY).EndInit();
             tabPage3.ResumeLayout(false);
             tabPage4.ResumeLayout(false);
             ((ISupportInitialize)dataGridView_PlayerHistory).EndInit();
@@ -3778,6 +3858,8 @@ namespace eft_dma_radar.UI.Radar
             flowLayoutPanel2.ResumeLayout(false);
             flowLayoutPanel2.PerformLayout();
             ((ISupportInitialize)dataGridView_Loot).EndInit();
+            flowLayoutPanel_ESP_Time.ResumeLayout(false);
+            flowLayoutPanel_ESP_Time.PerformLayout();
             ResumeLayout(false);
 
         }
@@ -4055,6 +4137,12 @@ namespace eft_dma_radar.UI.Radar
         private CheckBox checkBox_KillTask;
         private CheckBox checkBox_ESP_DoorsLocks;
         private CheckBox checkBox_ESP_Time;
+        private Label label_TimePositionX;
+        public TrackBar trackBar_TimePositionX;
+        private Label label_TimePositionY;
+        public TrackBar trackBar_TimePositionY;
+        private FlowLayoutPanel flowLayoutPanel_ESP_Time;
+        private Label label32;
     }
 }
 

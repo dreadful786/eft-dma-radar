@@ -290,8 +290,8 @@ namespace eft_dma_radar.UI.ESP
             DateTime tarkovTimeDay = epoch.AddSeconds(((offsetDay + (time * 7)) % oneDay) / 1000);
             DateTime tarkovTimeNight = epoch.AddSeconds(((offsetNight + (time * 7)) % oneDay) / 1000);
             string raidTime = tarkovTimeDay.ToString("HH:mm:ss") + " - " + tarkovTimeNight.ToString("HH:mm:ss");
-            var textPt = new SKPoint(CameraManagerBase.Viewport.Left + 180f * Config.ESP.FontScale,
-                CameraManagerBase.Viewport.Top + 20f * Config.ESP.FontScale);
+            var textPt = new SKPoint(CameraManagerBase.Viewport.Left + Config.TimePositionX * Config.ESP.FontScale,
+                CameraManagerBase.Viewport.Top + Config.TimePositionY * Config.ESP.FontScale);
             canvas.DrawText(raidTime, textPt, SKPaints.TextRaidTimeESP);
         }
         /// <summary>

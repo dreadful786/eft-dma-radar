@@ -75,6 +75,7 @@ namespace eft_dma_radar.UI.Radar
         public CheckedListBox checkedListBox_QuestHelper;
         public CheckBox checkBox_SA_SafeLock;
         public CheckBox checkBox_SA_AutoBone;
+
         /// <summary>
         /// Main UI/Application Config.
         /// </summary>
@@ -2746,6 +2747,10 @@ namespace eft_dma_radar.UI.Radar
             textBox_VischeckInvisColor.Text = Chams.Config.InvisibleColor;
             textBox_VischeckInvisColorPMC.Text = Chams.Config.InvisibleColorPMC;
             textBox_VischeckVisColorPMC.Text = Chams.Config.VisibleColorPMC;
+            trackBar_TimePositionX.Value = (int)Config.TimePositionX;
+            label_TimePositionX.Text = $"Time Position X: {trackBar_TimePositionX.Value}";
+            trackBar_TimePositionY.Value = (int)Config.TimePositionY;
+            label_TimePositionY.Text = $"Time Position Y: {trackBar_TimePositionY.Value}";
 
             CameraManagerBase.UpdateViewportRes();
             LoadESPConfig();
@@ -4504,10 +4509,23 @@ namespace eft_dma_radar.UI.Radar
             }
         }
 
-
         private void checkBox_KillTask_CheckedChanged(object sender, EventArgs e)
         {
             Config.ShowZone = checkBox_KillTask.Checked;
+        }
+
+        private void TrackBar_TimePositionX_ValueChanged(object sender, EventArgs e)
+        {
+            Config.TimePositionX = trackBar_TimePositionX.Value;
+            label_TimePositionX.Text = $"Time Position X: {trackBar_TimePositionX.Value}";
+            Config.Save();
+        }
+
+        private void TrackBar_TimePositionY_ValueChanged(object sender, EventArgs e)
+        {
+            Config.TimePositionY = trackBar_TimePositionY.Value;
+            label_TimePositionY.Text = $"Time Position Y: {trackBar_TimePositionY.Value}";
+            Config.Save();
         }
     }
 }
