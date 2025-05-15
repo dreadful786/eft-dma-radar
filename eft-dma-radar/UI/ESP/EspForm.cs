@@ -252,7 +252,8 @@ namespace eft_dma_radar.UI.ESP
                             DrawFireportAim(canvas, localPlayer);
                         if (Config.ESP.ShowStatusText)
                             DrawStatusText(canvas);
-                        DrawTime(canvas);
+                        if (Config.ESP.ShowTime)
+                            DrawTime(canvas);
                     }
                 }
             }
