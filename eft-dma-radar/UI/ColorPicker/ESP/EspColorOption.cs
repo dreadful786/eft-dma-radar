@@ -26,7 +26,11 @@ namespace eft_dma_radar.UI.ColorPicker.ESP
         StaticQuestItemsAndZones,
         Grenade,
         Exfil,
-        Corpse
+        Corpse,
+        Time,
+        Magazine,
+        Switches,
+        DoorsAndLocks
     }
 
     internal static class EspColorOptions
@@ -71,7 +75,12 @@ namespace eft_dma_radar.UI.ColorPicker.ESP
                 [EspColorOption.FoodFilterLoot] = SKColors.CornflowerBlue.ToString(),
                 [EspColorOption.BackpackFilterLoot] = SKColor.Parse("00b02c").ToString(),
                 [EspColorOption.Exfil] = SKColors.MediumSeaGreen.ToString(),
-                [EspColorOption.Corpse] = SKColors.Silver.ToString()
+                [EspColorOption.Corpse] = SKColors.Silver.ToString(),
+                [EspColorOption.Magazine] = SKColors.LimeGreen.ToString(),
+                [EspColorOption.Time] = SKColors.LimeGreen.ToString(),
+                [EspColorOption.DoorsAndLocks] = SKColors.White.ToString(),
+                [EspColorOption.Switches] = SKColors.Orange.ToString(),
+
             };
 
         /// <summary>
@@ -172,6 +181,19 @@ namespace eft_dma_radar.UI.ColorPicker.ESP
                         case EspColorOption.ContainerLoot:
                             SKPaints.PaintContainerLootESP.Color = skColor;
                             SKPaints.TextContainerLootESP.Color = skColor;
+                            break;
+                        case EspColorOption.Time:
+                            SKPaints.TextRaidTimeESP.Color = skColor;
+                            break;
+                        case EspColorOption.Magazine:
+                            SKPaints.TextMagazineESP.Color = skColor;
+                            SKPaints.TextMagazineInfoESP.Color = skColor;
+                            break;
+                        case EspColorOption.DoorsAndLocks:
+                            SKPaints.TextDoorsESP.Color = skColor;
+                            break;
+                        case EspColorOption.Switches:
+                            SKPaints.TextSwitchesESP.Color = skColor;
                             break;
                     }
                 }
