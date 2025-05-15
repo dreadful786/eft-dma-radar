@@ -3049,6 +3049,8 @@ namespace eft_dma_radar.UI.Radar
             toggleESPTime.HotkeyStateChanged += ToggleESPTime_HotkeyStateChanged;
             var toggleESPMagazine = new HotkeyActionController("Toggle ESP Magazine");
             toggleESPMagazine.HotkeyStateChanged += ToggleESPMagazine_HotkeyStateChanged;
+            var toggleESPDoorsLocks = new HotkeyActionController("Toggle ESP Doors and Locks");
+            toggleESPDoorsLocks.HotkeyStateChanged += ToggleESPDoorsLocks_HotkeyStateChanged;
             // Add to Static Collection:
             HotkeyManager.RegisterActionController(zoomIn);
             HotkeyManager.RegisterActionController(zoomOut);
@@ -3080,6 +3082,7 @@ namespace eft_dma_radar.UI.Radar
             HotkeyManager.RegisterActionController(toggleFastWeaponOps);
             HotkeyManager.RegisterActionController(toggleESPTime);
             HotkeyManager.RegisterActionController(toggleESPMagazine);
+            HotkeyManager.RegisterActionController(toggleESPDoorsLocks);
         }
 
         private void ToggleFastWeaponOps_HotkeyStateChanged(object sender, HotkeyEventArgs e)
@@ -3124,6 +3127,13 @@ namespace eft_dma_radar.UI.Radar
             if (e.State)
             {
                 checkBox_ESP_ShowMag.Checked = !checkBox_ESP_ShowMag.Checked;
+            }
+        }
+        private void ToggleESPDoorsLocks_HotkeyStateChanged(object sender, HotkeyEventArgs e)
+        {
+            if (e.State)
+            {
+                checkBox_ESP_DoorsLocks.Checked = !checkBox_ESP_DoorsLocks.Checked;
             }
         }
 
