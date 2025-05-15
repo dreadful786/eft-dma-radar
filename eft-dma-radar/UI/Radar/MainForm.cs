@@ -3383,6 +3383,7 @@ namespace eft_dma_radar.UI.Radar
             checkBox_ESP_Exfils.Checked = Config.ESP.ShowExfils;
             checkBox_ESP_Switches.Checked = Config.ESP.ShowSwitches;
             checkBox_ESP_DoorsLocks.Checked = Config.ESP.ShowDoorsLocks;
+            checkBox_ESP_Time.Checked = Config.ESP.ShowTime;
             checkBox_ESP_Loot.Checked = Config.ESP.ShowLoot;
             checkBox_ESP_Explosives.Checked = Config.ESP.ShowExplosives;
             checkBox_ESP_AimFov.Checked = Config.ESP.ShowAimFOV;
@@ -3457,7 +3458,7 @@ namespace eft_dma_radar.UI.Radar
         {
             button_StartESP.Text = "Running...";
             _settingsWidgetForm?.UpdateStartESPButtonText("Running...");
-            flowLayoutPanel_ESPSettings.Enabled = false;
+            // flowLayoutPanel_ESPSettings.Enabled = false;
             flowLayoutPanel_MonitorSettings.Enabled = false;
             var t = new Thread(() =>
             {
@@ -3560,6 +3561,10 @@ namespace eft_dma_radar.UI.Radar
         private void checkBox_ESP_DoorsLocks_CheckedChanged(object sender, EventArgs e)
         {
             Config.ESP.ShowDoorsLocks = checkBox_ESP_DoorsLocks.Checked;
+        }
+        private void checkBox_ESP_Time_CheckedChanged(object sender, EventArgs e)
+        {
+            Config.ESP.ShowTime = checkBox_ESP_Time.Checked;
         }
         private void checkBox_ESP_Explosives_CheckedChanged(object sender, EventArgs e)
         {

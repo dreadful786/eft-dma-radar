@@ -500,6 +500,12 @@ namespace eft_dma_radar.UI.Misc
         public bool ShowDoorsLocks { get; set; } = true;
 
         /// <summary>
+        /// Indicates whether to show Time on the ESP.
+        /// </summary>
+        [JsonPropertyName("showTimes")]
+        public bool ShowTime { get; set; } = true;
+
+        /// <summary>
         /// Display loot in ESP.
         /// </summary>
         [JsonPropertyName("showLoot")]
