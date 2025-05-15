@@ -4527,5 +4527,18 @@ namespace eft_dma_radar.UI.Radar
             label_TimePositionY.Text = $"Time Position Y: {trackBar_TimePositionY.Value}";
             Config.Save();
         }
+        private void TrackBar_MagazinePositionX_ValueChanged(object sender, EventArgs e)
+        {
+            this.label_MagazinePositionX.Text = $"Magazine Position X: {this.trackBar_MagazinePositionX.Value}";
+            Config.MagazinePositionX = this.trackBar_MagazinePositionX.Value;
+            Config.Save();
+        }
+
+        private void TrackBar_MagazinePositionY_ValueChanged(object sender, EventArgs e)
+        {
+            this.label_MagazinePositionY.Text = $"Magazine Position Y: {this.trackBar_MagazinePositionY.Value}";
+            Config.MagazinePositionY = this.trackBar_MagazinePositionY.Value;
+            Config.Save();
+        }
     }
 }

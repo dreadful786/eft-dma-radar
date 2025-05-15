@@ -300,6 +300,18 @@ namespace eft_dma_radar.UI.Misc
         [JsonPropertyName("timePositionY")]
         public float TimePositionY { get; set; } = 20f;
 
+        /// <summary>
+        /// X offset for DrawMagazine position
+        /// </summary>
+        [JsonPropertyName("magazinePositionX")]
+        public float MagazinePositionX { get; set; } = 1150f;
+
+        /// <summary>
+        /// Y offset for DrawMagazine position
+        /// </summary>
+        [JsonPropertyName("magazinePositionY")]
+        public float MagazinePositionY { get; set; } = 600f;
+
         #region Config Interface
 
         /// <summary>
