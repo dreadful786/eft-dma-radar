@@ -290,8 +290,8 @@ namespace eft_dma_radar.UI.ESP
             DateTime tarkovTimeDay = epoch.AddSeconds(((offsetDay + (time * 7)) % oneDay) / 1000);
             DateTime tarkovTimeNight = epoch.AddSeconds(((offsetNight + (time * 7)) % oneDay) / 1000);
             string raidTime = tarkovTimeDay.ToString("HH:mm:ss") + " - " + tarkovTimeNight.ToString("HH:mm:ss");
-            var textPt = new SKPoint(CameraManagerBase.Viewport.Left + 180f * Config.ESP.FontScale,
-                CameraManagerBase.Viewport.Top + 20f * Config.ESP.FontScale);
+            var textPt = new SKPoint(CameraManagerBase.Viewport.Left + Config.TimePositionX * Config.ESP.FontScale,
+                CameraManagerBase.Viewport.Top + Config.TimePositionY * Config.ESP.FontScale);
             canvas.DrawText(raidTime, textPt, SKPaints.TextRaidTimeESP);
         }
         /// <summary>
@@ -401,8 +401,10 @@ namespace eft_dma_radar.UI.ESP
             if (wepInfo is not null)
                 textWidth = Math.Max(textWidth, SKPaints.TextMagazineInfoESP.MeasureText(wepInfo));
             var textHeight = SKPaints.TextMagazineESP.FontSpacing + SKPaints.TextMagazineInfoESP.FontSpacing;
-            var x = CameraManagerBase.Viewport.Width - textWidth - 15f * Config.ESP.FontScale;
-            var y = CameraManagerBase.Viewport.Height - CameraManagerBase.Viewport.Height * 0.15f - textHeight + 4f * Config.ESP.FontScale;
+
+            var x = Config.MagazinePositionX * Config.ESP.FontScale;
+            var y = Config.MagazinePositionY * Config.ESP.FontScale;
+
             if (wepInfo is not null)
                 canvas.DrawText(wepInfo, x, y, SKPaints.TextMagazineInfoESP); // Draw Weapon Info
             canvas.DrawText(counter, x,
