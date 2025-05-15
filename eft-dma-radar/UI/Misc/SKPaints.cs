@@ -1073,7 +1073,7 @@ namespace eft_dma_radar.UI.Misc
         };
         public static SKPaint TextSwitchesESP { get; } = new()
         {
-            Color = SKColors.Orange,
+            // Color = SKColors.Orange,
             SubpixelText = true,
             IsStroke = false,
             TextSize = 12f,
@@ -1086,7 +1086,7 @@ namespace eft_dma_radar.UI.Misc
         };
         public static SKPaint TextDoorsESP { get; } = new()
         {
-            Color = SKColors.White,
+            // Color = SKColors.White,
             SubpixelText = true,
             IsStroke = false,
             TextSize = 12f,
@@ -1130,7 +1130,7 @@ namespace eft_dma_radar.UI.Misc
         public static SKPaint TextMagazineESP { get; } = new()
         {
             SubpixelText = true,
-            Color = SKColors.LimeGreen,
+            // Color = SKColors.LimeGreen,
             IsStroke = false,
             TextSize = 42f,
             TextAlign = SKTextAlign.Left,
@@ -1143,7 +1143,7 @@ namespace eft_dma_radar.UI.Misc
         public static SKPaint TextMagazineInfoESP { get; } = new()
         {
             SubpixelText = true,
-            Color = SKColors.LimeGreen,
+            // Color = SKColors.LimeGreen,
             IsStroke = false,
             TextSize = 16f,
             TextAlign = SKTextAlign.Left,
@@ -1156,7 +1156,7 @@ namespace eft_dma_radar.UI.Misc
         public static SKPaint TextRaidTimeESP { get; } = new()
         {
             SubpixelText = true,
-            Color = SKColors.LimeGreen,
+            // Color = SKColors.LimeGreen,
             IsStroke = false,
             TextSize = 25f,
             TextAlign = SKTextAlign.Left,

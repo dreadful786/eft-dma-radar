@@ -3857,7 +3857,7 @@ namespace eft_dma_radar.UI.Radar
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4, 3, 4, 3);
             Name = "MainForm";
-            Text = "EFT DMA Radar - Dreadful - v1.03";
+            Text = "EFT DMA Radar - Dreadful - v1.03.6";
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
