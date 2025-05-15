@@ -3043,6 +3043,12 @@ namespace eft_dma_radar.UI.Radar
             toggleFullBright.HotkeyStateChanged += ToggleFullBright_HotkeyStateChanged;
             var toggleFastWeaponOps = new HotkeyActionController("Toggle Fast Weapon Ops");
             toggleFastWeaponOps.HotkeyStateChanged += ToggleFastWeaponOps_HotkeyStateChanged;
+            var toggleMoveSpeed2 = new HotkeyActionController("Toggle Move Speed 1.4");
+            toggleMoveSpeed2.HotkeyStateChanged += ToggleMoveSpeed2_HotkeyStateChanged;
+            var toggleESPTime = new HotkeyActionController("Toggle ESP Time");
+            toggleESPTime.HotkeyStateChanged += ToggleESPTime_HotkeyStateChanged;
+            var toggleESPMagazine = new HotkeyActionController("Toggle ESP Magazine");
+            toggleESPMagazine.HotkeyStateChanged += ToggleESPMagazine_HotkeyStateChanged;
             // Add to Static Collection:
             HotkeyManager.RegisterActionController(zoomIn);
             HotkeyManager.RegisterActionController(zoomOut);
@@ -3069,8 +3075,11 @@ namespace eft_dma_radar.UI.Radar
             HotkeyManager.RegisterActionController(toggleWideLean);
             HotkeyManager.RegisterActionController(toggleLTW);
             HotkeyManager.RegisterActionController(toggleMoveSpeed);
+            HotkeyManager.RegisterActionController(toggleMoveSpeed2);
             HotkeyManager.RegisterActionController(toggleFullBright);
             HotkeyManager.RegisterActionController(toggleFastWeaponOps);
+            HotkeyManager.RegisterActionController(toggleESPTime);
+            HotkeyManager.RegisterActionController(toggleESPMagazine);
         }
 
         private void ToggleFastWeaponOps_HotkeyStateChanged(object sender, HotkeyEventArgs e)
@@ -3094,6 +3103,27 @@ namespace eft_dma_radar.UI.Radar
             if (e.State)
             {
                 checkBox_MoveSpeed.Checked = !checkBox_MoveSpeed.Checked;
+            }
+        }
+        private void ToggleMoveSpeed2_HotkeyStateChanged(object sender, HotkeyEventArgs e)
+        {
+            if (e.State)
+            {
+                checkBox_MoveSpeed2.Checked = !checkBox_MoveSpeed2.Checked;
+            }
+        }
+        private void ToggleESPTime_HotkeyStateChanged(object sender, HotkeyEventArgs e)
+        {
+            if (e.State)
+            {
+                checkBox_ESP_Time.Checked = !checkBox_ESP_Time.Checked;
+            }
+        }
+        private void ToggleESPMagazine_HotkeyStateChanged(object sender, HotkeyEventArgs e)
+        {
+            if (e.State)
+            {
+                checkBox_ESP_ShowMag.Checked = !checkBox_ESP_ShowMag.Checked;
             }
         }
 
