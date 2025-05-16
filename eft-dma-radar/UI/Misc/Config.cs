@@ -781,6 +781,12 @@ namespace eft_dma_radar.UI.Misc
         public ChamsConfig Chams { get; set; } = new();
 
         /// <summary>
+        /// BigHead configuration.
+        /// </summary>
+        [JsonPropertyName("bigHead")]
+        public BigHeadConfig BigHead { get; set; } = new();
+
+        /// <summary>
         /// Enable Always Day Feature on Startup.
         /// </summary>
         [JsonPropertyName("enableAlwaysDay")]
@@ -942,6 +948,20 @@ namespace eft_dma_radar.UI.Misc
         /// </summary>
         [JsonPropertyName("amount")]
         public int Amount { get; set; } = 50;
+    }
+    public sealed class BigHeadConfig
+    {
+        /// <summary>
+        /// True if BigHead is enabled.
+        /// </summary>
+        [JsonPropertyName("enabled")]
+        public bool Enabled { get; set; } = false;
+
+        /// <summary>
+        /// Scale multiplier for head size (1.0 - 3.0)
+        /// </summary>
+        [JsonPropertyName("scale")]
+        public float Scale { get; set; } = 50;
     }
 
     public sealed class AimbotConfig
