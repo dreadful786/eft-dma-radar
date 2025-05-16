@@ -292,25 +292,25 @@ namespace eft_dma_radar.UI.Misc
         /// X offset for DrawTime position
         /// </summary>
         [JsonPropertyName("timePositionX")]
-        public float TimePositionX { get; set; } = 180f;
+        public float TimePositionX { get; set; } = 10f;
 
         /// <summary>
         /// Y offset for DrawTime position
         /// </summary>
         [JsonPropertyName("timePositionY")]
-        public float TimePositionY { get; set; } = 20f;
+        public float TimePositionY { get; set; } = 15f;
 
         /// <summary>
         /// X offset for DrawMagazine position
         /// </summary>
         [JsonPropertyName("magazinePositionX")]
-        public float MagazinePositionX { get; set; } = 1150f;
+        public float MagazinePositionX { get; set; } = 10f;
 
         /// <summary>
         /// Y offset for DrawMagazine position
         /// </summary>
         [JsonPropertyName("magazinePositionY")]
-        public float MagazinePositionY { get; set; } = 600f;
+        public float MagazinePositionY { get; set; } = 15f;
 
         #region Config Interface
 
@@ -961,7 +961,7 @@ namespace eft_dma_radar.UI.Misc
         /// Scale multiplier for head size (1.0 - 3.0)
         /// </summary>
         [JsonPropertyName("scale")]
-        public float Scale { get; set; } = 50;
+        public float Scale { get; set; } = 1;
     }
 
     public sealed class AimbotConfig
