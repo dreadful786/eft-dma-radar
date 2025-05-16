@@ -1509,10 +1509,10 @@ namespace eft_dma_radar.UI.Radar
             flowLayoutPanel_MemWrites.Controls.Add(label22);
             flowLayoutPanel_MemWrites.Controls.Add(flowLayoutPanel_Aimbot);
             flowLayoutPanel_MemWrites.Controls.Add(flowLayoutPanel_NoRecoil);
+            flowLayoutPanel_MemWrites.Controls.Add(flowLayoutPanel_BigHead);
             flowLayoutPanel_MemWrites.Controls.Add(flowLayoutPanel_Chams);
             flowLayoutPanel_MemWrites.Controls.Add(flowLayoutPanel_LTW);
             flowLayoutPanel_MemWrites.Controls.Add(flowLayoutPanel_WideLean);
-            flowLayoutPanel_MemWrites.Controls.Add(flowLayoutPanel_BigHead);
             flowLayoutPanel_MemWrites.Dock = DockStyle.Top;
             flowLayoutPanel_Settings.SetFlowBreak(flowLayoutPanel_MemWrites, true);
             flowLayoutPanel_MemWrites.Location = new Point(3, 623);
@@ -2510,10 +2510,9 @@ namespace eft_dma_radar.UI.Radar
             flowLayoutPanel_BigHead.Controls.Add(label_BigHeadMultiplier);
             flowLayoutPanel_BigHead.Controls.Add(label36);
             flowLayoutPanel_BigHead.Controls.Add(trackBar_BigHead);
-            flowLayoutPanel_BigHead.Enabled = checkBox_BigHead.Enabled;
-            flowLayoutPanel_BigHead.Location = new Point(620, 400);
+            flowLayoutPanel_BigHead.Location = new Point(840, 168);
             flowLayoutPanel_BigHead.Name = "flowLayoutPanel_BigHead";
-            flowLayoutPanel_BigHead.Size = new Size(209, 73);
+            flowLayoutPanel_BigHead.Size = new Size(226, 73);
             flowLayoutPanel_BigHead.TabIndex = 66;
             // 
             // label_BigHead
@@ -2533,15 +2532,15 @@ namespace eft_dma_radar.UI.Radar
             label_BigHeadMultiplier.AutoSize = true;
             label_BigHeadMultiplier.Location = new Point(3, 38);
             label_BigHeadMultiplier.Name = "label_BigHeadMultiplier";
-            label_BigHeadMultiplier.Size = new Size(109, 15);
+            label_BigHeadMultiplier.Size = new Size(126, 15);
             label_BigHeadMultiplier.TabIndex = 63;
-            label_BigHeadMultiplier.Text = "Big Head Multiplier";
+            label_BigHeadMultiplier.Text = "Big Head Multiplier: 1x";
             // 
             // label36
             // 
             label36.Anchor = AnchorStyles.Right;
             label36.AutoSize = true;
-            label36.Location = new Point(118, 38);
+            label36.Location = new Point(135, 38);
             label36.Name = "label36";
             label36.Size = new Size(0, 15);
             label36.TabIndex = 65;
@@ -2550,7 +2549,7 @@ namespace eft_dma_radar.UI.Radar
             // 
             trackBar_BigHead.Anchor = AnchorStyles.Right;
             trackBar_BigHead.BackColor = SystemColors.Window;
-            trackBar_BigHead.Location = new Point(124, 23);
+            trackBar_BigHead.Location = new Point(141, 23);
             trackBar_BigHead.Maximum = 20;
             trackBar_BigHead.Minimum = 1;
             trackBar_BigHead.Name = "trackBar_BigHead";
@@ -3228,12 +3227,12 @@ namespace eft_dma_radar.UI.Radar
             // trackBar_TimePositionX
             // 
             trackBar_TimePositionX.Location = new Point(123, 23);
-            trackBar_TimePositionX.Maximum = (int)(Config.MonitorWidth / 1.4);
+            trackBar_TimePositionX.Maximum = (int)(Config.MonitorWidth /* / 1.4 */);
             trackBar_TimePositionX.Name = "trackBar_TimePositionX";
             trackBar_TimePositionX.Size = new Size(180, 45);
             trackBar_TimePositionX.TabIndex = 78;
             trackBar_TimePositionX.TickFrequency = 50;
-            trackBar_TimePositionX.Value = 180;
+            trackBar_TimePositionX.Value = 10;
             trackBar_TimePositionX.ValueChanged += TrackBar_TimePositionX_ValueChanged;
             // 
             // label_TimePositionY
@@ -3248,12 +3247,12 @@ namespace eft_dma_radar.UI.Radar
             // trackBar_TimePositionY
             // 
             trackBar_TimePositionY.Location = new Point(423, 23);
-            trackBar_TimePositionY.Maximum = (int)(Config.MonitorHeight / 1.27);
+            trackBar_TimePositionY.Maximum = (int)(Config.MonitorHeight /* / 1.27 */);
             trackBar_TimePositionY.Name = "trackBar_TimePositionY";
             trackBar_TimePositionY.Size = new Size(180, 45);
             trackBar_TimePositionY.TabIndex = 80;
             trackBar_TimePositionY.TickFrequency = 20;
-            trackBar_TimePositionY.Value = 20;
+            trackBar_TimePositionY.Value = 10;
             trackBar_TimePositionY.ValueChanged += TrackBar_TimePositionY_ValueChanged;
             // 
             // flowLayoutPanel_ESP_Magazine
@@ -3295,7 +3294,7 @@ namespace eft_dma_radar.UI.Radar
             // trackBar_MagazinePositionX
             // 
             trackBar_MagazinePositionX.Location = new Point(153, 23);
-            trackBar_MagazinePositionX.Maximum = (int)(Config.MonitorWidth / 1.37);
+            trackBar_MagazinePositionX.Maximum = (int)(Config.MonitorWidth /* / 1.37 */);
             trackBar_MagazinePositionX.Name = "trackBar_MagazinePositionX";
             trackBar_MagazinePositionX.Size = new Size(180, 45);
             trackBar_MagazinePositionX.TabIndex = 78;
@@ -3315,12 +3314,10 @@ namespace eft_dma_radar.UI.Radar
             // trackBar_MagazinePositionY
             // 
             trackBar_MagazinePositionY.Location = new Point(483, 23);
-            trackBar_MagazinePositionY.Maximum = (int)(Config.MonitorHeight / 1.32);
+            trackBar_MagazinePositionY.Maximum = (int)(Config.MonitorHeight /* / 1.32 */);
             trackBar_MagazinePositionY.Name = "trackBar_MagazinePositionY";
             trackBar_MagazinePositionY.Size = new Size(180, 45);
             trackBar_MagazinePositionY.TabIndex = 78;
-            trackBar_TimePositionY.TickFrequency = 20;
-            trackBar_TimePositionY.Value = 20;
             trackBar_MagazinePositionY.ValueChanged += TrackBar_MagazinePositionY_ValueChanged;
             // 
             // flowLayoutPanel4
@@ -3938,7 +3935,7 @@ namespace eft_dma_radar.UI.Radar
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4, 3, 4, 3);
             Name = "MainForm";
-            Text = "EFT DMA Radar - Dreadful - v1.03.6";
+            Text = "EFT DMA Radar - Dreadful - v1.04";
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();

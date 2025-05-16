@@ -82,6 +82,17 @@ namespace eft_dma_radar.Tarkov.Features.MemoryWrites
                 using var writeHandle = new ScatterWriteHandle();
                 var offset = transform.VerticesAddr + (uint)(transform.Index * 0x30) + 0x20;
                 writeHandle.AddValueEntry(offset, headScale);
+
+                writeHandle.Execute(() => {
+                    if (!game.IsSafeToWriteMem)
+                        return false;
+
+                    if (Memory.ReadValue<ulong>(player.CorpseAddr, false) != 0)
+                        return false;
+
+                    return true;
+                });
+
                 _modifiedPlayers[player.Base] = headScale;
             }
             catch (Exception ex)
@@ -107,6 +118,18 @@ namespace eft_dma_radar.Tarkov.Features.MemoryWrites
                         using var writeHandle = new ScatterWriteHandle();
                         var offset = transform.VerticesAddr + (uint)(transform.Index * 0x30) + 0x20;
                         writeHandle.AddValueEntry(offset, _defaultScale);
+
+
+                        writeHandle.Execute(() => {
+                            if (!game.IsSafeToWriteMem)
+                                return false;
+
+                            if (Memory.ReadValue<ulong>(player.CorpseAddr, false) != 0)
+                                return false;
+
+                            return true;
+                        });
+
                     }
                 }
 

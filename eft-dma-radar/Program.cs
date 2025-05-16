@@ -47,7 +47,7 @@ namespace eft_dma_radar
 {
     internal static class Program
     {
-        internal const string Name = "EFT DMA Radar - Dreadful - v1.03.6";
+        internal const string Name = "EFT DMA Radar - Dreadful - v1.04";
 
 
         /// <summary>

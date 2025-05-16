@@ -2759,6 +2759,8 @@ namespace eft_dma_radar.UI.Radar
             label_MagazinePositionY.Text = $"Magazine Position Y: {trackBar_MagazinePositionY.Value}";
             checkBox_BigHead.Checked = Config.MemWrites.BigHead.Enabled;
             trackBar_BigHead.Enabled = Config.MemWrites.BigHead.Enabled;
+            trackBar_BigHead.Value = (int)Config.MemWrites.BigHead.Scale;
+            label_BigHeadMultiplier.Text = $"Big Head Multiplier: {trackBar_BigHead.Value}x";
             CameraManagerBase.UpdateViewportRes();
             LoadESPConfig();
             InitializeContainers();
@@ -4590,13 +4592,8 @@ namespace eft_dma_radar.UI.Radar
 
         private void checkBox_BigHead_CheckedChanged(object sender, EventArgs e)
         {
-          /*  Config.MemWrites.BigHead.Enabled = checkBox_BigHead.Checked;
-            trackBar_BigHead.Enabled = checkBox_BigHead.Checked;
-            label_BigHeadMultiplier.Enabled = checkBox_BigHead.Checked; */
-
             bool enabled = checkBox_BigHead.Checked;
             MemWriteFeature<BigHead>.Instance.Enabled = enabled;
-
             Config.Save();
         }
 
@@ -4604,7 +4601,7 @@ namespace eft_dma_radar.UI.Radar
         {
             float scale = 1.0f + ((trackBar_BigHead.Value - 1) / 19.0f) * 2.0f; // 1.0 to 3.0
             MemWrites.Config.BigHead.Scale = scale;
-            label_BigHeadMultiplier.Text = scale.ToString("0.0") + "x";
+            label_BigHeadMultiplier.Text = "Big Head Multiplier: " + scale.ToString("0.0") + "x";
             Config.Save();
         }
     }
