@@ -3239,6 +3239,7 @@ namespace eft_dma_radar.UI.Radar
             // 
             trackBar_MagazinePositionY.Location = new Point(405, 23);
             trackBar_MagazinePositionY.Maximum = 2000;
+            trackBar_MagazinePositionY.Minimum = 15;
             trackBar_MagazinePositionY.Name = "trackBar_MagazinePositionY";
             trackBar_MagazinePositionY.Size = new Size(102, 45);
             trackBar_MagazinePositionY.TabIndex = 78;
@@ -3307,6 +3308,7 @@ namespace eft_dma_radar.UI.Radar
             // 
             trackBar_TimePositionY.Location = new Point(345, 23);
             trackBar_TimePositionY.Maximum = 2000;
+            trackBar_TimePositionY.Minimum = 15;
             trackBar_TimePositionY.Name = "trackBar_TimePositionY";
             trackBar_TimePositionY.Size = new Size(102, 45);
             trackBar_TimePositionY.TabIndex = 80;
@@ -3937,7 +3939,7 @@ namespace eft_dma_radar.UI.Radar
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4, 3, 4, 3);
             Name = "MainForm";
-            Text = "EFT DMA Radar - Dreadful - v1.04.03";
+            Text = "EFT DMA Radar - Dreadful - v1.04.04";
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();

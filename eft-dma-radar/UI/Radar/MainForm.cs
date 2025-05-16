@@ -231,7 +231,7 @@ namespace eft_dma_radar.UI.Radar
             button_StartESP.TextChanged += Button_StartESP_TextChanged;
             textBox_VischeckVisColor.TextChanged += textBox_VischeckVisColor_TextChanged;
             textBox_VischeckInvisColor.TextChanged += textBox_VischeckInvisColor_TextChanged;
-            trackBar_TimePositionX.Maximum = (int)(Config.MonitorWidth /* / 1.4 */);
+            trackBar_TimePositionX.Maximum = (int)(Config.MonitorWidth /* / 1.4 */); 
             trackBar_TimePositionY.Maximum = (int)(Config.MonitorHeight /* / 1.27 */);
             trackBar_MagazinePositionX.Maximum = (int)(Config.MonitorWidth /* / 1.37 */);
             trackBar_MagazinePositionY.Maximum = (int)(Config.MonitorHeight /* / 1.32 */);
