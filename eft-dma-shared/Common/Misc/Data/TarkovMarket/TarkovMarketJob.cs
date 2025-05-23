@@ -8,12 +8,11 @@ namespace eft_dma_shared.Common.Misc.Data.TarkovMarket
 {
     public static class TarkovMarketJob
     {
-
         public static async Task<string> GetUpdatedMarketDataAsync()
         {
             try
             {
-                var data = await TarkovDevCore.QueryTarkovDevAsync();
+                var data = await TarkovDevCore.QueryTarkovDevAsync(SharedProgram.IsPveMode);
                 var result = new TarkovMarketData()
                 {
                     Items = ParseMarketData(data),
