@@ -312,6 +312,12 @@ namespace eft_dma_radar.UI.Misc
         [JsonPropertyName("magazinePositionY")]
         public float MagazinePositionY { get; set; } = 15f;
 
+        /// <summary>
+        /// Game Mode (true = PvE, false = PvP)
+        /// </summary>
+        [JsonPropertyName("isPveMode")]
+        public bool IsPveMode { get; set; } = false;
+
         #region Config Interface
 
         /// <summary>

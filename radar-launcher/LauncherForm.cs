@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Text.Json;
 using System.Windows.Forms;
 using DarkModeForms;
 
@@ -73,8 +74,93 @@ namespace radar_launcher
         }
         private void btnEftRadar_Click(object sender, EventArgs e)
         {
-            LaunchExecutable(_eftRadarPath);
+            // Try to get the saved game mode preference
+            bool savedIsPve = true; // Default to PvE mode
+            string configPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                "eft-dma-radar", "Config-EFT.json");
+
+            if (File.Exists(configPath))
+            {
+                try
+                {
+                    string json = File.ReadAllText(configPath);
+                    using var document = JsonDocument.Parse(json);
+                    if (document.RootElement.TryGetProperty("isPveMode", out var isPveElement))
+                    {
+                        savedIsPve = isPveElement.GetBoolean();
+                    }
+                }
+                catch
+                {
+                    // Use default if there's any issue reading the config
+                }
+            }
+
+            // Create and configure dialog
+            using var gameModeDialog = new Form()
+            {
+                Text = "Select Game Mode",
+                ClientSize = new Size(300, 150),
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                StartPosition = FormStartPosition.CenterParent,
+                MaximizeBox = false,
+                MinimizeBox = false,
+                ShowInTaskbar = false
+            };
+
+            // Apply dark mode to the dialog
+            DarkModeCS dialogDarkMode = new DarkModeCS(gameModeDialog);
+
+            // Create radio buttons
+            var pveRadio = new RadioButton()
+            {
+                Text = "PvE Mode",
+                Location = new Point(20, 30),
+                AutoSize = true,
+                Checked = savedIsPve, // Use saved preference
+                ForeColor = System.Drawing.Color.White // Ensure text is visible in dark mode
+            };
+
+            var pvpRadio = new RadioButton()
+            {
+                Text = "PvP Mode",
+                Location = new Point(20, 60),
+                AutoSize = true,
+                Checked = !savedIsPve, // Use saved preference
+                ForeColor = System.Drawing.Color.White // Ensure text is visible in dark mode
+            };
+
+            // Create OK and Cancel buttons
+            var okButton = new Button()
+            {
+                Text = "OK",
+                DialogResult = DialogResult.OK,
+                Location = new Point(100, 100),
+                Size = new Size(80, 30)
+            };
+
+            var cancelButton = new Button()
+            {
+                Text = "Cancel",
+                DialogResult = DialogResult.Cancel,
+                Location = new Point(190, 100),
+                Size = new Size(80, 30)
+            };
+
+            // Add controls to form
+            gameModeDialog.Controls.AddRange(new Control[] { pveRadio, pvpRadio, okButton, cancelButton });
+            gameModeDialog.AcceptButton = okButton;
+            gameModeDialog.CancelButton = cancelButton;
+
+            // Show dialog and check result
+            if (gameModeDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                bool isPve = pveRadio.Checked;
+                LaunchEftRadar(isPve);
+            }
         }
+
+
         private void btnEftRadarNonRotated_Click(object sender, EventArgs e)
         {
             LaunchExecutable(_eftRadarNonRotatedPath);
@@ -128,6 +214,36 @@ namespace radar_launcher
             }
 
             throw new DirectoryNotFoundException("Solution directory could not be located.");
+        }
+
+        private void LaunchEftRadar(bool isPve)
+        {
+            try
+            {
+                string path = _eftRadarPath;
+                // Set the working directory to the directory of the executable
+                string workingDirectory = Path.GetDirectoryName(path);
+
+                ProcessStartInfo startInfo = new()
+                {
+                    FileName = path,
+                    WorkingDirectory = workingDirectory, // Set the working directory
+                    UseShellExecute = true,
+                    Arguments = isPve ? "pve" : "pvp" // Pass game mode as command-line argument
+                };
+
+                Process.Start(startInfo);
+
+                // Close the launcher after starting the selected application
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error launching application: {ex.Message}",
+                    "Launch Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
     }
 }

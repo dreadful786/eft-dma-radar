@@ -47,7 +47,7 @@ namespace eft_dma_radar
 {
     internal static class Program
     {
-        internal const string Name = "EFT DMA Radar - Dreadful - v1.04.04";
+        internal const string Name = "EFT DMA Radar - Dreadful - v1.05";
 
 
         /// <summary>
@@ -61,24 +61,6 @@ namespace eft_dma_radar
         public static DirectoryInfo ConfigPath { get; } =
             new(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "eft-dma-radar"));
 
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        static void Main(string[] args)
-        {
-            try
-            {
-                ConfigureProgram();
-                Application.Run(new MainForm());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString(), Program.Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
-            }
-        }
-
         #region Private Members
 
         static Program()
@@ -88,8 +70,44 @@ namespace eft_dma_radar
                 TryImportLoneCfg();
                 ConfigPath.Create();
                 var config = Config.Load();
-                eft_dma_shared.SharedProgram.Initialize(ConfigPath, config);
+                // Don't initialize SharedProgram here, we'll do it in Main after parsing args
                 Config = config;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), Program.Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main(string[] args)
+        {
+            try
+            {
+                // Process command line arguments to determine game mode
+                bool isPve = true; // Default to PvE mode
+                if (args.Length > 0)
+                {
+                    string gameMode = args[0].ToLower().Trim();
+                    if (gameMode == "pvp")
+                        isPve = false;
+                }
+
+                // Save the game mode to the config
+                Config.IsPveMode = isPve;
+
+                // Now initialize SharedProgram with the isPve value
+                eft_dma_shared.SharedProgram.Initialize(ConfigPath, Config, isPve);
+
+                ConfigureProgram(isPve);
+                Application.Run(new MainForm());
+
+                // Save the config when application exits
+                Config.Save();
             }
             catch (Exception ex)
             {
@@ -102,31 +120,31 @@ namespace eft_dma_radar
         /// If user is a former managed Lone EFT User, try import their config.
         /// </summary>
         private static void TryImportLoneCfg()
-        {
-            try
-            {
-                DirectoryInfo loneCfgPath = new(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Lones-Client"));
-                if (!ConfigPath.Exists && loneCfgPath.Exists)
                 {
-                    ConfigPath.Create();
-                    foreach (var file in loneCfgPath.EnumerateFiles())
-                        file.CopyTo(Path.Combine(ConfigPath.FullName, file.Name));
+                    try
+                    {
+                        DirectoryInfo loneCfgPath = new(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Lones-Client"));
+                        if (!ConfigPath.Exists && loneCfgPath.Exists)
+                        {
+                            ConfigPath.Create();
+                            foreach (var file in loneCfgPath.EnumerateFiles())
+                                file.CopyTo(Path.Combine(ConfigPath.FullName, file.Name));
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("ERROR Importing Lone Config(s)." +
+                            $"Exception Info: {ex}",
+                            Program.Name,
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("ERROR Importing Lone Config(s)." +
-                    $"Exception Info: {ex}",
-                    Program.Name,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-            }
-        }
 
         /// <summary>
         /// Configure Program Startup.
         /// </summary>
-        private static void ConfigureProgram()
+        private static void ConfigureProgram(bool isPve = true)
         {
             ApplicationConfiguration.Initialize();
             using var loading = LoadingForm.Create();

@@ -16,6 +16,7 @@ namespace eft_dma_shared
 #pragma warning disable IDE0052 // Remove unread private members
         private static Mutex _mutex;
 #pragma warning restore IDE0052 // Remove unread private members
+        public static bool IsPveMode { get; private set; } = true; // Default to PvE mode
 
         internal static DirectoryInfo ConfigPath { get; private set; }
         internal static IConfig Config { get; private set; }
@@ -30,12 +31,13 @@ namespace eft_dma_shared
         /// <param name="configPath">Config path directory.</param>
         /// <param name="config">Config file instance.</param>
         /// <exception cref="ApplicationException"></exception>
-        public static void Initialize(DirectoryInfo configPath, IConfig config)
+        public static void Initialize(DirectoryInfo configPath, IConfig config, bool isPve = true)
         {
             ArgumentNullException.ThrowIfNull(configPath, nameof(configPath));
             ArgumentNullException.ThrowIfNull(config, nameof(config));
             ConfigPath = configPath;
             Config = config;
+            IsPveMode = isPve; // Set the game mode
             _mutex = new Mutex(true, _mutexID, out bool singleton);
             if (!singleton)
                 throw new ApplicationException("The Application Is Already Running!");
