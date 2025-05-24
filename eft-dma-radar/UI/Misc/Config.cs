@@ -781,6 +781,12 @@ namespace eft_dma_radar.UI.Misc
         public bool InfStamina { get; set; } = false;
 
         /// <summary>
+        /// Enable Inf Arm Stamina Feature on Startup.
+        /// </summary>
+        [JsonPropertyName("enableInfArmStamina")]
+        public bool InfArmStamina { get; set; } = false;
+
+        /// <summary>
         /// Chams Feature Config
         /// </summary>
         [JsonPropertyName("chams")]

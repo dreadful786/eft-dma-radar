@@ -164,6 +164,11 @@ namespace LonesEFTRadar.UI.SKWidgetControl
             _mainForm.checkBox_InfStamina.Checked = checkBox_InfStamina_SettingsWidget.Checked;
         }
 
+        private void checkBox_InfArmStamina_SettingsWidget_CheckedChanged(object sender, EventArgs e)
+        {
+            _mainForm.checkBox_InfArmStamina.Checked = checkBox_InfArmStamina_SettingsWidget.Checked;
+        }
+
         private void checkBox_LTW_SettingsWidget_CheckedChanged(object sender, EventArgs e)
         {
             _mainForm.checkBox_LTW.Checked = checkBox_LTW_SettingsWidget.Checked;
@@ -335,6 +340,10 @@ namespace LonesEFTRadar.UI.SKWidgetControl
         public void UpdateInfStaminaCheckbox(bool isChecked)
         {
             checkBox_InfStamina_SettingsWidget.Checked = isChecked;
+        }
+        public void UpdateInfArmStaminaCheckbox(bool isChecked)
+        {
+            checkBox_InfArmStamina_SettingsWidget.Checked = isChecked;
         }
 
         public void UpdateLTWCheckbox(bool isChecked)

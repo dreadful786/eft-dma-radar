@@ -181,6 +181,7 @@ namespace LonesEFTRadar.UI.SKWidgetControl
             checkBox_NoVisor = new CheckBox();
             checkBox_AlwaysDaySunny = new CheckBox();
             checkBox_NoWepMalf = new CheckBox();
+            checkBox_InfArmStamina_SettingsWidget = new CheckBox();
             headerPanel.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -324,7 +325,7 @@ namespace LonesEFTRadar.UI.SKWidgetControl
             // checkBox_Chams_SettingsWidget
             // 
             checkBox_Chams_SettingsWidget.AutoSize = true;
-            checkBox_Chams_SettingsWidget.Location = new Point(397, 32);
+            checkBox_Chams_SettingsWidget.Location = new Point(457, 57);
             checkBox_Chams_SettingsWidget.Name = "checkBox_Chams_SettingsWidget";
             checkBox_Chams_SettingsWidget.Size = new Size(63, 19);
             checkBox_Chams_SettingsWidget.TabIndex = 88;
@@ -352,6 +353,7 @@ namespace LonesEFTRadar.UI.SKWidgetControl
             // tabPage1
             // 
             tabPage1.BackgroundImageLayout = ImageLayout.None;
+            tabPage1.Controls.Add(checkBox_InfArmStamina_SettingsWidget);
             tabPage1.Controls.Add(checkBox_Loot_SettingsWidget);
             tabPage1.Controls.Add(checkBox_LootWishlist_SettingsWidget);
             tabPage1.Controls.Add(checkBox_ShowContainers_SettingsWidget);
@@ -480,7 +482,6 @@ namespace LonesEFTRadar.UI.SKWidgetControl
             checkedListBox_Containers_SettingsWidget.Name = "checkedListBox_Containers_SettingsWidget";
             checkedListBox_Containers_SettingsWidget.Size = new Size(228, 94);
             checkedListBox_Containers_SettingsWidget.TabIndex = 60;
-         //   checkedListBox_Containers_SettingsWidget.ItemCheck += checkedListBox_Containers_SettingsWidget_ItemCheck;
             // 
             // checkBox_EnableMemWrite_SettingsWidget
             // 
@@ -1901,6 +1902,16 @@ namespace LonesEFTRadar.UI.SKWidgetControl
             checkBox_NoWepMalf.Text = "No Wep Malfunctions";
             checkBox_NoWepMalf.UseVisualStyleBackColor = true;
             // 
+            // checkBox_InfArmStamina_SettingsWidget
+            // 
+            checkBox_InfArmStamina_SettingsWidget.AutoSize = true;
+            checkBox_InfArmStamina_SettingsWidget.Location = new Point(397, 32);
+            checkBox_InfArmStamina_SettingsWidget.Name = "checkBox_InfArmStamina_SettingsWidget";
+            checkBox_InfArmStamina_SettingsWidget.Size = new Size(173, 19);
+            checkBox_InfArmStamina_SettingsWidget.TabIndex = 96;
+            checkBox_InfArmStamina_SettingsWidget.Text = "Infinite Arm Stamina (Risky)";
+            checkBox_InfArmStamina_SettingsWidget.CheckedChanged += checkBox_InfArmStamina_SettingsWidget_CheckedChanged;
+            // 
             // SettingsWidgetForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -2104,5 +2115,6 @@ namespace LonesEFTRadar.UI.SKWidgetControl
         private Label label6;
         private Label label7;
         private Label label8;
+        private CheckBox checkBox_InfArmStamina_SettingsWidget;
     }
 }
