@@ -8,7 +8,7 @@ using eft_dma_shared.Common.Unity.Collections;
 
 namespace eft_dma_radar.Tarkov.Features.MemoryWrites
 {
-    public sealed class InfStamina : MemWriteFeature<InfStamina>
+    public sealed class InfArmStamina : MemWriteFeature<InfArmStamina>
     {
         private const byte _infStamSourceStateName = (byte)Enums.EPlayerState.Sprint;
         private const byte _infStamTargetStateName = (byte)Enums.EPlayerState.Transition;
@@ -16,8 +16,8 @@ namespace eft_dma_radar.Tarkov.Features.MemoryWrites
 
         public override bool Enabled
         {
-            get => MemWrites.Config.InfStamina;
-            set => MemWrites.Config.InfStamina = value;
+            get => MemWrites.Config.InfArmStamina;
+            set => MemWrites.Config.InfArmStamina = value;
         }
 
         protected override TimeSpan Delay => TimeSpan.FromSeconds(1);
@@ -34,39 +34,24 @@ namespace eft_dma_radar.Tarkov.Features.MemoryWrites
                         ApplyFatigueBypass_V2(localPlayer);
                     }
 
-                    /// Apply Inf Stamina
+                    /// Apply Inf Arm Stamina
                     const float maxStam = 100f; // Default Max Value (may be higher w/ skills)
                     const float maxOxy = 350f; // Default Max Value (may be higher w/ skills)
                     var phys = Memory.ReadPtr(localPlayer + Offsets.Player.Physical);
-                    var stamObj = Memory.ReadPtr(phys + Offsets.Physical.Stamina);
-                    var currentStam = Memory.ReadValue<float>(stamObj + Offsets.PhysicalValue.Current, false);
-                    if (currentStam < 0f || currentStam > 500f)
-                        throw new ArgumentOutOfRangeException("Invalid Stam value! Possible bad read");
                     var oxyObj = Memory.ReadPtr(phys + Offsets.Physical.Oxygen);
                     var currentOxy = Memory.ReadValue<float>(oxyObj + Offsets.PhysicalValue.Current, false);
                     if (currentOxy < 0f || currentOxy > 1000f)
                         throw new ArgumentOutOfRangeException("Invalid Oxy value! Possible bad read");
-                  /*  var handstamObj = Memory.ReadPtr(phys + Offsets.Physical.HandsStamina);
+                    var handstamObj = Memory.ReadPtr(phys + Offsets.Physical.HandsStamina);
                     var currentHandStam = Memory.ReadValue<float>(handstamObj + Offsets.PhysicalValue.Current, false);
                     if (currentHandStam < 0f || currentHandStam > 500f)
-                        throw new ArgumentOutOfRangeException("Invalid Stam value! Possible bad read"); */
-                    if (currentStam < maxStam / 3) // Refill when below 33%
-                    {
-                        writes.AddValueEntry(stamObj + Offsets.PhysicalValue.Current, maxStam);
-                        LoneLogging.WriteLine($"InfStamina -> stam:{currentStam}->{maxStam}");
-                    }
+                        throw new ArgumentOutOfRangeException("Invalid Stam value! Possible bad read");
 
-                    if (currentOxy < maxOxy / 3) // Refill when below 33%
-                    {
-                        writes.AddValueEntry(oxyObj + Offsets.PhysicalValue.Current, maxOxy);
-                        LoneLogging.WriteLine($"InfStamina -> oxy:{currentOxy}->{maxOxy}");
-                    }
-
-                 /*   if (currentHandStam < maxStam / 3) // Refill when below 33%
+                    if (currentHandStam < maxStam / 3) // Refill when below 33%
                     {
                         writes.AddValueEntry(handstamObj + Offsets.PhysicalValue.Current, maxStam);
                         LoneLogging.WriteLine($"InfStamina -> stam:{currentHandStam}->{maxStam}");
-                    } */
+                    }
                 }
             }
             catch (Exception ex)
@@ -85,7 +70,7 @@ namespace eft_dma_radar.Tarkov.Features.MemoryWrites
             if (originalState == default)
             {
                 _bypassSet = true;
-                LoneLogging.WriteLine("InfStamina -> Bypass ALREADY SET");
+                LoneLogging.WriteLine("InfArmStamina -> Bypass ALREADY SET");
                 return;
             }
             int targetHash = Memory.ReadValueEnsure<int>(patchState + Offsets.MovementState.AnimatorStateHash);
@@ -93,7 +78,7 @@ namespace eft_dma_radar.Tarkov.Features.MemoryWrites
             Memory.WriteValueEnsure(originalState + Offsets.MovementState.AnimatorStateHash, targetHash);
             Memory.WriteValueEnsure(originalState + Offsets.MovementState.Name, _infStamTargetStateName);
             _bypassSet = true;
-            LoneLogging.WriteLine("InfStamina -> Bypass SET");
+            LoneLogging.WriteLine("InfArmStamina -> Bypass SET");
         }
 
         private static void GetStates(LocalPlayer localPlayer, out ulong originalState, out ulong patchState)

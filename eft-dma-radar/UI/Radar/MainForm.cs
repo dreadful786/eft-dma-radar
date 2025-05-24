@@ -1976,6 +1976,15 @@ namespace eft_dma_radar.UI.Radar
             _settingsWidgetForm?.UpdateInfStaminaCheckbox(isChecked);
         }
 
+        public void checkBox_InfArmStamina_CheckedChanged(object sender, EventArgs e)
+        {
+            bool isChecked = checkBox_InfArmStamina.Checked;
+            MemWriteFeature<InfArmStamina>.Instance.Enabled = isChecked;
+
+            // Update the SettingsWidgetForm checkbox
+            _settingsWidgetForm?.UpdateInfArmStaminaCheckbox(isChecked);
+        }
+
         private void TrackBar_NoSway_ValueChanged(object sender, EventArgs e)
         {
             var value = trackBar_NoSway.Value;
@@ -2441,6 +2450,12 @@ namespace eft_dma_radar.UI.Radar
                 "NOTE: You will not gain endurance/strength xp with this on.\n" +
                 "NOTE: At higher weights you may get server desync. You can try disabling 1.2 Move Speed, or reducing your weight. MULE stims help here too.\n" +
                 "WARNING: This is marked as a RISKY feature since other players can see you 'gliding' instead of running and is visually noticeable.");
+            toolTip1.SetToolTip(checkBox_InfArmStamina,
+                "Enables the Infinite Stamina feature. Prevents you from running out of stamina/breath, and bypasses the Fatigue debuff. Due to safety reasons you can only disable this after the raid has ended.\n" +
+                "NOTE: Your footsteps will be silent, this is normal.\n" +
+                "NOTE: You will not gain endurance/strength xp with this on.\n" +
+                "NOTE: At higher weights you may get server desync. You can try disabling 1.2 Move Speed, or reducing your weight. MULE stims help here too.\n" +
+                "WARNING: This is marked as a RISKY feature since other players can see you 'gliding' instead of running and is visually noticeable.");
             toolTip1.SetToolTip(checkBox_MoveSpeed,
                 "Enables/Disables 1.2x Move Speed Feature. This causes your player to move 1.2 times faster.\n" +
                 "NOTE: When used in conjunction with Infinite Stamina this can contribute to Server Desync at higher carry weights. Turn this off to reduce desync.\n" +
@@ -2546,9 +2561,9 @@ namespace eft_dma_radar.UI.Radar
             checkBox_AimHeadAI.Checked = Aimbot.Config.HeadshotAI;
             checkBox_SA_SafeLock.Checked = Aimbot.Config.SilentAim.SafeLock;
             checkBox_AimRandomBone.Checked = Aimbot.Config.RandomBone.Enabled;
-
             checkBox_NoVisor.Checked = MemWriteFeature<NoVisor>.Instance.Enabled;
             checkBox_InfStamina.Checked = MemWriteFeature<InfStamina>.Instance.Enabled;
+            checkBox_InfArmStamina.Checked = MemWriteFeature<InfArmStamina>.Instance.Enabled;
             checkBox_Chams.Checked = MemWriteFeature<Chams>.Instance.Enabled;
             checkBox_AlwaysDaySunny.Checked = MemWriteFeature<AlwaysDaySunny>.Instance.Enabled;
             checkBox_NoWepMalf.Checked = MemPatchFeature<NoWepMalfPatch>.Instance.Enabled;
