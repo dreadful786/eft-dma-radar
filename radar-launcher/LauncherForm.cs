@@ -100,7 +100,7 @@ namespace radar_launcher
             using var gameModeDialog = new Form()
             {
                 Text = "Select Game Mode",
-                ClientSize = new Size(300, 150),
+                ClientSize = new Size(200, 80),
                 FormBorderStyle = FormBorderStyle.FixedDialog,
                 StartPosition = FormStartPosition.CenterParent,
                 MaximizeBox = false,
@@ -115,7 +115,7 @@ namespace radar_launcher
             var pveRadio = new RadioButton()
             {
                 Text = "PvE Mode",
-                Location = new Point(20, 30),
+                Location = new Point(20, 10),
                 AutoSize = true,
                 Checked = savedIsPve, // Use saved preference
                 ForeColor = System.Drawing.Color.White // Ensure text is visible in dark mode
@@ -124,7 +124,7 @@ namespace radar_launcher
             var pvpRadio = new RadioButton()
             {
                 Text = "PvP Mode",
-                Location = new Point(20, 60),
+                Location = new Point(105, 10),
                 AutoSize = true,
                 Checked = !savedIsPve, // Use saved preference
                 ForeColor = System.Drawing.Color.White // Ensure text is visible in dark mode
@@ -135,7 +135,7 @@ namespace radar_launcher
             {
                 Text = "OK",
                 DialogResult = DialogResult.OK,
-                Location = new Point(100, 100),
+                Location = new Point(20, 40),
                 Size = new Size(80, 30)
             };
 
@@ -143,7 +143,7 @@ namespace radar_launcher
             {
                 Text = "Cancel",
                 DialogResult = DialogResult.Cancel,
-                Location = new Point(190, 100),
+                Location = new Point(105, 40),
                 Size = new Size(80, 30)
             };
 
