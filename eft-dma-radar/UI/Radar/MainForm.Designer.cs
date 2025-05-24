@@ -133,6 +133,7 @@ namespace eft_dma_radar.UI.Radar
             checkBox_NoRecoilSway = new CheckBox();
             checkBox_Chams = new CheckBox();
             checkBox_InfStamina = new CheckBox();
+            checkBox_InfArmStamina = new CheckBox();
             checkBox_MoveSpeed = new CheckBox();
             checkBox_MoveSpeed2 = new CheckBox();
             checkBox_FastWeaponOps = new CheckBox();
@@ -330,7 +331,6 @@ namespace eft_dma_radar.UI.Radar
             label36 = new Label();
             colorPicker1 = new ColorDialog();
             toolTip1 = new ToolTip(components);
-            checkBox_InfArmStamina = new CheckBox();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             flowLayoutPanel_Loot.SuspendLayout();
@@ -854,7 +854,7 @@ namespace eft_dma_radar.UI.Radar
             button_Restart.TabIndex = 18;
             button_Restart.Text = "Restart Radar";
             button_Restart.UseVisualStyleBackColor = true;
-            button_Restart.Click += button_Restart_Click;
+            button_Restart.Click += this.button_Restart_Click;
             // 
             // button_HotkeyManager
             // 
@@ -1626,6 +1626,18 @@ namespace eft_dma_radar.UI.Radar
             checkBox_InfStamina.Text = "Infinite Stamina (Risky)";
             checkBox_InfStamina.UseVisualStyleBackColor = true;
             checkBox_InfStamina.CheckedChanged += checkBox_InfStamina_CheckedChanged;
+            // 
+            // checkBox_InfArmStamina
+            // 
+            checkBox_InfArmStamina.Anchor = AnchorStyles.Right;
+            checkBox_InfArmStamina.AutoSize = true;
+            checkBox_InfArmStamina.Location = new Point(488, 63);
+            checkBox_InfArmStamina.Name = "checkBox_InfArmStamina";
+            checkBox_InfArmStamina.Size = new Size(173, 19);
+            checkBox_InfArmStamina.TabIndex = 87;
+            checkBox_InfArmStamina.Text = "Infinite Arm Stamina (Risky)";
+            checkBox_InfArmStamina.UseVisualStyleBackColor = true;
+            checkBox_InfArmStamina.CheckedChanged += checkBox_InfArmStamina_CheckedChanged;
             // 
             // checkBox_MoveSpeed
             // 
@@ -3933,18 +3945,6 @@ namespace eft_dma_radar.UI.Radar
             toolTip1.InitialDelay = 500;
             toolTip1.ReshowDelay = 100;
             // 
-            // checkBox_InfArmStamina
-            // 
-            checkBox_InfArmStamina.Anchor = AnchorStyles.Right;
-            checkBox_InfArmStamina.AutoSize = true;
-            checkBox_InfArmStamina.Location = new Point(488, 63);
-            checkBox_InfArmStamina.Name = "checkBox_InfArmStamina";
-            checkBox_InfArmStamina.Size = new Size(173, 19);
-            checkBox_InfArmStamina.TabIndex = 87;
-            checkBox_InfArmStamina.Text = "Infinite Arm Stamina (Risky)";
-            checkBox_InfArmStamina.UseVisualStyleBackColor = true;
-            checkBox_InfArmStamina.CheckedChanged += checkBox_InfArmStamina_CheckedChanged;
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -3954,7 +3954,7 @@ namespace eft_dma_radar.UI.Radar
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(4, 3, 4, 3);
             Name = "MainForm";
-            Text = "EFT DMA Radar - Dreadful - v1.05";
+            Text = "EFT DMA Radar - Dreadful - v1.05.01";
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
