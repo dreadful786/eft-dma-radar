@@ -46,10 +46,6 @@ namespace eft_dma_radar.Tarkov.Features.MemoryWrites
                     var currentOxy = Memory.ReadValue<float>(oxyObj + Offsets.PhysicalValue.Current, false);
                     if (currentOxy < 0f || currentOxy > 1000f)
                         throw new ArgumentOutOfRangeException("Invalid Oxy value! Possible bad read");
-                  /*  var handstamObj = Memory.ReadPtr(phys + Offsets.Physical.HandsStamina);
-                    var currentHandStam = Memory.ReadValue<float>(handstamObj + Offsets.PhysicalValue.Current, false);
-                    if (currentHandStam < 0f || currentHandStam > 500f)
-                        throw new ArgumentOutOfRangeException("Invalid Stam value! Possible bad read"); */
                     if (currentStam < maxStam / 3) // Refill when below 33%
                     {
                         writes.AddValueEntry(stamObj + Offsets.PhysicalValue.Current, maxStam);
@@ -61,12 +57,6 @@ namespace eft_dma_radar.Tarkov.Features.MemoryWrites
                         writes.AddValueEntry(oxyObj + Offsets.PhysicalValue.Current, maxOxy);
                         LoneLogging.WriteLine($"InfStamina -> oxy:{currentOxy}->{maxOxy}");
                     }
-
-                 /*   if (currentHandStam < maxStam / 3) // Refill when below 33%
-                    {
-                        writes.AddValueEntry(handstamObj + Offsets.PhysicalValue.Current, maxStam);
-                        LoneLogging.WriteLine($"InfStamina -> stam:{currentHandStam}->{maxStam}");
-                    } */
                 }
             }
             catch (Exception ex)
