@@ -88,6 +88,7 @@ namespace eft_dma_radar.UI.Radar
             checkBox_GrpConnect = new CheckBox();
             checkBox_HideNames = new CheckBox();
             checkBox_ShowMines = new CheckBox();
+            checkBox_ShowDoorsLocks = new CheckBox();
             checkBox_TeammateAimlines = new CheckBox();
             checkBox_AIAimlines = new CheckBox();
             flowLayoutPanel5 = new FlowLayoutPanel();
@@ -336,6 +337,7 @@ namespace eft_dma_radar.UI.Radar
             label36 = new Label();
             colorPicker1 = new ColorDialog();
             toolTip1 = new ToolTip(components);
+            checkBox_ShowSwitches = new CheckBox();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             flowLayoutPanel_Loot.SuspendLayout();
@@ -807,6 +809,8 @@ namespace eft_dma_radar.UI.Radar
             flowLayoutPanel_RadarSettings.Controls.Add(checkBox_GrpConnect);
             flowLayoutPanel_RadarSettings.Controls.Add(checkBox_HideNames);
             flowLayoutPanel_RadarSettings.Controls.Add(checkBox_ShowMines);
+            flowLayoutPanel_RadarSettings.Controls.Add(checkBox_ShowDoorsLocks);
+            flowLayoutPanel_RadarSettings.Controls.Add(checkBox_ShowSwitches);
             flowLayoutPanel_RadarSettings.Controls.Add(checkBox_TeammateAimlines);
             flowLayoutPanel_RadarSettings.Controls.Add(checkBox_AIAimlines);
             flowLayoutPanel_RadarSettings.Dock = DockStyle.Top;
@@ -862,7 +866,7 @@ namespace eft_dma_radar.UI.Radar
             button_Restart.TabIndex = 18;
             button_Restart.Text = "Restart Radar";
             button_Restart.UseVisualStyleBackColor = true;
-            button_Restart.Click += this.button_Restart_Click;
+            button_Restart.Click += button_Restart_Click;
             // 
             // button_HotkeyManager
             // 
@@ -1068,10 +1072,30 @@ namespace eft_dma_radar.UI.Radar
             checkBox_ShowMines.Text = "Show Mines";
             checkBox_ShowMines.UseVisualStyleBackColor = true;
             // 
+            // checkBox_ShowDoorsLocks
+            // 
+            checkBox_ShowDoorsLocks.AutoSize = true;
+            checkBox_ShowDoorsLocks.Location = new Point(815, 133);
+            checkBox_ShowDoorsLocks.Name = "checkBox_ShowDoorsLocks";
+            checkBox_ShowDoorsLocks.Size = new Size(124, 19);
+            checkBox_ShowDoorsLocks.TabIndex = 61;
+            checkBox_ShowDoorsLocks.Text = "Show Doors/Locks";
+            checkBox_ShowDoorsLocks.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_ShowSwitches
+            // 
+            checkBox_ShowSwitches.AutoSize = true;
+            checkBox_ShowSwitches.Location = new Point(945, 133);
+            checkBox_ShowSwitches.Name = "checkBox_ShowSwitches";
+            checkBox_ShowSwitches.Size = new Size(104, 19);
+            checkBox_ShowSwitches.TabIndex = 62;
+            checkBox_ShowSwitches.Text = "Show Switches";
+            checkBox_ShowSwitches.UseVisualStyleBackColor = true;
+            // 
             // checkBox_TeammateAimlines
             // 
             checkBox_TeammateAimlines.AutoSize = true;
-            checkBox_TeammateAimlines.Location = new Point(815, 133);
+            checkBox_TeammateAimlines.Location = new Point(1055, 133);
             checkBox_TeammateAimlines.Name = "checkBox_TeammateAimlines";
             checkBox_TeammateAimlines.Size = new Size(131, 19);
             checkBox_TeammateAimlines.TabIndex = 39;
@@ -1085,7 +1109,7 @@ namespace eft_dma_radar.UI.Radar
             checkBox_AIAimlines.Checked = true;
             checkBox_AIAimlines.CheckState = CheckState.Checked;
             flowLayoutPanel_RadarSettings.SetFlowBreak(checkBox_AIAimlines, true);
-            checkBox_AIAimlines.Location = new Point(952, 133);
+            checkBox_AIAimlines.Location = new Point(1192, 133);
             checkBox_AIAimlines.Name = "checkBox_AIAimlines";
             checkBox_AIAimlines.Size = new Size(86, 19);
             checkBox_AIAimlines.TabIndex = 60;
@@ -4415,7 +4439,8 @@ namespace eft_dma_radar.UI.Radar
         private TrackBar trackBar_ESPSwitchDist;
         private Label label_ESPDoorDist;
         private TrackBar trackBar_ESPDoorDist;
-
+        private CheckBox checkBox_ShowDoorsLocks;
+        private CheckBox checkBox_ShowSwitches;
     }
 }
 
