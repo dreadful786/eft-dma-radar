@@ -507,51 +507,58 @@ namespace eft_dma_radar.UI.Radar
                         } // end exfils
                     }
                     // Draw switches from the cached list
-                    foreach (var switchInstance in _switches)
+                    if (checkBox_ShowSwitches.Checked)
                     {
-                        // Get the switch's position on the map
-                        var switchPosition = switchInstance.Position.ToMapPos(map.Config).ToZoomedPos(mapParams);
-
-                        // Save the current canvas state
-                        canvas.Save();
-
-                        // Apply a rotation transformation to the canvas
-                        ApplyRotationForText(canvas, switchPosition.X, switchPosition.Y, _rotationDegrees);
-
-                        // Draw the switch
-                        switchInstance.Draw(canvas, mapParams, localPlayer);
-
-                        // Restore the canvas state
-                        canvas.Restore();
-                    }
-                    // Draw Doors from the cached list
-                    foreach (var doorInstance in _doors)
-                    {
-                        // Get the Door's position on the map
-                        var doorPosition = doorInstance.Position.ToMapPos(map.Config).ToZoomedPos(mapParams);
-
-                        // Save the current canvas state
-                        canvas.Save();
-
-                        // Apply a rotation transformation to the canvas
-                        ApplyRotationForText(canvas, doorPosition.X, doorPosition.Y, _rotationDegrees);
-
-                        // Draw the Door
-                        doorInstance.Draw(canvas, mapParams, localPlayer);
-
-                        // Restore the canvas state
-                        canvas.Restore();
-                    }
-
-
-                    if (allPlayers is not null)
-                        foreach (var player in allPlayers) // Draw PMCs
+                        foreach (var switchInstance in _switches)
                         {
-                            if (player == localPlayer)
-                                continue; // Already drawn local player, move on
-                            player.Draw(canvas, mapParams, localPlayer);
-                        } // end ForEach (allPlayers)
+                            // Get the switch's position on the map
+                            var switchPosition = switchInstance.Position.ToMapPos(map.Config).ToZoomedPos(mapParams);
 
+                            // Save the current canvas state
+                            canvas.Save();
+
+                            // Apply a rotation transformation to the canvas
+                            ApplyRotationForText(canvas, switchPosition.X, switchPosition.Y, _rotationDegrees);
+
+                            // Draw the switch
+                            switchInstance.Draw(canvas, mapParams, localPlayer);
+
+                            // Restore the canvas state
+                            canvas.Restore();
+                        }
+                    }
+                    if (checkBox_ShowDoorsLocks.Checked)
+                    {
+                        // Draw Doors from the cached list
+                        foreach (var doorInstance in _doors)
+                        {
+                            // Get the Door's position on the map
+                            var doorPosition = doorInstance.Position.ToMapPos(map.Config).ToZoomedPos(mapParams);
+
+                            // Save the current canvas state
+                            canvas.Save();
+
+                            // Apply a rotation transformation to the canvas
+                            ApplyRotationForText(canvas, doorPosition.X, doorPosition.Y, _rotationDegrees);
+
+                            // Draw the Door
+                            doorInstance.Draw(canvas, mapParams, localPlayer);
+
+                            // Restore the canvas state
+                            canvas.Restore();
+                        }
+                    }
+
+                    if (checkBox_ShowPlayersAI.Checked)
+                    {
+                        if (allPlayers is not null)
+                            foreach (var player in allPlayers) // Draw PMCs
+                            {
+                                if (player == localPlayer)
+                                    continue; // Already drawn local player, move on
+                                player.Draw(canvas, mapParams, localPlayer);
+                            } // end ForEach (allPlayers)
+                    }
                     // End allPlayers not null
                     if (checkBox_GrpConnect.Checked) // Connect Groups together
                     {
@@ -2754,6 +2761,9 @@ namespace eft_dma_radar.UI.Radar
             checkBox_ShowLootTab.Checked = Config.ShowLootTab;
             checkBox_HideCorpses.Checked = Config.HideCorpses;
             checkBox_ShowMines.Checked = Config.ShowMines;
+            checkBox_ShowPlayersAI.Checked = Config.ShowPlayersAI;
+            checkBox_ShowDoorsLocks.Checked = Config.ShowDoorsLocks;
+            checkBox_ShowSwitches.Checked = Config.ShowSwitches;
             checkBox_KillTask.Checked = Config.ShowZone;
             checkBox_TeammateAimlines.Checked = Config.TeammateAimlines;
             checkBox_AIAimlines.Checked = Config.AIAimlines;
@@ -2920,6 +2930,9 @@ namespace eft_dma_radar.UI.Radar
                 Config.ShowLootTab = checkBox_ShowLootTab.Checked;
                 Config.HideNames = checkBox_HideNames.Checked;
                 Config.ShowMines = checkBox_ShowMines.Checked;
+                Config.ShowPlayersAI = checkBox_ShowPlayersAI.Checked;
+                Config.ShowDoorsLocks = checkBox_ShowDoorsLocks.Checked;
+                Config.ShowSwitches = checkBox_ShowSwitches.Checked;
                 Config.ConnectGroups = checkBox_GrpConnect.Checked;
                 Config.Containers.Selected = TrackedContainers
                     .Where(x => x.Value is true)
