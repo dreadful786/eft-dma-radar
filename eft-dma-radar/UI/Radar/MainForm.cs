@@ -2406,6 +2406,10 @@ namespace eft_dma_radar.UI.Radar
                 "Enables the rendering of a line between your Fireport and your currently locked Aimbot Target.");
             toolTip1.SetToolTip(trackBar_EspLootDist,
                 "Sets the Maximum Distance from LocalPlayer for regular loot to be rendered.");
+            toolTip1.SetToolTip(trackBar_ESPDoorDist,
+                "Sets the Maximum Distance from LocalPlayer for Doors/Locks to be rendered.");
+            toolTip1.SetToolTip(trackBar_ESPSwitchDist,
+                "Sets the Maximum Distance from LocalPlayer for Switches to be rendered.");
             toolTip1.SetToolTip(trackBar_EspImpLootDist,
                 "Sets the Maximum Distance from LocalPlayer for important loot to be rendered.");
             toolTip1.SetToolTip(trackBar_EspQuestHelperDist,
@@ -3412,6 +3416,8 @@ namespace eft_dma_radar.UI.Radar
             trackBar_EspFontScale.ValueChanged += TrackBar_EspFontScale_ValueChanged;
             trackBar_EspLineScale.ValueChanged += TrackBar_EspLineScale_ValueChanged;
             trackBar_ESPContainerDist.ValueChanged += TrackBar_ESPContainerDist_ValueChanged;
+            trackBar_ESPDoorDist.ValueChanged += TrackBar_EspDoorDist_ValueChanged;
+            trackBar_ESPSwitchDist.ValueChanged += TrackBar_EspSwitchDist_ValueChanged;
             Config.ESP.PlayerRendering ??= new ESPPlayerRenderOptions();
             Config.ESP.AIRendering ??= new ESPPlayerRenderOptions();
             switch (Config.ESP.PlayerRendering.RenderingMode)
@@ -3469,6 +3475,8 @@ namespace eft_dma_radar.UI.Radar
             checkBox_ESP_StatusText.Checked = Config.ESP.ShowStatusText;
             checkBox_ESP_FPS.Checked = Config.ESP.ShowFPS;
             trackBar_EspLootDist.Value = (int)Config.ESP.LootDrawDistance;
+            trackBar_ESPDoorDist.Value = (int)Config.ESP.DoorDrawDistance;
+            trackBar_ESPSwitchDist.Value = (int)Config.ESP.SwitchDrawDistance;
             trackBar_EspImpLootDist.Value = (int)Config.ESP.ImpLootDrawDistance;
             trackBar_EspQuestHelperDist.Value = (int)Config.ESP.QuestHelperDrawDistance;
             trackBar_EspGrenadeDist.Value = (int)Config.ESP.GrenadeDrawDistance;
@@ -3591,6 +3599,20 @@ namespace eft_dma_radar.UI.Radar
             var value = trackBar_EspLootDist.Value;
             label_EspLootDist.Text = $"Loot Dist {value}";
             Config.ESP.LootDrawDistance = value;
+        }
+
+        private void TrackBar_EspDoorDist_ValueChanged(object sender, EventArgs e)
+        {
+            var value = trackBar_ESPDoorDist.Value;
+            label_ESPDoorDist.Text = $"Door Dist {value}";
+            Config.ESP.DoorDrawDistance = value;
+        }
+
+        private void TrackBar_EspSwitchDist_ValueChanged(object sender, EventArgs e)
+        {
+            var value = trackBar_ESPSwitchDist.Value;
+            label_ESPSwitchDist.Text = $"Switch Dist {value}";
+            Config.ESP.SwitchDrawDistance = value;
         }
 
         private void TrackBar_EspImpLootDist_ValueChanged(object sender, EventArgs e)
