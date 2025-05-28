@@ -118,16 +118,22 @@ namespace eft_dma_radar.UI.Misc
         public bool ShowMines { get; set; } = true;
 
         /// <summary>
-        /// Show Mines/Claymores in the Radar UI.
+        /// Show Doors and Locks in the Radar UI.
         /// </summary>
         [JsonPropertyName("showDoorsLocks")]
         public bool ShowDoorsLocks { get; set; } = true;
 
         /// <summary>
-        /// Show Mines/Claymores in the Radar UI.
+        /// Show Switches in the Radar UI.
         /// </summary>
         [JsonPropertyName("showSwitches")]
         public bool ShowSwitches { get; set; } = true;
+
+        /// <summary>
+        /// Show Players and AI in the Radar UI.
+        /// </summary>
+        [JsonPropertyName("showPlayersAI")]
+        public bool ShowPlayersAI { get; set; } = true;
 
         /// <summary>
         /// Show BorderZone for KillTask

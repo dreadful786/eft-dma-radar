@@ -549,14 +549,16 @@ namespace eft_dma_radar.UI.Radar
                         }
                     }
 
-                    if (allPlayers is not null)
-                        foreach (var player in allPlayers) // Draw PMCs
-                        {
-                            if (player == localPlayer)
-                                continue; // Already drawn local player, move on
-                            player.Draw(canvas, mapParams, localPlayer);
-                        } // end ForEach (allPlayers)
-
+                    if (checkBox_ShowPlayersAI.Checked)
+                    {
+                        if (allPlayers is not null)
+                            foreach (var player in allPlayers) // Draw PMCs
+                            {
+                                if (player == localPlayer)
+                                    continue; // Already drawn local player, move on
+                                player.Draw(canvas, mapParams, localPlayer);
+                            } // end ForEach (allPlayers)
+                    }
                     // End allPlayers not null
                     if (checkBox_GrpConnect.Checked) // Connect Groups together
                     {
@@ -2759,6 +2761,7 @@ namespace eft_dma_radar.UI.Radar
             checkBox_ShowLootTab.Checked = Config.ShowLootTab;
             checkBox_HideCorpses.Checked = Config.HideCorpses;
             checkBox_ShowMines.Checked = Config.ShowMines;
+            checkBox_ShowPlayersAI.Checked = Config.ShowPlayersAI;
             checkBox_ShowDoorsLocks.Checked = Config.ShowDoorsLocks;
             checkBox_ShowSwitches.Checked = Config.ShowSwitches;
             checkBox_KillTask.Checked = Config.ShowZone;
@@ -2927,6 +2930,7 @@ namespace eft_dma_radar.UI.Radar
                 Config.ShowLootTab = checkBox_ShowLootTab.Checked;
                 Config.HideNames = checkBox_HideNames.Checked;
                 Config.ShowMines = checkBox_ShowMines.Checked;
+                Config.ShowPlayersAI = checkBox_ShowPlayersAI.Checked;
                 Config.ShowDoorsLocks = checkBox_ShowDoorsLocks.Checked;
                 Config.ShowSwitches = checkBox_ShowSwitches.Checked;
                 Config.ConnectGroups = checkBox_GrpConnect.Checked;
