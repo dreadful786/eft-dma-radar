@@ -620,10 +620,22 @@ namespace eft_dma_radar.UI.Misc
         public bool ShowStatusText { get; set; } = true;
 
         /// <summary>
+        /// Max Distance to draw Doors/Locks.
+        /// </summary>
+        [JsonPropertyName("doorDrawDistance")]
+        public float DoorDrawDistance { get; set; } = 50f;
+
+        /// <summary>
         /// Max Distance to draw loot.
         /// </summary>
         [JsonPropertyName("lootDrawDistance")]
         public float LootDrawDistance { get; set; } = 50f;
+
+        /// <summary>
+        /// Max Distance to draw Switches.
+        /// </summary>
+        [JsonPropertyName("SwitchDrawDistance")]
+        public float SwitchDrawDistance { get; set; } = 50f;
 
         /// <summary>
         /// Max Distance to draw important loot.

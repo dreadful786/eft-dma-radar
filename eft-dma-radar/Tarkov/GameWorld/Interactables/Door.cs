@@ -40,7 +40,10 @@ namespace eft_dma_radar.Tarkov.GameWorld.Interactables
         public void Draw(SKCanvas canvas, LoneMapParams mapParams, ILocalPlayer localPlayer)
         {
             var heightDiff = Position.Y - localPlayer.Position.Y;
+         //   var dist = Vector3.Distance(localPlayer.Position, Position);
             var paint = GetPaint();
+         //   if (dist > MainForm.Config.ESP.DoorDrawDistance)
+         //       return;
             var point = Position.ToMapPos(mapParams.Map).ToZoomedPos(mapParams);
             MouseoverPosition = new Vector2(point.X, point.Y);
 
@@ -105,6 +108,10 @@ namespace eft_dma_radar.Tarkov.GameWorld.Interactables
         /// </summary>
         public void DrawESP(SKCanvas canvas, LocalPlayer localPlayer)
         {
+            var dist = Vector3.Distance(localPlayer.Position, Position);
+            var paint = GetPaint();
+            if (dist > MainForm.Config.ESP.DoorDrawDistance)
+                return;
             if (!CameraManagerBase.WorldToScreen(ref Position, out var screenPos))
             {
                 return;
