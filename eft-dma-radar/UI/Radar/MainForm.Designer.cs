@@ -3275,7 +3275,7 @@ namespace eft_dma_radar.UI.Radar
             // trackBar_TimePositionX
             // 
             trackBar_TimePositionX.Location = new Point(123, 23);
-            trackBar_TimePositionX.Maximum = 2000;
+            trackBar_TimePositionX.Maximum = 4000;
             trackBar_TimePositionX.Name = "trackBar_TimePositionX";
             trackBar_TimePositionX.Size = new Size(102, 45);
             trackBar_TimePositionX.TabIndex = 78;
@@ -3296,7 +3296,7 @@ namespace eft_dma_radar.UI.Radar
             // trackBar_TimePositionY
             // 
             trackBar_TimePositionY.Location = new Point(345, 23);
-            trackBar_TimePositionY.Maximum = 2000;
+            trackBar_TimePositionY.Maximum = 4000;
             trackBar_TimePositionY.Minimum = 15;
             trackBar_TimePositionY.Name = "trackBar_TimePositionY";
             trackBar_TimePositionY.Size = new Size(102, 45);
@@ -3345,7 +3345,7 @@ namespace eft_dma_radar.UI.Radar
             // trackBar_MagazinePositionX
             // 
             trackBar_MagazinePositionX.Location = new Point(153, 23);
-            trackBar_MagazinePositionX.Maximum = 2000;
+            trackBar_MagazinePositionX.Maximum = 4000;
             trackBar_MagazinePositionX.Name = "trackBar_MagazinePositionX";
             trackBar_MagazinePositionX.Size = new Size(102, 45);
             trackBar_MagazinePositionX.TabIndex = 78;
@@ -3366,7 +3366,7 @@ namespace eft_dma_radar.UI.Radar
             // trackBar_MagazinePositionY
             // 
             trackBar_MagazinePositionY.Location = new Point(405, 23);
-            trackBar_MagazinePositionY.Maximum = 2000;
+            trackBar_MagazinePositionY.Maximum = 4000;
             trackBar_MagazinePositionY.Minimum = 15;
             trackBar_MagazinePositionY.Name = "trackBar_MagazinePositionY";
             trackBar_MagazinePositionY.Size = new Size(102, 45);
